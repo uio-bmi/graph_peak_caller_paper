@@ -23,7 +23,7 @@ class EncodeWrapper(object):
         response = requests.get(url, headers=HEADERS)
         if response.status_code != 200:
             raise Exception("Error while calling API %s . Error: %s"
-                            % (url, response.error))
+                            % (url, ""))
 
         return response.json()
 

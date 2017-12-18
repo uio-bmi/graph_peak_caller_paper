@@ -4,9 +4,12 @@ params.encode_experiment_id = "ENCSR000DUB"
 params.replicate_number = "1"
 params.tf_name = "CTCF"
 params.work_dir = "/home/ivargry/dev/graph_chip_seq_pipeline/data"
+params.fragment_length = "136"
+params.read_length = "36"
 
 params.graph_dir = "/home/ivargry/dev/graph_peak_caller/tests/lrc_kir/"
 params.graph_peak_caller = "/home/ivargry/dev/graph_peak_caller/graph_peak_caller.py"
+
 
 peak_caller = params.graph_peak_caller
 encode_experiment_id = params.encode_experiment_id
@@ -15,6 +18,11 @@ replicate_number = params.replicate_number
 vg_xg_index = params.graph_dir + "graph.xg"
 vg_gcsa_index = params.graph_dir + "graph.gcsa"
 
+raw_reads = '/home/ivargry/dev/graph_peak_caller/tests/lrc_kir/ENCFF639IFG_lrc_kir.fastq'
+
+raw_fastq_reads = Channel.fromPath( '/home/ivargry/dev/graph_peak_caller/tests/lrc_kir/ENCFF639IFG_lrc_kir.fastq' )
+
+/*
 process downloadData{
 	
 	input:
@@ -31,16 +39,17 @@ process downloadData{
     gunzip -c raw.fastq.gz > raw_reads
     """
 }
+*/
 
 process filterRawReads{
 	input:
-	file raw_reads
+	file raw_reads from raw_fastq_reads
 	
 	output:
 	file filtered_reads
 	
 	"""
-	head -n 1000 raw_reads > filtered_reads
+	head -n 1000 $raw_reads > filtered_reads
 	"""
 }
 
@@ -69,22 +78,28 @@ process filterMappedReads{
 	"""
 }
 
-
+/*
 process splitMappedReadsBychromosome{
 	input:
 	file filtered_json
 
-	output:
-	file "filtered_*.json" into result
 	
 	"""
-	python3 $peak_caller split_vg_json_reads_into_chromosomes filtered_json $params.graph_dir 
+	python3 $peak_caller split_vg_json_reads_into_chromosomes filtered_json $params.graph_dir
+	"""
+}
+*/
+
+process doPeakCalling{
+	input:
+	filtered_json
+	
+	
+	"""
+	python3 $peak_caller 
 	"""
 }
 
-
-result.flatMap().subscribe {
-    println it.trim()
-}
-
+	
+	
 
