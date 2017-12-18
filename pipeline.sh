@@ -66,8 +66,8 @@ do
         $graph_dir/$chromosome.json \
         $graph_dir/$chromosome.vg \
         $graph_dir/linear_map_$chromosome \
-        filtered.json \
-        filtered.json \
+        filtered_$chromosome.json \
+        filtered_$chromosome.json \
         False \
         "" \
         $fragment_length \
