@@ -1,19 +1,21 @@
 #!/usr/bin/env bash
 
-experiment_id=$1
-replicate_number=$2
-tf_name=$3
-fragment_length=$4
-read_length=$5
-graph_dir=$6
-graph_peak_caller=$7
+config_file=$1
+experiment_id=$2
+replicate_number=$3
+tf_name=$4
 base_dir=$(pwd)
-chromosomes=$8
+chromosomes=$5
+bam_alignments_url=$6
+
 # Example
 # ./pipeline.sh ENCSR000DUB 1 CTCF 135 36 /home/ivargry/dev/graph_peak_caller/tests/lrc_kir/ /home/ivargry/dev/graph_peak_caller/graph_peak_caller.py 1,2
 # On server:
-# ./pipeline.sh ENCSR000DUB 1 CTCF 135 36 ~/data/whole_genome/ ~/dev/graph_peak_caller/graph_peak_caller.py 16,17
+# ./pipeline.sh config_server.sh ENCSR000DUB 1 CTCF 16,17 https://www.encodeproject.org/files/ENCFF639IFG/@@download/ENCFF639IFG.bam
 
+source $config_file
+echo "Config file: $config_file"
+echo "Experiment id: $experiment_id"
 
 vg_xg_index="$graph_dir/graph.xg"
 vg_gcsa_index="$graph_dir/graph.gcsa"
@@ -21,6 +23,7 @@ vg_gcsa_index="$graph_dir/graph.gcsa"
 work_dir="data/${tf_name}_${experiment_id}/$replicate_number"
 mkdir -p $work_dir
 cd $work_dir
+echo "Made working directory $work_dir"
 
 
 # Step 1: Download data
@@ -29,16 +32,35 @@ if [ ! -f raw.fastq ]; then
     echo "Download fastq"
     encode_url=$(python3 $base_dir/download_encode_fastq.py $experiment_id $replicate_number)
     echo "Encode url: $encode_url"
-    wget -qO- $encode_url > raw.fastq.gz
+    wget -qO- $encode_url --show-progress > raw.fastq.gz
     gunzip -c raw.fastq.gz > raw.fastq
 else
     echo "Raw fastq already exists. Not dowloading"
 fi
 
+# Downlaod bam alignments
+if [ ! -f linear_alignments.bam ]; then
+    wget -qO- $bam_alignments_url --show-progress > linear_alignments.bam
+fi
+
+
+# Run macs2 to get fragment length/read length
+if [ ! -f macs_output.txt ]; then
+	macs2 predictd -g hs -i linear_alignments.bam > macs_output.txt 2>&1
+else
+	echo "Not running max. Already done"
+fi
+
+read_length=$(cat macs_output.txt | gawk 'match($0,  /tag size = ([0-9]+)/, ary) {print ary[1]}' )
+echo "Found read length: $read_length"
+fragment_length=$(cat macs_output.txt | gawk 'match($0,  /fragment length is ([0-9]+)/, ary) {print ary[1]}' )
+echo "Found fragment length: $fragment_length"
+
 # Step 2: Filter reads
 # fastqc, trim_galore
 if [ ! -f filtered.fastq ]; then
-    head -n 1000 raw.fastq > filtered.fastq
+   # head -n 1000 raw.fastq > filtered.fastq
+    mv raw.fastq filtered.fastq
 else
     echo "Fastq already filtered"
 fi
@@ -69,7 +91,7 @@ do
         filtered_$chromosome.json \
         filtered_$chromosome.json \
         False \
-        "" \
+        "chr${chromosome}_" \
         $fragment_length \
         $read_length > log_chr$chromosome.txt 2>&1 &
 
