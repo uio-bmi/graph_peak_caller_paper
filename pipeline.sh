@@ -11,6 +11,8 @@ base_dir=$(pwd)
 chromosomes=$8
 # Example
 # ./pipeline.sh ENCSR000DUB 1 CTCF 135 36 /home/ivargry/dev/graph_peak_caller/tests/lrc_kir/ /home/ivargry/dev/graph_peak_caller/graph_peak_caller.py 1,2
+# On server:
+# ./pipeline.sh ENCSR000DUB 1 CTCF 135 36 ~/data/whole_genome/ ~/dev/graph_peak_caller/graph_peak_caller.py 16,17
 
 
 vg_xg_index="$graph_dir/graph.xg"
@@ -43,6 +45,7 @@ fi
 
 
 # Step 3: Map reads
+echo "Mapping reads"
 if [ ! -f mapped.gam ]; then
     vg map -f filtered.fastq -g $vg_gcsa_index -x $vg_xg_index -M 2 > mapped.gam
 else
@@ -68,5 +71,10 @@ do
         False \
         "" \
         $fragment_length \
-        $read_length > log_chr$chromosome.txt 2>&1
+        $read_length > log_chr$chromosome.txt 2>&1 &
+
+    echo "Log output for chr $chromosome will be written to $work_dir/log_chr$chromosome.txt"
+
 done
+
+echo "Peak calling now running in background."
