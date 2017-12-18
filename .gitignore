@@ -1,0 +1,6 @@
+.idea
+.*
+*.png*
+*.tmp
+work
+*.txt*
