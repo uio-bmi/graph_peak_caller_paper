@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 config_file=$1
 experiment_id=$2
@@ -17,8 +18,10 @@ source $config_file
 echo "Config file: $config_file"
 echo "Experiment id: $experiment_id"
 
-vg_xg_index="$graph_dir/graph.xg"
-vg_gcsa_index="$graph_dir/graph.gcsa"
+#vg_xg_index="$graph_dir/graph.xg"
+#vg_gcsa_index="$graph_dir/graph.gcsa"
+vg_xg_index=/home/ivar/data/whole_genome/graph.xg
+vg_gcsa_index=/home/ivar/data/whole_genome/graph.gcsa
 
 work_dir="data/${tf_name}_${experiment_id}/$replicate_number"
 mkdir -p $work_dir
@@ -32,7 +35,8 @@ if [ ! -f raw.fastq ]; then
     echo "Download fastq"
     encode_url=$(python3 $base_dir/download_encode_fastq.py $experiment_id $replicate_number)
     echo "Encode url: $encode_url"
-    wget -qO- $encode_url --show-progress > raw.fastq.gz
+    wget -O raw.fastq.gz --show-progress $encode_url 
+    echo "Unzipping"
     gunzip -c raw.fastq.gz > raw.fastq
 else
     echo "Raw fastq already exists. Not dowloading"
@@ -40,12 +44,14 @@ fi
 
 # Downlaod bam alignments
 if [ ! -f linear_alignments.bam ]; then
-    wget -qO- $bam_alignments_url --show-progress > linear_alignments.bam
+    echo "Downloading linear alignments (for macs2)"
+    wget -O linear_alignments.bam $bam_alignments_url 
 fi
 
 
 # Run macs2 to get fragment length/read length
 if [ ! -f macs_output.txt ]; then
+	echo "Running macs2"
 	macs2 predictd -g hs -i linear_alignments.bam > macs_output.txt 2>&1
 else
 	echo "Not running max. Already done"
@@ -59,8 +65,9 @@ echo "Found fragment length: $fragment_length"
 # Step 2: Filter reads
 # fastqc, trim_galore
 if [ ! -f filtered.fastq ]; then
-   # head -n 1000 raw.fastq > filtered.fastq
-    mv raw.fastq filtered.fastq
+   head -n 10000 raw.fastq > filtered.fastq
+    echo "Creating filtered.fastq from raw.fastq" 
+    #mv raw.fastq filtered.fastq
 else
     echo "Fastq already filtered"
 fi
@@ -69,6 +76,7 @@ fi
 # Step 3: Map reads
 echo "Mapping reads"
 if [ ! -f mapped.gam ]; then
+    echo "Using indices: $vg_gcsa_index and $vg_xg_index"
     vg map -f filtered.fastq -g $vg_gcsa_index -x $vg_xg_index -M 2 > mapped.gam
 else
     echo "Mapped reads exist. Not mapping"
