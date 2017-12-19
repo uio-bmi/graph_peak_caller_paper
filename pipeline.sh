@@ -8,6 +8,7 @@ tf_name=$4
 base_dir=$(pwd)
 chromosomes=$5
 bam_alignments_url=$6
+motif_url=$7
 
 # Example
 # ./pipeline.sh ENCSR000DUB 1 CTCF 135 36 /home/ivargry/dev/graph_peak_caller/tests/lrc_kir/ /home/ivargry/dev/graph_peak_caller/graph_peak_caller.py 1,2
@@ -137,3 +138,6 @@ done
 python3 $graph_peak_caller concatenate_sequence_files $chromosomes sequence_all_chromosomes.fasta
 
 echo "Peak calling now running in background."
+
+# Step 8: Plot motif enrichment
+$base_dir/plot_motif_enrichments.sh sequence_all_chromosomes.fasta macs_sequences.fasta $motif_url motif_enrichment.png
