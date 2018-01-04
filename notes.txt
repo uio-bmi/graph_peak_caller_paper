@@ -1,145 +1,55 @@
 
 
 
-
-input:
-    ENCODE experiment ID
-    TF name
-    Replicate number (default 1) -> replicate_number
-    vg_xg_index
-    vg_gcsa_index
-    vg_graph_file_name
-
-
-
-Step 1, setup dirs:
-
-    mkdir $tfName_$experiment_iddirName
-    dirName="$dirName/rep" + str(replicate_number)
-
-
-Step 2, download data:
-    wget -o https://www.encodeproject.org/experiments/{experiment_id}/?format=json > encode_experiment.json
-
-    - rep1.fastq.gz
-
-Step 3, run fastqc, filter/trim reads:
-    - Run fastqc (just to generate a report)
-    - Run trim_galore-> rep1_trimmed.fastq.gz
-
-Step 4, map reads:
-    vg map -f reads_trimmed
-
-
-
-
-
 --
-experiment_id="ENCSR000DUB"
-url="https://www.encodeproject.org/experiments/{$experiment_id}/?format=json"
-n_replicates=$("wget -qO- $url | python3 -c 'import sys, json; print(len(json.load(sys.stdin)['replicates']))'")
-
-for test in $(seq 0 $((n_replicates - 1))); do
-    echo $test;
-done
-
-
-
 --
 
 
-vg snarls 1.vg > 1.snarls &
-vg snarls 2.vg > 2.snarls &
-vg snarls 3.vg > 3.snarls &
-vg snarls 4.vg > 4.snarls &
-vg snarls 5.vg > 5.snarls &
-vg snarls 6.vg > 6.snarls &
-vg snarls 7.vg > 7.snarls &
-vg snarls 8.vg > 8.snarls &
-vg snarls 9.vg > 9.snarls &
-vg snarls 10.vg > 10.snarls &
-vg snarls 11.vg > 11.snarls &
-vg snarls 12.vg > 12.snarls &
-vg snarls 13.vg > 13.snarls &
-vg snarls 14.vg > 14.snarls &
-vg snarls 15.vg > 15.snarls &
-vg snarls 16.vg > 16.snarls &
-vg snarls 17.vg > 17.snarls &
-vg snarls 18.vg > 18.snarls &
-vg snarls 19.vg > 19.snarls &
-vg snarls 20.vg > 20.snarls &
-vg snarls 21.vg > 21.snarls &
-vg snarls 22.vg > 22.snarls &
-vg snarls X.vg > X.snarls &
-vg snarls Y.vg > Y.snarls &
+CTCF
+./pipeline.sh config_server.sh ENCSR000DUB 1 CTCF 15,16,17,18,19,20,21,22 https://www.encodeproject.org/files/ENCFF639IFG/@@download/ENCFF639IFG.bam http://jaspar.genereg.net/api/v1/matrix/MA0139.1.meme
+./plot_motif_enrichments.sh data/CTCF_ENCSR000DUB/1/sequence_all_chromosomes.fasta data/CTCF_ENCSR000DUB/1/macs_sequences.fasta http://jaspar.genereg.net/api/v1/matrix/MA0139.1.meme test.png
+http://jaspar.genereg.net/api/v1/matrix/MA0139.1.meme
 
+MAX
+./pipeline.sh config_server.sh ENCSR521IID 1 MAX 15,16,17,18,19,20,21,22 https://www.encodeproject.org/files/ENCFF499VEN/@@download/ENCFF499VEN.bam http://jaspar.genereg.net/api/v1/matrix/MA0058.2.meme
 
-vg view -Vj 1.vg > 1.json &
-vg view -Vj 2.vg > 2.json &
-vg view -Vj 3.vg > 3.json &
-vg view -Vj 4.vg > 4.json &
-vg view -Vj 5.vg > 5.json &
-vg view -Vj 6.vg > 6.json &
-vg view -Vj 7.vg > 7.json &
-vg view -Vj 8.vg > 8.json &
-vg view -Vj 9.vg > 9.json &
-vg view -Vj 10.vg > 10.json &
-vg view -Vj 11.vg > 11.json &
-vg view -Vj 12.vg > 12.json &
-vg view -Vj 13.vg > 13.json &
-vg view -Vj 14.vg > 14.json &
-vg view -Vj 15.vg > 15.json &
-vg view -Vj 16.vg > 16.json &
-vg view -Vj 17.vg > 17.json &
-vg view -Vj 18.vg > 18.json &
-vg view -Vj 19.vg > 19.json &
-vg view -Vj 20.vg > 20.json &
-vg view -Vj 21.vg > 21.json &
-vg view -Vj 22.vg > 22.json &
-vg view -Vj X.vg > X.json &
-vg view -Vj X.vg > Y.json &
+SRF
+./pipeline.sh config_server.sh ENCSR000BIV 1 SRF 17,18,19,20,21,22 https://www.encodeproject.org/files/ENCFF575DNN/@@download/ENCFF575DNN.bam http://jaspar.genereg.net/api/v1/matrix/MA0083.2.meme
+
+EBF
+./pipeline.sh config_server.sh ENCSR000BGU 1 EBF 14,15,16,17,18,19,20,21,22 https://www.encodeproject.org/files/ENCFF426RGL/@@download/ENCFF426RGL.bam http://jaspar.genereg.net/api/v1/matrix/MA0154.2.meme
+
+BATF
+./pipeline.sh config_server.sh ENCSR000BGT 1 BATF 14,15,16,17,18,19,20,21,22 https://www.encodeproject.org/files/ENCFF399QIP/@@download/ENCFF399QIP.bam http://jaspar.genereg.net/api/v1/matrix/MA0462.1.meme
+
+JUN
+./pipeline.sh config_server.sh ENCSR996DUT 1 JUN 14,15,16,17,18,19,20,21,22 https://www.encodeproject.org/files/ENCFF755QDV/@@download/ENCFF755QDV.bam http://jaspar.genereg.net/api/v1/matrix/MA0488.1.meme
+
+NR3C1
+./pipeline.sh config_server.sh ENCSR070VXO 1 NR3C1 10,11,12,13,14,15,16,17,18,19,20,21,22 https://www.encodeproject.org/files/ENCFF883JID/@@download/ENCFF883JID.bam http://jaspar.genereg.net/api/v1/matrix/MA0113.3.meme
+
+ELF1
+./pipeline.sh config_server.sh ENCSR000BMZ 1 ELF1 19,20,21,22 https://www.encodeproject.org/files/ENCFF418EVV/@@download/ENCFF418EVV.bam http://jaspar.genereg.net/api/v1/matrix/MA0473.2.meme
+
+USF2
+./pipeline.sh config_server.sh ENCSR000ECD 1 USF2 9,10,11,12,13,14,15,16,17,18,19,20,21,22 https://www.encodeproject.org/files/ENCFF992YZZ/@@download/ENCFF992YZZ.bam http://jaspar.genereg.net/api/v1/matrix/MA0526.1.meme
+
+SP1
+./pipeline.sh config_server.sh ENCSR000ECD 1 SP1 12,13,14,15,16,17,18,19,20,21,22,X https://www.encodeproject.org/files/ENCFF992YZZ/@@download/ENCFF992YZZ.bam http://jaspar.genereg.net/api/v1/matrix/MA0526.1.meme
+
+GATA3
+./pipeline.sh config_server.sh ENCSR000EXZ 1 GATA3 12,13,14,15,16,17,18,19,20,21,22,X https://www.encodeproject.org/files/ENCFF318YMR/@@download/ENCFF318YMR.bam http://jaspar.genereg.net/api/v1/matrix/MA0037.2.memes
 
 
 
 
-~/bin/vg1.5 view -Vj 14.vg > 14.json &
-~/bin/vg1.5 view -Vj 17.vg > 17.json &
-~/bin/vg1.5 view -Vj 12.vg > 12.json &
-~/bin/vg1.5 view -Vj 10.vg > 10.json &
-~/bin/vg1.5 view -Vj 8.vg > 8.json &
-~/bin/vg1.5 view -Vj 3.vg > 3.json &
 
 
-for chr in $(seq 1 22; echo X; echo Y);
-do
-	python3 ~/dev/graph_peak_caller/graph_peak_caller.py create_ob_graph $chr.json $chr.obg
-done
-
-# Create linear maps
-for chr in $(seq 10 22; echo X; echo Y);
-do
-	python3 ~/dev/graph_peak_caller/graph_peak_caller.py create_linear_map $chr.obg $chr.snarls linear_map_$chr &
-done
 
 
-# Create heads/tails
-for chr in $(seq 1 22; echo X; echo Y);
-do
-	vg stats -H $chr.vg > $chr_head_node.txt
-	vg stats -T $chr.vg > $chr_tail_node.txt
-done
 
 
-# Get node range
-for chr in $(seq 1 22; echo X; echo Y);
-do
-	vg stats -r $chr.vg  | awk '{print $2}' > node_range_$chr.txt
-done
 
 
-# Fix wrong format
-for chr in $(seq 2 22; echo X; echo Y);
-do
-	cat \{$chr\}_node_range.txt  | awk '{print $2}' > node_range_$chr.txt
-done
+
 
