@@ -6,7 +6,8 @@
 
 
 CTCF
-./pipeline.sh config_server.sh ENCSR000DUB 1 CTCF 15,16,17,18,19,20,21,22 https://www.encodeproject.org/files/ENCFF639IFG/@@download/ENCFF639IFG.bam http://jaspar.genereg.net/api/v1/matrix/MA0139.1.meme
+./pipeline.sh config_server.sh ENCSR000DUB 1 CTCF 22 https://www.encodeproject.org/files/ENCFF639IFG/@@download/ENCFF639IFG.bam http://jaspar.genereg.net/api/v1/matrix/MA0139.1.meme
+
 ./plot_motif_enrichments.sh data/CTCF_ENCSR000DUB/1/sequence_all_chromosomes.fasta data/CTCF_ENCSR000DUB/1/macs_sequences.fasta http://jaspar.genereg.net/api/v1/matrix/MA0139.1.meme test.png
 http://jaspar.genereg.net/api/v1/matrix/MA0139.1.meme
 
@@ -14,7 +15,7 @@ MAX
 ./pipeline.sh config_server.sh ENCSR521IID 1 MAX 15,16,17,18,19,20,21,22 https://www.encodeproject.org/files/ENCFF499VEN/@@download/ENCFF499VEN.bam http://jaspar.genereg.net/api/v1/matrix/MA0058.2.meme
 
 SRF
-./pipeline.sh config_server.sh ENCSR000BIV 1 SRF 17,18,19,20,21,22 https://www.encodeproject.org/files/ENCFF575DNN/@@download/ENCFF575DNN.bam http://jaspar.genereg.net/api/v1/matrix/MA0083.2.meme
+./pipeline.sh config_server.sh ENCSR000BIV 1 SRF 2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,X,Y https://www.encodeproject.org/files/ENCFF575DNN/@@download/ENCFF575DNN.bam http://jaspar.genereg.net/api/v1/matrix/MA0083.2.meme
 
 EBF
 ./pipeline.sh config_server.sh ENCSR000BGU 1 EBF 14,15,16,17,18,19,20,21,22 https://www.encodeproject.org/files/ENCFF426RGL/@@download/ENCFF426RGL.bam http://jaspar.genereg.net/api/v1/matrix/MA0154.2.meme
@@ -35,14 +36,55 @@ USF2
 ./pipeline.sh config_server.sh ENCSR000ECD 1 USF2 9,10,11,12,13,14,15,16,17,18,19,20,21,22 https://www.encodeproject.org/files/ENCFF992YZZ/@@download/ENCFF992YZZ.bam http://jaspar.genereg.net/api/v1/matrix/MA0526.1.meme
 
 SP1
-./pipeline.sh config_server.sh ENCSR000ECD 1 SP1 12,13,14,15,16,17,18,19,20,21,22,X https://www.encodeproject.org/files/ENCFF992YZZ/@@download/ENCFF992YZZ.bam http://jaspar.genereg.net/api/v1/matrix/MA0526.1.meme
+./pipeline.sh config_server.sh ENCSR000ECD 1 SP1 17 https://www.encodeproject.org/files/ENCFF992YZZ/@@download/ENCFF992YZZ.bam http://jaspar.genereg.net/api/v1/matrix/MA0526.1.meme
 
 GATA3
 ./pipeline.sh config_server.sh ENCSR000EXZ 1 GATA3 12,13,14,15,16,17,18,19,20,21,22,X https://www.encodeproject.org/files/ENCFF318YMR/@@download/ENCFF318YMR.bam http://jaspar.genereg.net/api/v1/matrix/MA0037.2.memes
 
 
 
+Bør ha en pipeline så man kan kjøre full chip-seq fra rå reads til peaks om denne skal bli brukt av noen.
+Brukere vil typisk ha en vg-graf og rå reads.
 
+Er egentlig to relevante pipelines:
+    1) Brukeren har en vg graf og rå reads (typisk er grafen for en mindre region, et lite genom etc)
+    2) Brukeren vil kjøre på 1000 genomes whole genome graf.
+
+Tilfelle 1: Ganske enkelt pipeline script. To uavhengige steg:
+    Steg 1: Konvertere til obgraph + linear map
+    Steg 2: Kjøre pipelinen som:
+        - Mapper til grafen
+        - Filtrerer
+        - Kjører peak calleren
+
+Tilfelle 2: Ikke aktuelt for brukeren å lage grafer og linear maps selv.
+    - Laster ned linear maps, grafer og vg index filer
+    - Eget modifisert pipeline script som:
+        - Mapper til hele genomet ved å bruke helgenom-indeksene
+        - Splitter mappingene per kromosom
+        - Filtrerer
+        - Kjører peak calleren per kromosom (bør kunne kjøre parallelt om det spesifiserer)
+        - Slår sammen resultatene
+
+En variant av Tilfelle 1 hvor man ikke har reads, men spesifiserer en encode ID og replicate som man vil hente data fra.
+
+Pipeline 2 bør kunne gjenbruke pipeline1, så lenge det er mulig å spesifisere index-fil og det er et steg som filtrerer vekk reads som ikke traff grafen.
+
+Kanskje enklest å lage alt dette i Python? Da kan man subclasse og gjenbruke ting mye enklere.
+
+
+Mulig oppsett:
+    x
+
+    - En nextflow pipeline som tar som input:
+        - Graf
+        - Linear map
+        - Sample fastq fil
+        - Control fastq fil
+
+        Bruker VG og Graph Peak Caller
+
+    - En nextflow pipeline eller scripts som konverterer vg-graf til obgraf og linear map
 
 
 

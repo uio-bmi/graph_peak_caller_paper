@@ -63,7 +63,8 @@ vg view -Vj X.vg > Y.json &
 
 for chr in $(seq 1 22; echo X; echo Y);
 do
-	python3 ~/dev/graph_peak_caller/graph_peak_caller.py create_ob_graph $chr.json $chr.obg
+	#python3 ~/dev/graph_peak_caller/graph_peak_caller.py create_ob_graph $chr.json $chr.obg
+	python3 ~/dev/graph_peak_caller/graph_peak_caller.py create_ob_numpy_graph $chr.json $chr
 done
 
 # Create linear maps
