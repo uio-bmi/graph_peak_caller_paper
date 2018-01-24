@@ -118,8 +118,8 @@ fi
 for chromosome in $(echo $chromosomes | tr "," "\n")
 do
     if [ ! -f chr${chromosome}_max_paths.intervalcollection ]; then
-    	python3 $graph_peak_caller callpeaks \
-        	$graph_dir/$chromosome.json \
+    	python3 $graph_peak_caller callpeaks_with_numpy_graph \
+        	$graph_dir/$chromosome \
 		$graph_dir/$chromosome.vg \
 		$graph_dir/linear_map_$chromosome \
 		filtered_$chromosome.json \
