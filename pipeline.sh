@@ -70,7 +70,7 @@ done
 
 # Fetch macs sequences for these peaks
 echo "Fetch macs sequences for selected chromosomes"
-python3 $graph_peak_caller linear_peaks_to_fasta macs_selected_chromosomes.bed $grch38_fasta_file macs_sequences.fasta
+graph_peak_caller linear_peaks_to_fasta macs_selected_chromosomes.bed $grch38_fasta_file macs_sequences.fasta
 
 
 read_length=$(cat macs_output_whole_run.txt | gawk 'match($0,  /tag size = ([0-9]+)/, ary) {print ary[1]}' )
@@ -118,7 +118,7 @@ fi
 for chromosome in $(echo $chromosomes | tr "," "\n")
 do
     if [ ! -f chr${chromosome}_max_paths.intervalcollection ]; then
-    	python3 $graph_peak_caller callpeaks_with_numpy_graph \
+    	graph_peak_caller callpeaks_with_numpy_graph \
         	$graph_dir/$chromosome \
 		$graph_dir/$chromosome.vg \
 		$graph_dir/linear_map_$chromosome \
@@ -135,7 +135,7 @@ do
 done
 
 # Step 7: Merge all sequence files into one single sequence file
-python3 $graph_peak_caller concatenate_sequence_files $chromosomes sequence_all_chromosomes.fasta
+graph_peak_caller concatenate_sequence_files $chromosomes sequence_all_chromosomes.fasta
 
 echo "Peak calling now running in background."
 
