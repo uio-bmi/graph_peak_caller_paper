@@ -1,6 +1,6 @@
 .idea
-.*
 *.png*
 *.tmp
-work
+data/*
+*.swp
 *.txt*
