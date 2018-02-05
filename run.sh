@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+./generate_paper_figures_and_tables.sh CTCF ENCSR000DUB 1 2,3,4,5,6 http://jaspar.genereg.net/api/v1/matrix/MA0139.1.meme https://www.encodeproject.org/files/ENCFF639IFG/@@download/ENCFF639IFG.bam
