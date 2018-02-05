@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-tf=$1
-encode_id=$2
-replicate=$3
+encode_id=$1
+replicate=$2
+tf=$3
 chromosomes=$4
-motif_url=$5
-bam_alignments_url=$6
+bam_alignments_url=$5
+motif_url=$6
 echo $bam_alignments_url
 base_dir=$(pwd)
 grch38_fasta_file=/home/ivargry/dev/hg38.fasta
@@ -39,7 +39,13 @@ echo "Extracting macs sequences"
 for chromosome in $(echo $chromosomes | tr "," "\n")
 do
     echo "Getting macs peaks for chromosome $chromosome"
+    # Add to single file for all chromosomems
     grep "chr${chromosome}\s" macs_peaks.narrowPeak >> macs_selected_chromosomes.bed
+
+    # Also sort out specific chromosome, making later analysis faster
+    grep "chr${chromosome}\s" macs_peaks.narrowPeak > macs_peaks_chr$chr.bed
+    graph_peak_caller linear_peaks_to_fasta macs_peaks_chr$chr.bed $grch38_fasta_file macs_sequences_chr$chr.fasta
+
 done
 
 
@@ -54,3 +60,4 @@ graph_peak_caller concatenate_sequence_files $chromosomes sequence_all_chromosom
 
 # Run motif enrichment analysis
 $base_dir/plot_motif_enrichments.sh sequence_all_chromosomes.fasta macs_sequences.fasta $motif_url motif_enrichment.png
+cp motif_enrichment.png ../../../figures_tables/$tf.png
