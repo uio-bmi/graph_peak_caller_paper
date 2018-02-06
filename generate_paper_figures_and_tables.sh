@@ -8,7 +8,7 @@ bam_alignments_url=$5
 motif_url=$6
 echo $bam_alignments_url
 base_dir=$(pwd)
-grch38_fasta_file=/home/ivargry/dev/hg38.fasta
+grch38_fasta_file=~/dev/hg38.fasta
 
 
 echo "RUNNING"

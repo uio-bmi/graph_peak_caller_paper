@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-./generate_paper_figures_and_tables.sh  ENCSR000DUB 1 CTCF 2,3,4,5,6 http://jaspar.genereg.net/api/v1/matrix/MA0139.1.meme https://www.encodeproject.org/files/ENCFF639IFG/@@download/ENCFF639IFG.bam
+./generate_paper_figures_and_tables.sh  ENCSR000DUB 1 CTCF 2,3,4,5,6 https://www.encodeproject.org/files/ENCFF639IFG/@@download/ENCFF639IFG.bam http://jaspar.genereg.net/api/v1/matrix/MA0139.1.meme
 
 ./generate_paper_figures_and_tables.sh  ENCSR000BIV 1 SRF 2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,X https://www.encodeproject.org/files/ENCFF575DNN/@@download/ENCFF575DNN.bam http://jaspar.genereg.net/api/v1/matrix/MA0083.2.meme
 
