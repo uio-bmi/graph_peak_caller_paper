@@ -67,6 +67,23 @@ do
 	python3 ~/dev/graph_peak_caller/graph_peak_caller.py create_ob_numpy_graph $chr.json $chr
 done
 
+for chr in $(seq 1 22; echo X; echo Y);
+do
+    git mv BATF_ENCSR000BGT/1/chr${chr}_sequences.fasta BATF_ENCSR000BGT/1/${chr}_sequences.fasta
+done
+
+for chr in $(seq 1 22; echo X; echo Y); do     git mv CTCF_ENCSR000DUB/1/chr${chr}_sequences.fasta CTCF_ENCSR000DUB/1/${chr}_sequences.fasta; done
+for chr in $(seq 1 22; echo X; echo Y); do     git mv EBF_ENCSR000BGU/1/chr${chr}_sequences.fasta EBF_ENCSR000BGU/1/${chr}_sequences.fasta; done
+for chr in $(seq 1 22; echo X; echo Y); do     git mv ELF1_ENCSR000BMZ/1/chr${chr}_sequences.fasta ELF1_ENCSR000BMZ/1/${chr}_sequences.fasta; done
+for chr in $(seq 1 22; echo X; echo Y); do     git mv GATA3_ENCSR000EXZ/1/chr${chr}_sequences.fasta GATA3_ENCSR000EXZ/1/${chr}_sequences.fasta; done
+for chr in $(seq 1 22; echo X; echo Y); do     git mv JUN_ENCSR996DUT/1/chr${chr}_sequences.fasta JUN_ENCSR996DUT/1/${chr}_sequences.fasta; done
+for chr in $(seq 1 22; echo X; echo Y); do     git mv MAX_ENCSR521IID/1/chr${chr}_sequences.fasta MAX_ENCSR521IID/1/${chr}_sequences.fasta; done
+for chr in $(seq 1 22; echo X; echo Y); do     git mv NR3C1_ENCSR070VXO/1/chr${chr}_sequences.fasta NR3C1_ENCSR070VXO/1/${chr}_sequences.fasta; done
+for chr in $(seq 1 22; echo X; echo Y); do     git mv SP1_ENCSR000ECD/1/chr${chr}_sequences.fasta SP1_ENCSR000ECD/1/${chr}_sequences.fasta; done
+for chr in $(seq 1 22; echo X; echo Y); do     git mv SRF_ENCSR000BIV/1/chr${chr}_sequences.fasta SRF_ENCSR000BIV/1/${chr}_sequences.fasta; done
+for chr in $(seq 1 22; echo X; echo Y); do     git mv USF2_ENCSR000ECD/1/chr${chr}_sequences.fasta USF2_ENCSR000ECD/1/${chr}_sequences.fasta; done
+
+
 # Create linear maps
 for chr in $(seq 10 22; echo X; echo Y);
 do
