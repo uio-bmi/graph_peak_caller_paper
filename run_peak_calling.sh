@@ -9,6 +9,7 @@ base_dir=$(pwd)
 chromosomes=$5
 bam_alignments_url=$6
 motif_url=$7
+genome_size=$8
 
 # Example
 # ./pipeline.sh ENCSR000DUB 1 CTCF 135 36 /home/ivargry/dev/graph_peak_caller/tests/lrc_kir/ /home/ivargry/dev/graph_peak_caller/graph_peak_caller.py 1,2
@@ -41,6 +42,12 @@ else
     echo "Raw fastq already exists. Not dowloading"
 fi
 
+# Downlaod bam alignments
+if [ ! -f linear_alignments.bam ]; then
+    echo "Downloading linear alignments (for macs2)"
+    wget -O linear_alignments.bam $bam_alignments_url
+fi
+
 # Run macs2 to get fragment length/read length
 if [ ! -f macs_output_whole_run.txt ]; then
 	echo "Running macs2"
@@ -53,6 +60,8 @@ read_length=$(cat macs_output_whole_run.txt | gawk 'match($0,  /tag size = ([0-9
 echo "Found read length: $read_length"
 fragment_length=$(cat macs_output_whole_run.txt | gawk 'match($0,  /fragment length is ([0-9]+)/, ary) {print ary[1]}' )
 echo "Found fragment length: $fragment_length"
+
+
 
 # Step 2: Filter reads
 # fastqc, trim_galore
@@ -90,6 +99,17 @@ else
 	echo "Not splitting into chromosomes."
 fi
 
+# Count unique reads in filtered files
+if [ ! -f count_unique_reads_output.txt ]; then
+    graph_peak_caller count_unique_reads $chromosomes $graph_dir/ filtered_ > count_unique_reads_output.txt
+else
+    echo "Unique reads already counted. Not counting"
+fi
+
+unique_reads=$(tail -n 1 count_unique_reads_output.txt)
+echo "$unique_reads unique reads in total"
+
+
 # Step 6 run peak caller to get p-values for every chromosome
 pids=""
 RESULT=0
@@ -101,7 +121,8 @@ do
 		$graph_dir/ \
 		$graph_dir/linear_map_ \
 		filtered_ filtered_ "" False $fragment_length $read_length \
-		True > log_before_p_values_$chromosome.txt 2>&1 &
+		True $unique_reads $genome_size \
+		> log_before_p_values_$chromosome.txt 2>&1 &
         pids="$pids $!"
 	    echo "Peak calling for chr $chromosome started as process. Log will be written to $work_dir/log_before_p_values_$chromosome.txt"
     else
