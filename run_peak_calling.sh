@@ -101,7 +101,7 @@ fi
 
 # Count unique reads in filtered files
 if [ ! -f count_unique_reads_output.txt ]; then
-    graph_peak_caller count_unique_reads $chromosomes $graph_dir/ filtered_ > count_unique_reads_output.txt
+    graph_peak_caller count_unique_reads $chromosomes $graph_dir/ filtered_ > count_unique_reads_output.txt 2>&1
 else
     echo "Unique reads already counted. Not counting"
 fi
