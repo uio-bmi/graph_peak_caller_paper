@@ -91,6 +91,8 @@ else
 fi
 
 # Step 6 run peak caller to get p-values for every chromosome
+pids=""
+RESULT=0
 for chromosome in $(echo $chromosomes | tr "," "\n")
 do
     if [ ! -f ${chromosome}_pvalues.bdg ]; then
@@ -100,11 +102,23 @@ do
 		$graph_dir/linear_map_ \
 		filtered_ filtered_ "" False $fragment_length $read_length \
 		True > log_before_p_values_$chromosome.txt 2>&1 &
-	echo "Peak calling for chr $chromosome started as process. Log will be written to $work_dir/log_before_p_values_$chromosome.txt"
+        pids="$pids $!"
+	    echo "Peak calling for chr $chromosome started as process. Log will be written to $work_dir/log_before_p_values_$chromosome.txt"
     else
         echo "P values already computed for chromosome $chromosome."
     fi
 done
+
+# Wait for all to finish between continuing
+for pid in $pids; do
+    wait $pid || let "RESULT=1"
+done
+
+if [ "$RESULT" == "1" ];
+    then
+       exit 1
+fi
+
 
 # Step 7 run from p values
 for chromosome in $(echo $chromosomes | tr "," "\n")
