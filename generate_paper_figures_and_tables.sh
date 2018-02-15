@@ -4,12 +4,13 @@ encode_id=$1
 replicate=$2
 tf=$3
 chromosomes=$4
-bam_alignments_url=$5
-motif_url=$6
-echo $bam_alignments_url
-base_dir=$(pwd)
-grch38_fasta_file=~/dev/hg19.fasta
+motif_url=$5
 
+base_dir=$(pwd)
+grch38_fasta_file=~/data/hg19/hg19.fasta
+n_threads=$(grep -c ^processor /proc/cpuinfo)
+
+echo "Will use $n_threads threads"
 
 echo "RUNNING"
 work_dir=data/${tf}_${encode_id}/${replicate}
@@ -17,11 +18,31 @@ cd $work_dir
 
 echo "Changed dir to $work_dir"
 
+# Get raw fastq for this encode experiment and replicate number
+if [ ! -f raw.fastq.gz ]; then
+    echo "Download fastq"
+    encode_url=$(python3 $base_dir/download_encode_fastq.py $encode_id $replicate)
+    echo "Encode url: $encode_url"
+    wget -O raw.fastq.gz --show-progress $encode_url
+    echo "Unzipping"
+    gunzip -c raw.fastq.gz > raw.fastq
+else
+    echo "Raw fastq already exists. Not dowloading"
+fi
 
-# Downlaod bam alignments
+
+# Prepare linear reads for linear peak calling
 if [ ! -f linear_alignments.bam ]; then
-    echo "Downloading linear alignments (for macs2)"
-    wget -O linear_alignments.bam $bam_alignments_url
+    echo "Mapping reads to linear genome"
+    bwa aln -t $n_threads $grch38_fasta_file raw.fastq > reads.sai
+    bwa samse $grch38_fasta_file reads.sai raw.fastq > alignments.sam
+
+    # Convert to bam and sort
+    echo "Converting to bam and filtering"
+    samtools view -Su alignments.sam | samtools sort - alignments_sorted
+
+    # Filter (removed duplicates and reads having low score)
+    samtools view -F 1804 -q 30 -b alignments_sorted.bam > linear_alignments.bam
 fi
 
 
