@@ -43,22 +43,22 @@ else
 fi
 
 # Downlaod bam alignments
-if [ ! -f linear_alignments.bam ]; then
+if [ ! -f linear_alignments_from_encode.bam ]; then
     echo "Downloading linear alignments (for macs2)"
-    wget -O linear_alignments.bam $bam_alignments_url
+    wget -O linear_alignments_from_encode.bam $bam_alignments_url
 fi
 
 # Run macs2 to get fragment length/read length
-if [ ! -f macs_output_whole_run.txt ]; then
+if [ ! -f macs_output_whole_run_using_encode_data.txt ]; then
 	echo "Running macs2"
-	macs2 predictd -g hs -i linear_alignments.bam > macs_output_whole_run.txt 2>&1
+	macs2 predictd -g hs -i linear_alignments_from_encode.bam > macs_output_whole_run_using_encode_data.txt 2>&1
 else
 	echo "Not running max. Already done"
 fi
 
-read_length=$(cat macs_output.txt | gawk 'match($0,  /tag size = ([0-9]+)/, ary) {print ary[1]}' )
+read_length=$(cat macs_output_whole_run_using_encode_data.txt | gawk 'match($0,  /tag size = ([0-9]+)/, ary) {print ary[1]}' )
 echo "Found read length: $read_length"
-fragment_length=$(cat macs_output.txt | gawk 'match($0,  /fragment length is ([0-9]+)/, ary) {print ary[1]}' )
+fragment_length=$(cat macs_output_whole_run_using_encode_data.txt | gawk 'match($0,  /fragment length is ([0-9]+)/, ary) {print ary[1]}' )
 echo "Found fragment length: $fragment_length"
 
 

@@ -61,10 +61,14 @@ vg view -Vj X.vg > Y.json &
 ~/bin/vg1.5 view -Vj 3.vg > 3.json &
 
 
-for chr in $(seq 1 22; echo X; echo Y);
+for chr in $(seq 16 22);
 do
-	#python3 ~/dev/graph_peak_caller/graph_peak_caller.py create_ob_graph $chr.json $chr.obg
-	python3 ~/dev/graph_peak_caller/graph_peak_caller.py create_ob_numpy_graph $chr.json $chr
+	graph_peak_caller create_ob_graph $chr.json $chr.nobg &
+done
+
+for chr in $(seq 1 6);
+do
+	graph_peak_caller find_linear_path $chr.json $chr.nobg $chr ${chr}_linear_path.interval &
 done
 
 for chr in $(seq 1 22; echo X; echo Y);
