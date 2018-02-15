@@ -8,7 +8,7 @@ bam_alignments_url=$5
 motif_url=$6
 echo $bam_alignments_url
 base_dir=$(pwd)
-grch38_fasta_file=~/dev/hg38.fasta
+grch38_fasta_file=~/dev/hg19.fasta
 
 
 echo "RUNNING"
@@ -46,6 +46,7 @@ do
     grep "chr${chromosome}\s" macs_peaks.narrowPeak > macs_peaks_chr${chromosome}.bed
     graph_peak_caller linear_peaks_to_fasta macs_peaks_chr${chromosome}.bed $grch38_fasta_file macs_sequences_chr${chromosome}.fasta
 
+
 done
 
 
@@ -61,3 +62,12 @@ graph_peak_caller concatenate_sequence_files $chromosomes sequence_all_chromosom
 # Run motif enrichment analysis
 $base_dir/plot_motif_enrichments.sh sequence_all_chromosomes.fasta macs_sequences.fasta $motif_url motif_enrichment.png
 cp motif_enrichment.png ../../../figures_tables/$tf.png
+
+# Also run fimo for each chromosome
+for chromosome in $(echo $chromosomes | tr "," "\n")
+do
+    echo ""
+    echo "----- Running fimo separately for chr $chromosome --- "
+    fimo -oc fimo_macs_chr$chromosome motif.meme macs_sequences_chr${chromosome}.fasta
+    fimo -oc fimo_graph_chr$chromosome motif.meme ${chromosome}_sequences.fasta
+done
