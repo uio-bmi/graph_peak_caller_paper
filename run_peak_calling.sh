@@ -49,9 +49,9 @@ if [ ! -f linear_alignments.bam ]; then
 fi
 
 # Run macs2 to get fragment length/read length
-if [ ! -f macs_output.txt ]; then
+if [ ! -f macs_output_whole_run.txt ]; then
 	echo "Running macs2"
-	macs2 predictd -g hs -i linear_alignments.bam > macs_output.txt 2>&1
+	macs2 predictd -g hs -i linear_alignments.bam > macs_output_whole_run.txt 2>&1
 else
 	echo "Not running max. Already done"
 fi
