@@ -28,7 +28,7 @@ else
     echo "Raw fastq already exists. Not dowloading"
 fi
 
-if [ ! -f raw.fastq.gz ]; then
+if [ ! -f raw.fastq ]; then
     echo "Unzipping"
     gunzip -c raw.fastq.gz > raw.fastq
 else
