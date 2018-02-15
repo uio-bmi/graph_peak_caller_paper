@@ -24,10 +24,15 @@ if [ ! -f raw.fastq.gz ]; then
     encode_url=$(python3 $base_dir/download_encode_fastq.py $encode_id $replicate)
     echo "Encode url: $encode_url"
     wget -O raw.fastq.gz --show-progress $encode_url
+else
+    echo "Raw fastq already exists. Not dowloading"
+fi
+
+if [ ! -f raw.fastq.gz ]; then
     echo "Unzipping"
     gunzip -c raw.fastq.gz > raw.fastq
 else
-    echo "Raw fastq already exists. Not dowloading"
+    echo "Unzipped fastq alread exists. Not unzipping"
 fi
 
 
