@@ -100,3 +100,5 @@ do
     fimo -oc fimo_macs_chr$chromosome motif.meme macs_sequences_chr${chromosome}.fasta
     fimo -oc fimo_graph_chr$chromosome motif.meme ${chromosome}_sequences.fasta
 done
+
+
