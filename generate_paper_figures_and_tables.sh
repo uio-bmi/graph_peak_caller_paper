@@ -99,4 +99,4 @@ do
 done
 
 # Analyse peak data sets
-graph_peak_caller analyse_peaks_whole_genome $chromosomes ./ ~/data/whole_genome/ $tf > peak_analysis_log.txt 2>&1
+graph_peak_caller analyse_peaks_whole_genome $chromosomes ./ ~/data/whole_genome/ ../../../figures_tables/$tf
