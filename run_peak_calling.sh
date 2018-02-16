@@ -11,11 +11,6 @@ bam_alignments_url=$6
 motif_url=$7
 genome_size=$8
 
-# Example
-# ./pipeline.sh ENCSR000DUB 1 CTCF 135 36 /home/ivargry/dev/graph_peak_caller/tests/lrc_kir/ /home/ivargry/dev/graph_peak_caller/graph_peak_caller.py 1,2
-# On server:
-# ./pipeline.sh config_server.sh ENCSR000DUB 1 CTCF 16,17 https://www.encodeproject.org/files/ENCFF639IFG/@@download/ENCFF639IFG.bam
-
 source $config_file
 echo "Config file: $config_file"
 echo "Experiment id: $experiment_id"
