@@ -90,13 +90,18 @@ Mulig oppsett:
 
 
 ./run_peak_calling.sh config_server.sh ENCSR000DUB 1 CTCF 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22 https://www.encodeproject.org/files/ENCFF639IFG/@@download/ENCFF639IFG.bam http://jaspar.genereg.net/api/v1/matrix/MA0139.1.meme
-./run_peak_calling.sh config_server.sh ENCSR000DUB 1 CTCF 12,13,14,15,16,17,18,19,20,21,22 https://www.encodeproject.org/files/ENCFF639IFG/@@download/ENCFF639IFG.bam http://jaspar.genereg.net/api/v1/matrix/MA0139.1.meme
-nohup ./run_peak_calling.sh config_server.sh ENCSR521IID 1 MAX 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22 https://www.encodeproject.org/files/ENCFF499VEN/@@download/ENCFF499VEN.bam http://jaspar.genereg.net/api/v1/matrix/MA0058.2.meme > max_output.txt 2>&1 &
+
+
+nohup ./run_peak_calling.sh config_server.sh ENCSR000DUB 1 CTCFTrimmingBothSides 12,13,14,15,16,17,18,19,20,21,22 https://www.encodeproject.org/files/ENCFF639IFG/@@download/ENCFF639IFG.bam http://jaspar.genereg.net/api/v1/matrix/MA0139.1.meme 2930000000 > ctcf_output.txt 2>&1 &
+nohup ./run_peak_calling.sh config_server.sh ENCSR521IID 1 MAX 12,13,14,15,16,17,18,19,20,21,22 https://www.encodeproject.org/files/ENCFF499VEN/@@download/ENCFF499VEN.bam http://jaspar.genereg.net/api/v1/matrix/MA0058.2.meme 2930000000 > max_output.txt 2>&1 &
+nohup ./run_peak_calling.sh config_server.sh ENCSR000BGU 1 EBF 12,13,14,15,16,17,18,19,20,21,22 https://www.encodeproject.org/files/ENCFF426RGL/@@download/ENCFF426RGL.bam http://jaspar.genereg.net/api/v1/matrix/MA0154.2.meme 2930000000 > ebf_output.txt 2>&1 &
+nohup ./run_peak_calling.sh config_server.sh ENCSR000BIV 1 SRF 12,13,14,15,16,17,18,19,20,21,22 https://www.encodeproject.org/files/ENCFF575DNN/@@download/ENCFF575DNN.bam http://jaspar.genereg.net/api/v1/matrix/MA0083.2.meme 2930000000 > srf_output.txt 2>&1 &
+nohup ./run_peak_calling.sh config_server.sh ENCSR000BMZ 1 ELF1 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22 https://www.encodeproject.org/files/ENCFF418EVV/@@download/ENCFF418EVV.bam http://jaspar.genereg.net/api/v1/matrix/MA0473.2.meme 2930000000 > elf1_output.txt 2 >&1 &
 
 
 ./run_peak_calling.sh config_server.sh ENCSR000DUB 1 CTCF 21,22 https://www.encodeproject.org/files/ENCFF639IFG/@@download/ENCFF639IFG.bam http://jaspar.genereg.net/api/v1/matrix/MA0139.1.meme
 
 
-
+./run_peak_calling.sh config_server.sh ENCSR000DUB 1 CTCFTrimmingBothSides 22 https://www.encodeproject.org/files/ENCFF639IFG/@@download/ENCFF639IFG.bam http://jaspar.genereg.net/api/v1/matrix/MA0139.1.meme 2930000000
 
 graph_peak_caller analyse_peaks ~/dev/graph_peak_caller/tests/whole_genome/22.nobg ~/dev/graph_peak_caller/tests/whole_genome/22.json macs_sequences_chr22.fasta 22_sequences.fasta fimo_macs_22/fimo.txt fimo_graph_22/fimo.txt 22 22 0 0
