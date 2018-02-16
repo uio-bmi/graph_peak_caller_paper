@@ -18,26 +18,29 @@ cd $work_dir
 
 echo "Changed dir to $work_dir"
 
-# Get raw fastq for this encode experiment and replicate number
-if [ ! -f raw.fastq.gz ]; then
-    echo "Download fastq"
-    encode_url=$(python3 $base_dir/download_encode_fastq.py $encode_id $replicate)
-    echo "Encode url: $encode_url"
-    wget -O raw.fastq.gz --show-progress $encode_url
-else
-    echo "Raw fastq already exists. Not dowloading"
-fi
-
-if [ ! -f raw.fastq ]; then
-    echo "Unzipping"
-    gunzip -c raw.fastq.gz > raw.fastq
-else
-    echo "Unzipped fastq alread exists. Not unzipping"
-fi
 
 
 # Prepare linear reads for linear peak calling
 if [ ! -f linear_alignments.bam ]; then
+
+    # Get raw fastq for this encode experiment and replicate number
+    if [ ! -f raw.fastq.gz ]; then
+        echo "Download fastq"
+        encode_url=$(python3 $base_dir/download_encode_fastq.py $encode_id $replicate)
+        echo "Encode url: $encode_url"
+        wget -O raw.fastq.gz --show-progress $encode_url
+    else
+        echo "Raw fastq already exists. Not dowloading"
+    fi
+
+    if [ ! -f raw.fastq ]; then
+        echo "Unzipping"
+        gunzip -c raw.fastq.gz > raw.fastq
+    else
+        echo "Unzipped fastq alread exists. Not unzipping"
+    fi
+
+
     echo "Mapping reads to linear genome"
     bwa aln -t $n_threads $grch38_fasta_file raw.fastq > reads.sai
     bwa samse $grch38_fasta_file reads.sai raw.fastq > alignments.sam
@@ -86,7 +89,7 @@ graph_peak_caller concatenate_sequence_files $chromosomes sequence_all_chromosom
 
 
 # Run motif enrichment analysis
-$base_dir/plot_motif_enrichments.sh sequence_all_chromosomes.fasta macs_sequences.fasta $motif_url motif_enrichment.png
+$base_dir/plot_motif_enrichments.sh sequence_all_chromosomes.fasta macs_sequences.fasta $motif_url motif_enrichment.png $tf
 cp motif_enrichment.png ../../../figures_tables/$tf.png
 
 # Also run fimo for each chromosome
@@ -97,6 +100,3 @@ do
     fimo -oc fimo_macs_chr$chromosome motif.meme macs_sequences_chr${chromosome}.fasta
     fimo -oc fimo_graph_chr$chromosome motif.meme ${chromosome}_sequences.fasta
 done
-
-# Analyse peak data sets
-graph_peak_caller analyse_peaks_whole_genome $chromosomes ./ ~/data/whole_genome/ $tf > peak_analysis_log.txt 2>&1
