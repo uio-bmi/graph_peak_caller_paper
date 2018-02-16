@@ -27,6 +27,8 @@
 
 # Using raw fastq and performing linear mapping
 # All these have been run and produces new correct linear_alignments.bam for hg19
+nohup ./generate_paper_figures_and_tables.sh  ENCSR000DUB 1 CTCFCustomMapping 15,16,17,18,19,20,21,22 http://jaspar.genereg.net/api/v1/matrix/MA0139.1.meme > ctcf_log_figures.txt 2>&1 &
+
 nohup ./generate_paper_figures_and_tables.sh  ENCSR000DUB 1 CTCFTrimmingBothSides 12,13,14,15,16,17,18,19,20,21,22 http://jaspar.genereg.net/api/v1/matrix/MA0139.1.meme > ctcf_log_figures.txt 2>&1 &
 nohup ./generate_paper_figures_and_tables.sh  ENCSR521IID 1 MAX 12,13,14,15,16,17,18,19,20,21,22 http://jaspar.genereg.net/api/v1/matrix/MA0058.2.meme > max_log_figures.txt 2>&1 &
 nohup ./generate_paper_figures_and_tables.sh  ENCSR000BIV 1 SRF 12,13,14,15,16,17,18,19,20,21,22 http://jaspar.genereg.net/api/v1/matrix/MA0083.2.meme > srf_log_figures.txt 2>&1 &
