@@ -115,7 +115,7 @@ pids=""
 RESULT=0
 for chromosome in $(echo $chromosomes | tr "," "\n")
 do
-    if [ ! -f ${chromosome}_pvalues.bdg ]; then
+    if [ ! -f ${chromosome}_pvalues_values.npy ]; then
 	graph_peak_caller callpeaks_whole_genome $chromosome \
 		$graph_dir/ \
 		$graph_dir/ \
@@ -146,7 +146,7 @@ for chromosome in $(echo $chromosomes | tr "," "\n")
 do
     if [ -f ${chromosome}_max_paths.intervalcollection ]; then
 	echo "Peaks already called for $chromosome. Not calling"
-    elif [ -f ${chromosome}_pvalues.bdg ]; then
+    elif [ -f ${chromosome}_pvalues_values.npy ]; then
 	graph_peak_caller callpeaks_whole_genome_from_p_values $chromosome $chromosome \
 		$graph_dir/ \
 		$graph_dir/ \
