@@ -97,3 +97,6 @@ do
     fimo -oc fimo_macs_chr$chromosome motif.meme macs_sequences_chr${chromosome}.fasta
     fimo -oc fimo_graph_chr$chromosome motif.meme ${chromosome}_sequences.fasta
 done
+
+# Analyse peak data sets
+graph_peak_caller analyse_peaks_whole_genome $chromosomes ./ ~/data/whole_genome/ $tf > peak_analysis_log.txt 2>&1
