@@ -60,12 +60,12 @@ echo "Found fragment length: $fragment_length"
 
 # Step 2: Filter reads
 # fastqc, trim_galore
-if [ ! -f filtered.fastq ]; then
-   #head -n 10000 raw.fastq > filtered.fastq
-    echo "Creating filtered.fastq from raw.fastq" 
-   mv raw.fastq filtered.fastq
+if [ ! -f raw_trimmed.fq ]; then
+    echo "Trimming fastq using trim galore"
+   #mv raw.fastq filtered.fastq
+   trim_galore raw.fastq
 else
-    echo "Fastq already filtered"
+    echo "Fastq already trimmed"
 fi
 
 
@@ -73,7 +73,7 @@ fi
 echo "Mapping reads"
 if [ ! -f mapped.gam ]; then
     echo "Using indices: $vg_gcsa_index and $vg_xg_index"
-    vg map -f filtered.fastq -g $vg_gcsa_index -x $vg_xg_index -M 2 > mapped.gam
+    vg map -f raw_trimmed.fq -g $vg_gcsa_index -x $vg_xg_index -M 2 > mapped.gam
 else
     echo "Mapped reads exist. Not mapping"
 fi

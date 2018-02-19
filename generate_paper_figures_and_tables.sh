@@ -40,10 +40,18 @@ if [ ! -f linear_alignments.bam ]; then
         echo "Unzipped fastq alread exists. Not unzipping"
     fi
 
+    if [ ! -f raw_trimmed.fq ]; then
+        echo "Trimming fastq using trim galore"
+       #mv raw.fastq filtered.fastq
+       trim_galore raw.fastq
+    else
+        echo "Fastq already trimmed"
+    fi
+
 
     echo "Mapping reads to linear genome"
     bwa aln -t $n_threads $grch38_fasta_file raw.fastq > reads.sai
-    bwa samse $grch38_fasta_file reads.sai raw.fastq > alignments.sam
+    bwa samse $grch38_fasta_file reads.sai raw_trimmed.fastq > alignments.sam
 
     # Convert to bam and sort
     echo "Converting to bam and filtering"
