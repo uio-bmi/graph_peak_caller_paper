@@ -49,9 +49,13 @@ if [ ! -f linear_alignments.bam ]; then
     echo "Converting to bam and filtering"
     samtools view -Su alignments.sam | samtools sort - alignments_sorted
 
+
     # Filter (removed duplicates and reads having low score)
-    samtools view -F 1804 -q 30 -b alignments_sorted.bam > linear_alignments.bam
+    # bwa aln has max mapping quality 37
+    samtools view -F 0x904 -q 37 -b alignments_sorted.bam > linear_alignments.bam
 fi
+
+
 
 
 # Run macs with encode linear mapped reads
@@ -101,4 +105,5 @@ do
     fimo -oc fimo_graph_chr$chromosome motif.meme ${chromosome}_sequences.fasta
 done
 
-
+# Analyse peak results
+graph_peak_caller analyse_peaks_whole_genome $chromosomes ./ ~/data/whole_genome/ ../../../figures_tables/$tf
