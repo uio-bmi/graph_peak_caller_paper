@@ -7,7 +7,7 @@ chromosomes=$4
 motif_url=$5
 
 base_dir=$(pwd)
-grch38_fasta_file=~/data/hg19/hg19.fasta
+grch38_fasta_file=~/data/hg19/chromosomes/hg19_chr1-Y.fa
 n_threads=$(grep -c ^processor /proc/cpuinfo)
 
 echo "Will use $n_threads threads"
@@ -50,8 +50,8 @@ if [ ! -f linear_alignments.bam ]; then
 
 
     echo "Mapping reads to linear genome"
-    bwa aln -t $n_threads $grch38_fasta_file raw.fastq > reads.sai
-    bwa samse $grch38_fasta_file reads.sai raw_trimmed.fastq > alignments.sam
+    bwa aln -t $n_threads $grch38_fasta_file raw_trimmed.fq > reads.sai
+    bwa samse $grch38_fasta_file reads.sai raw_trimmed.fq > alignments.sam
 
     # Convert to bam and sort
     echo "Converting to bam and filtering"
