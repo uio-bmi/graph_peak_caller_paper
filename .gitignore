@@ -4,3 +4,15 @@
 data/*
 *.swp
 *.txt*
+*.pickle
+*.bed
+*fimo*
+*.fastq
+*.gz
+macs_sequences*
+*.out
+*.sam
+*.bam
+*.r
+*.narrowPeak
+

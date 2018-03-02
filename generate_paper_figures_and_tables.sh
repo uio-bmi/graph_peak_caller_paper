@@ -5,9 +5,10 @@ replicate=$2
 tf=$3
 chromosomes=$4
 motif_url=$5
+data_dir=$6
+fasta_file=$7
 
 base_dir=$(pwd)
-grch38_fasta_file=~/data/hg19/chromosomes/hg19_chr1-Y.fa
 n_threads=$(grep -c ^processor /proc/cpuinfo)
 
 echo "Will use $n_threads threads"
@@ -50,8 +51,8 @@ if [ ! -f linear_alignments.bam ]; then
 
 
     echo "Mapping reads to linear genome"
-    bwa aln -t $n_threads $grch38_fasta_file raw_trimmed.fq > reads.sai
-    bwa samse $grch38_fasta_file reads.sai raw_trimmed.fq > alignments.sam
+    bwa aln -t $n_threads $fasta_file raw_trimmed.fq > reads.sai
+    bwa samse $fasta_file reads.sai raw_trimmed.fq > alignments.sam
 
     # Convert to bam and sort
     echo "Converting to bam and filtering"
@@ -85,7 +86,7 @@ do
 
     # Also sort out specific chromosome, making later analysis faster
     grep "chr${chromosome}\s" macs_peaks.narrowPeak > macs_peaks_chr${chromosome}.bed
-    graph_peak_caller linear_peaks_to_fasta macs_peaks_chr${chromosome}.bed $grch38_fasta_file macs_sequences_chr${chromosome}.fasta
+    graph_peak_caller linear_peaks_to_fasta macs_peaks_chr${chromosome}.bed $fasta_file macs_sequences_chr${chromosome}.fasta
 
 
 done
@@ -93,7 +94,7 @@ done
 
 # Fetch macs sequences for these peaks
 echo "Fetch macs sequences for selected chromosomes"
-graph_peak_caller linear_peaks_to_fasta macs_selected_chromosomes.bed $grch38_fasta_file macs_sequences.fasta
+graph_peak_caller linear_peaks_to_fasta macs_selected_chromosomes.bed $fasta_file macs_sequences.fasta
 
 
 # Merge all graph peak caller result files into one single sorted sequence file
@@ -114,4 +115,4 @@ do
 done
 
 # Analyse peak results
-graph_peak_caller analyse_peaks_whole_genome $chromosomes ./ ~/data/whole_genome/ ../../../figures_tables/$tf
+graph_peak_caller analyse_peaks_whole_genome $chromosomes ./ $data_dir ../../../figures_tables/$tf

@@ -78,7 +78,7 @@ fi
 echo "Mapping reads"
 if [ ! -f mapped.gam ]; then
     echo "Using indices: $vg_gcsa_index and $vg_xg_index"
-    vg map -f raw_trimmed.fq -g $vg_gcsa_index -x $vg_xg_index > mapped.gam
+    vg_mappering map -c 5000 -f raw_trimmed.fq -g $vg_gcsa_index -x $vg_xg_index > mapped.gam
     #vg mpmap --mq-method 2 -S -x $vg_xg_index -g $vg_gcsa_index -f raw_trimmed.fq > mapped.gam
 else
     echo "Mapped reads exist. Not mapping"
@@ -86,9 +86,9 @@ fi
 
 # Step 4: Filter mapped reads
 echo "Filtering"
-if [ ! -f filtered.json ]; then
-	vg filter -q 60 -r 0.97 -s 2.0 -fu -t 20 mapped.gam > filtered.gam
-	vg view -aj filtered.gam > filtered.json
+if [ ! -f filtered_low_qual_reads_removed.json ]; then
+	vg_mappering filter -q 60 -r 0.95 -s 2.0 -fu -t 20 mapped.gam > filtered.gam
+	vg_mappering view -aj filtered.gam > filtered_low_qual_reads_removed.json
 else
 	echo "Filtered exists. Not filtering"
 fi
@@ -110,34 +110,38 @@ if [ ! -f linear_alignments.bam ]; then
 fi
 
 # Get sequence id of reads that mapped with low mapq to linear genome
-echo "Finding reads that mapped bad to linear"
-awk '$5 < 37 { print $1  }' alignments.sam > low_qual.txt
-if [ ! -s "low_qual.txt" ]
-then 
-   echo "Something is probaly wrong. Found no low qual reads."
-   exit 0
-fi
+#echo "Finding reads that mapped bad to linear"
+#awk '$5 < 37 { print $1  }' alignments.sam > low_qual.txt
+#awk '$5 < 37 && $6 == "36M" { print $1  }' alignments.sam > low_qual.txt
+#if [ ! -s "low_qual.txt" ]
+#then 
+   #echo "Something is probaly wrong. Found no low qual reads."
+   #exit 0
+#fi
 
 echo "Removing low quality reads."
-python3 $base_dir/filter_json_alignments.py low_qual.txt filtered.json filtered_low_qual_reads_removed.json
+#python3 $base_dir/filter_json_alignments.py low_qual.txt filtered.json filtered_low_qual_reads_removed.json
+#cp filtered.json filtered_low_qual_reads_removed.json
 
 
 
 # Step 5: Split filtered into chromosomes
 #if [ ! -f filtered_1.json ]; then
-	graph_peak_caller split_vg_json_reads_into_chromosomes filtered_low_qual_reads_removed.json $graph_dir
+	graph_peak_caller split_vg_json_reads_into_chromosomes $chromosomes filtered_low_qual_reads_removed.json $graph_dir
 #else
 	#echo "Not splitting into chromosomes."
 #fi
 
 # Count unique reads in filtered files
-if [ ! -f count_unique_reads_output.txt ]; then
-    graph_peak_caller count_unique_reads $chromosomes $graph_dir/ filtered_low_qual_reads_removed_ > count_unique_reads_output.txt 2>&1
-else
-    echo "Unique reads already counted. Not counting"
-fi
+#if [ ! -f count_unique_reads_output.txt ]; then
+#    graph_peak_caller count_unique_reads $chromosomes $graph_dir/ filtered_low_qual_reads_removed_ > count_unique_reads_output.txt 2>&1
+#else
+#    echo "Unique reads already counted. Not counting"
+#fi
 
-unique_reads=$(tail -n 1 count_unique_reads_output.txt)
+#unique_reads=$(tail -n 1 count_unique_reads_output.txt)
+echo "Counting unique reads"
+unique_reads=$(pcregrep -o1 '"sequence": "([ACGTNacgtn]{20,})"' filtered_low_qual_reads_removed.json | sort | uniq | wc -l)
 echo "$unique_reads unique reads in total"
 
 
@@ -182,7 +186,7 @@ do
 		$graph_dir/ \
 		$graph_dir/ \
 		$graph_dir/linear_map_ \
-		filtered_ filtered_ "" False $fragment_length $read_length \
+		filtered_low_qual_reads_removed filtered_low_qual_reads_removed_ "" False $fragment_length $read_length \
 		 > log_after_p_values_$chromosome.txt 2>&1 &
 	echo "Peak calling for chr $chromosome started as process. Log will be written to $work_dir/log_after_p_values_$chromosome.txt"
     #else
