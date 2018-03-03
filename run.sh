@@ -13,5 +13,3 @@ wait
 ./generate_paper_figures_and_tables2.sh  ENCSR978WED 1 DM_JIM chr3R,chr3L,chr2R,chr2L,chrX,chr4 . /media/storage1/dm6/ /media/storage1/dm6/dm3_main_chromosomes.fasta 97958719 &
 
 wait
-
-echo "Done."
