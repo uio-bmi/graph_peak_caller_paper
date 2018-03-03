@@ -94,7 +94,7 @@ echo "Found fragment length: $fragment_length"
 echo "Mapping reads"
 if [ ! -f mapped.gam ]; then
     echo "Using indices: $vg_gcsa_index and $vg_xg_index"
-    vg_mappering map -c 5000 -f raw_trimmed.fq -g $vg_gcsa_index -x $vg_xg_index > mapped.gam
+    vg map -c 5000 -f raw_trimmed.fq -g $vg_gcsa_index -x $vg_xg_index > mapped.gam
     #vg mpmap --mq-method 2 -S -x $vg_xg_index -g $vg_gcsa_index -f raw_trimmed.fq > mapped.gam
 else
     echo "Mapped reads exist. Not mapping"
@@ -103,8 +103,8 @@ fi
 # Step 4: Filter mapped reads
 echo "Filtering"
 if [ ! -f filtered_low_qual_reads_removed.json ]; then
-	vg_mappering filter -q 60 -r 0.95 -s 2.0 -fu -t 20 mapped.gam > filtered.gam
-	vg_mappering view -aj filtered.gam > filtered_low_qual_reads_removed.json
+	vg filter -q 60 -r 0.95 -s 2.0 -fu -t 20 mapped.gam > filtered.gam
+	vg view -aj filtered.gam > filtered_low_qual_reads_removed.json
 else
 	echo "Filtered exists. Not filtering"
 fi
