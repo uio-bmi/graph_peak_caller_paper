@@ -8,6 +8,7 @@ motif_url=$5
 data_dir=$6
 fasta_file=$7
 
+
 base_dir=$(pwd)
 n_threads=$(grep -c ^processor /proc/cpuinfo)
 
