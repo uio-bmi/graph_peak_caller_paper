@@ -20,62 +20,6 @@ cd $work_dir
 
 echo "Changed dir to $work_dir"
 
-
-
-# Prepare linear reads for linear peak calling
-if [ ! -f linear_alignments.bam ]; then
-
-    # Get raw fastq for this encode experiment and replicate number
-    if [ ! -f raw.fastq.gz ]; then
-        echo "Download fastq"
-        encode_url=$(python3 $base_dir/download_encode_fastq.py $encode_id $replicate)
-        echo "Encode url: $encode_url"
-        wget -O raw.fastq.gz --show-progress $encode_url
-    else
-        echo "Raw fastq already exists. Not dowloading"
-    fi
-
-    if [ ! -f raw.fastq ]; then
-        echo "Unzipping"
-        gunzip -c raw.fastq.gz > raw.fastq
-    else
-        echo "Unzipped fastq alread exists. Not unzipping"
-    fi
-
-    if [ ! -f raw_trimmed.fq ]; then
-        echo "Trimming fastq using trim galore"
-       #mv raw.fastq filtered.fastq
-       trim_galore raw.fastq
-    else
-        echo "Fastq already trimmed"
-    fi
-
-
-    echo "Mapping reads to linear genome"
-    bwa aln -t $n_threads $linear_genome_fasta_file raw_trimmed.fq > reads.sai
-    bwa samse $linear_genome_fasta_file  reads.sai raw_trimmed.fq > alignments.sam
-
-    # Convert to bam and sort
-    echo "Converting to bam and filtering"
-    samtools view -Su alignments.sam | samtools sort - alignments_sorted
-
-
-    # Filter (removed duplicates and reads having low score)
-    # bwa aln has max mapping quality 37
-    samtools view -F 0x904 -q 37 -b alignments_sorted.bam > linear_alignments.bam
-fi
-
-
-
-
-# Run macs with encode linear mapped reads
-if [ ! -f macs_output_whole_run.txt ]; then
-	echo "Running macs2"
-	macs2 callpeak -g $genome_size -t linear_alignments.bam -n macs --bdg > macs_output_whole_run.txt 2>&1
-else
-	echo "Not running max. Already done"
-fi
-
 # Extract macs2 sequences, write to fasta (for later comparison)
 echo "Extracting macs sequences"
 > macs_selected_chromosomes.bed  # Create empty file
@@ -91,7 +35,6 @@ do
 
 
 done
-
 
 # Fetch macs sequences for these peaks
 echo "Fetch macs sequences for selected chromosomes"
