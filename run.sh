@@ -1,41 +1,17 @@
-#!/usr/bin/env bash
-./generate_paper_figures_and_tables.sh  ENCSR000DUB 1 CTCF 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,X https://www.encodeproject.org/files/ENCFF639IFG/@@download/ENCFF639IFG.bam http://jaspar.genereg.net/api/v1/matrix/MA0139.1.meme
-./generate_paper_figures_and_tables.sh  ENCSR000DUB 1 CTCFNonTrimming 15,16,17,18,19,20,21,22 https://www.encodeproject.org/files/ENCFF639IFG/@@download/ENCFF639IFG.bam http://jaspar.genereg.net/api/v1/matrix/MA0139.1.meme
-
-./generate_paper_figures_and_tables.sh  ENCSR521IID 1 MAX 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22 https://www.encodeproject.org/files/ENCFF499VEN/@@download/ENCFF499VEN.bam http://jaspar.genereg.net/api/v1/matrix/MA0058.2.meme
-
-./generate_paper_figures_and_tables.sh  ENCSR000BIV 1 SRF 2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,X https://www.encodeproject.org/files/ENCFF575DNN/@@download/ENCFF575DNN.bam http://jaspar.genereg.net/api/v1/matrix/MA0083.2.meme
-
-./generate_paper_figures_and_tables.sh  ENCSR000BGU 1 EBF 14,15,16,17,18,19,20,21,22 https://www.encodeproject.org/files/ENCFF426RGL/@@download/ENCFF426RGL.bam http://jaspar.genereg.net/api/v1/matrix/MA0154.2.meme
-
-./generate_paper_figures_and_tables.sh  ENCSR000BGT 1 BATF 14,15,16,17,18,19,20,21,22 https://www.encodeproject.org/files/ENCFF399QIP/@@download/ENCFF399QIP.bam http://jaspar.genereg.net/api/v1/matrix/MA0462.1.meme
-
-./generate_paper_figures_and_tables.sh  ENCSR996DUT 1 JUN 14,15,16,17,18,19,20,21,22 https://www.encodeproject.org/files/ENCFF755QDV/@@download/ENCFF755QDV.bam http://jaspar.genereg.net/api/v1/matrix/MA0488.1.meme
-
-./generate_paper_figures_and_tables.sh  ENCSR070VXO 1 NR3C1 10,11,12,13,14,15,16,17,18,19,20,21,22 https://www.encodeproject.org/files/ENCFF883JID/@@download/ENCFF883JID.bam http://jaspar.genereg.net/api/v1/matrix/MA0113.3.meme
-
-./generate_paper_figures_and_tables.sh  ENCSR000BMZ 1 ELF1 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22 https://www.encodeproject.org/files/ENCFF418EVV/@@download/ENCFF418EVV.bam http://jaspar.genereg.net/api/v1/matrix/MA0473.2.meme
-
-./generate_paper_figures_and_tables.sh  ENCSR000ECD 1 USF2 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22 https://www.encodeproject.org/files/ENCFF992YZZ/@@download/ENCFF992YZZ.bam http://jaspar.genereg.net/api/v1/matrix/MA0526.1.meme
-
-./generate_paper_figures_and_tables.sh  ENCSR000ECD 1 SP1 17 https://www.encodeproject.org/files/ENCFF992YZZ/@@download/ENCFF992YZZ.bam http://jaspar.genereg.net/api/v1/matrix/MA0526.1.meme
-
-./generate_paper_figures_and_tables.sh  ENCSR000EXZ 1 GATA3 12,13,14,15,16,17,18,19,20,21,22,X https://www.encodeproject.org/files/ENCFF318YMR/@@download/ENCFF318YMR.bam http://jaspar.genereg.net/api/v1/matrix/MA0037.2.memes
 
 
+./run_peak_calling_generic.sh blank_config.sh ENCSR471GSA 1 DM_JRA chr3R,chr3L,chr2R,chr2L,chrX,chr4 https://www.encodeproject.org/files/ENCFF597CVA/@@download/ENCFF597CVA.bam . 97958719 /media/storage1/dm6/dm3_main_chromosomes.fasta /media/storage1/dm6/wg.xg /media/storage1/dm6/wg.gcsa /media/storage1/dm6/  > dm_jra_output.txt 2 >&1 &
+./run_peak_calling_generic.sh blank_config.sh ENCSR923VWW 1 DM_SQZ chr3R,chr3L,chr2R,chr2L,chrX,chr4 https://www.encodeproject.org/files/ENCFF255JBC/@@download/ENCFF255JBC.bam . 97958719 /media/storage1/dm6/dm3_main_chromosomes.fasta /media/storage1/dm6/wg.xg /media/storage1/dm6/wg.gcsa /media/storage1/dm6/ > dm_sqz_output.txt 2 >&1 &
+./run_peak_calling_generic.sh blank_config.sh ENCSR978WED 1 DM_JIM chr3R,chr3L,chr2R,chr2L,chrX,chr4 . . 97958719 /media/storage1/dm6/dm3_main_chromosomes.fasta /media/storage1/dm6/wg.xg /media/storage1/dm6/wg.gcsa /media/storage1/dm6/ > dm_jim_output.txt 2 >&1 &
+./run_peak_calling_generic.sh blank_config.sh ENCSR082RBU 1 DM_ANTP chr3R,chr3L,chr2R,chr2L,chrX,chr4 https://www.encodeproject.org/files/ENCFF713VJE/@@download/ENCFF713VJE.bam . 97958719 /media/storage1/dm6/dm3_main_chromosomes.fasta /media/storage1/dm6/wg.xg /media/storage1/dm6/wg.gcsa /media/storage1/dm6/ > dm_antp_output.txt 2 >&1 &'
 
+wait
 
-# Using raw fastq and performing linear mapping
-# All these have been run and produces new correct linear_alignments.bam for hg19
-nohup ./generate_paper_figures_and_tables.sh  ENCSR000DUB 1 CTCFCustomMapping 15,16,17,18,19,20,21,22 http://jaspar.genereg.net/api/v1/matrix/MA0139.1.meme > ctcf_log_figures.txt 2>&1 &
+./generate_paper_figures_and_tables2.sh  ENCSR471GSA 1 DM_JRA chr3R,chr3L,chr2R,chr2L,chrX,chr4 . /media/storage1/dm6/ /media/storage1/dm6/dm3_main_chromosomes.fasta 97958719 &
+./generate_paper_figures_and_tables2.sh  ENCSR923VWW 1 DM_SQZ chr3R,chr3L,chr2R,chr2L,chrX,chr4 . /media/storage1/dm6/ /media/storage1/dm6/dm3_main_chromosomes.fasta 97958719 &
+./generate_paper_figures_and_tables2.sh  ENCSR082RBU 1 DM_ANTP chr3R,chr3L,chr2R,chr2L,chrX,chr4 . /media/storage1/dm6/ /media/storage1/dm6/dm3_main_chromosomes.fasta 97958719 &
+./generate_paper_figures_and_tables2.sh  ENCSR978WED 1 DM_JIM chr3R,chr3L,chr2R,chr2L,chrX,chr4 . /media/storage1/dm6/ /media/storage1/dm6/dm3_main_chromosomes.fasta 97958719 &
 
-nohup ./generate_paper_figures_and_tables.sh  ENCSR000DUB 1 CTCFTrimmingBothSides 12,13,14,15,16,17,18,19,20,21,22 http://jaspar.genereg.net/api/v1/matrix/MA0139.1.meme > ctcf_log_figures.txt 2>&1 &
-nohup ./generate_paper_figures_and_tables.sh  ENCSR521IID 1 MAX 12,13,14,15,16,17,18,19,20,21,22 http://jaspar.genereg.net/api/v1/matrix/MA0058.2.meme > max_log_figures.txt 2>&1 &
-nohup ./generate_paper_figures_and_tables.sh  ENCSR000BIV 1 SRF 12,13,14,15,16,17,18,19,20,21,22 http://jaspar.genereg.net/api/v1/matrix/MA0083.2.meme > srf_log_figures.txt 2>&1 &
-nohup ./generate_paper_figures_and_tables.sh  ENCSR000BGU 1 EBF 12,13,14,15,16,17,18,19,20,21,22 http://jaspar.genereg.net/api/v1/matrix/MA0154.2.meme > ebf_log_figures.txt 2>&1 &
+wait
 
-
-nohup graph_peak_caller analyse_peaks_whole_genome 12,13,14,15,16,17,18,19,20,21,22 ./ ~/data/whole_genome/ CTCFCustomMapping > ctcf_analysis_log.txt 2>&1 &
-nohup graph_peak_caller analyse_peaks_whole_genome 12,13,14,15,16,17,18,19,20,21,22 ./ ~/data/whole_genome/ ~/dev/graph_chip_seq_pipeline/figures_tables/SRF > analysis_log.txt 2>&1 &
-nohup graph_peak_caller analyse_peaks_whole_genome 12,13,14,15,16,17,18,19,20,21,22 ./ ~/data/whole_genome/ ~/dev/graph_chip_seq_pipeline/figures_tables/MAX > analysis_log.txt 2>&1 &
-nohup graph_peak_caller analyse_peaks_whole_genome 12,13,14,15,16,17,18,19,20,21,22 ./ ~/data/whole_genome/ ~/dev/graph_chip_seq_pipeline/figures_tables/EBF > analysis_log.txt 2>&1 &
+echo "Done."

@@ -66,9 +66,9 @@ do
 	graph_peak_caller create_ob_graph $chr.json $chr.nobg &
 done
 
-for chr in $(seq 1 6);
+for chr in $(seq 16 21; echo X; echo Y);
 do
-	graph_peak_caller find_linear_path $chr.json $chr.nobg $chr ${chr}_linear_path.interval &
+	graph_peak_caller find_linear_path $chr.json $chr.nobg $chr ${chr}_linear_pathv2.interval &
 done
 
 for chr in $(seq 1 22; echo X; echo Y);
@@ -114,4 +114,41 @@ done
 for chr in $(seq 2 22; echo X; echo Y);
 do
 	cat \{$chr\}_node_range.txt  | awk '{print $2}' > node_range_$chr.txt
+done
+
+
+# DM
+for chr in $(echo chr3R; echo chr3L; echo chr2R; echo chr2L; echo chrX; echo chr4);
+do
+    vg view -Vj $chr.vg > $chr.json &
+done
+
+
+for chr in $(echo chr3R; echo chr3L; echo chr2R; echo chr2L; echo chrX; echo chr4);
+do
+    vg snarls $chr.vg > $chr.snarls &
+done
+
+
+for chr in $(echo chr3R; echo chr3L; echo chr2R; echo chr2L; echo chrX; echo chr4);
+do
+	vg stats -r $chr.vg  | awk '{print $2}' > node_range_$chr.txt
+done
+
+
+for chr in $(echo chr3R; echo chr3L; echo chr2R; echo chr2L; echo chrX; echo chr4);
+do
+	graph_peak_caller create_ob_graph $chr.json $chr.nobg &
+done
+
+
+for chr in $(echo chr3R; echo chr3L; echo chr2R; echo chr2L; echo chrX; echo chr4);
+do
+	graph_peak_caller find_linear_path $chr.json $chr.nobg $chr ${chr}_linear_pathv2.interval &
+done
+
+# Create linear maps
+for chr in $(echo chr3R; echo chr3L; echo chr2R; echo chr2L; echo chrX; echo chr4);
+do
+	graph_peak_caller create_linear_map $chr.nobg $chr.snarls linear_map_$chr &
 done

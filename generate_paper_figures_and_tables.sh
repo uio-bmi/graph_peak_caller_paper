@@ -6,6 +6,7 @@ tf=$3
 chromosomes=$4
 motif_url=$5
 
+
 base_dir=$(pwd)
 grch38_fasta_file=~/data/hg19/hg19.fasta
 n_threads=$(grep -c ^processor /proc/cpuinfo)

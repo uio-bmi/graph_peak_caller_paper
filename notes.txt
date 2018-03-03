@@ -93,10 +93,44 @@ Mulig oppsett:
 
 
 nohup ./run_peak_calling.sh config_server.sh ENCSR000DUB 1 CTCFTrimmingBothSides 12,13,14,15,16,17,18,19,20,21,22 https://www.encodeproject.org/files/ENCFF639IFG/@@download/ENCFF639IFG.bam http://jaspar.genereg.net/api/v1/matrix/MA0139.1.meme 2930000000 > ctcf_output.txt 2>&1 &
+nohup ./run_peak_calling.sh config_server.sh ENCSR000DUB 1 CTCFTrueSparse 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,X https://www.encodeproject.org/files/ENCFF639IFG/@@download/ENCFF639IFG.bam http://jaspar.genereg.net/api/v1/matrix/MA0139.1.meme 3080000000 > ctcf_output.txt 2>&1 &
 nohup ./run_peak_calling.sh config_server.sh ENCSR521IID 1 MAX 12,13,14,15,16,17,18,19,20,21,22 https://www.encodeproject.org/files/ENCFF499VEN/@@download/ENCFF499VEN.bam http://jaspar.genereg.net/api/v1/matrix/MA0058.2.meme 2930000000 > max_output.txt 2>&1 &
-nohup ./run_peak_calling.sh config_server.sh ENCSR000BGU 1 EBF 12,13,14,15,16,17,18,19,20,21,22 https://www.encodeproject.org/files/ENCFF426RGL/@@download/ENCFF426RGL.bam http://jaspar.genereg.net/api/v1/matrix/MA0154.2.meme 2930000000 > ebf_output.txt 2>&1 &
+nohup ./run_peak_calling.sh config_server.sh ENCSR000BGU 1 EBF 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,X https://www.encodeproject.org/files/ENCFF426RGL/@@download/ENCFF426RGL.bam http://jaspar.genereg.net/api/v1/matrix/MA0154.2.meme 2930000000 > ebf_output.txt 2>&1 &
 nohup ./run_peak_calling.sh config_server.sh ENCSR000BIV 1 SRF 12,13,14,15,16,17,18,19,20,21,22 https://www.encodeproject.org/files/ENCFF575DNN/@@download/ENCFF575DNN.bam http://jaspar.genereg.net/api/v1/matrix/MA0083.2.meme 2930000000 > srf_output.txt 2>&1 &
-nohup ./run_peak_calling.sh config_server.sh ENCSR000BMZ 1 ELF1 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22 https://www.encodeproject.org/files/ENCFF418EVV/@@download/ENCFF418EVV.bam http://jaspar.genereg.net/api/v1/matrix/MA0473.2.meme 2930000000 > elf1_output.txt 2 >&1 &
+nohup ./run_peak_calling.sh config_server.sh ENCSR000BMZ 1 ELF1 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,X https://www.encodeproject.org/files/ENCFF418EVV/@@download/ENCFF418EVV.bam http://jaspar.genereg.net/api/v1/matrix/MA0473.2.meme 2930000000 > elf1_output.txt 2 >&1 &
+nohup ./run_peak_calling.sh config_server.sh ENCSR000BGT 1 BATF 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22 https://www.encodeproject.org/files/ENCFF399QIP/@@download/ENCFF399QIP.bam http://jaspar.genereg.net/api/v1/matrix/MA0462.1.meme 2930000000 > batf_output.txt 2 >&1 &
+nohup ./run_peak_calling.sh config_server.sh ENCSR000EXZ 1 GATA3 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22  https://www.encodeproject.org/files/ENCFF318YMR/@@download/ENCFF318YMR.bam http://jaspar.genereg.net/api/v1/matrix/MA0037.2.meme 2930000000 > gata3_output.txt 2 >&1 &
+nohup ./run_peak_calling.sh config_server.sh ENCSR000BRY 1 TEAD4 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,X  https://www.encodeproject.org/files/ENCFF000OVO/@@download/ENCFF000OVO.bam http://jaspar.genereg.net/api/v1/matrix/MA0809.1.meme 3080000000 > tead4_output.txt 2 >&1 &
+nohup ./run_peak_calling.sh config_server.sh ENCSR000BUX 1 EGR1 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,X  https://www.encodeproject.org/files/ENCFF000QLS/@@download/ENCFF000QLS.bam http://jaspar.genereg.net/api/v1/matrix/MA0162.2.meme 2930000000 > egr3_output.txt 2 >&1 &
+nohup ./run_peak_calling.sh config_server.sh ENCSR070VXO 1 NR3C1 1,2,3,4,5,6,7,8,9,10,11,12,13,14,16,17,18,19,20,21,22,X https://www.encodeproject.org/files/ENCFF883JID/@@download/ENCFF883JID.bam http://jaspar.genereg.net/api/v1/matrix/MA0113.3.meme 2930000000 > nr3c1_output.txt 2 >&1 &
+nohup ./run_peak_calling.sh config_server.sh ENCSR000BQK 1 ATF2 1,2,3,4,5,6,7,8,9,10,11,12,13,14,16,17,18,19,20,21,22,X https://www.encodeproject.org/files/ENCFF992YZZ/@@download/ENCFF992YZZ.bam http://jaspar.genereg.net/api/v1/matrix/MA0834.1.meme 3080000000 > atf2_output.txt 2 >&1 &
+
+nohup ./run_peak_calling.sh config_server.sh ENCSR000DUB 1 CTCF24Feb 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,X https://www.encodeproject.org/files/ENCFF639IFG/@@download/ENCFF639IFG.bam http://jaspar.genereg.net/api/v1/matrix/MA0139.1.meme 3080000000 > ctcf_output.txt 2>&1 &
+nohup ./run_peak_calling.sh config_server.sh ENCSR000BUX 1 EGR124Feb 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,X  https://www.encodeproject.org/files/ENCFF000QLS/@@download/ENCFF000QLS.bam http://jaspar.genereg.net/api/v1/matrix/MA0162.2.meme 3080000000 > egr3_output.txt 2 >&1 &
+nohup ./run_peak_calling.sh config_server.sh ENCSR000BGU 1 EBF24Feb 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,X https://www.encodeproject.org/files/ENCFF426RGL/@@download/ENCFF426RGL.bam http://jaspar.genereg.net/api/v1/matrix/MA0154.2.meme 3080000000 > ebf_output.txt 2>&1 &
+
+nohup ./run_peak_calling.sh config_server.sh ENCSR000DUB 1 CTCF25Feb 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,X https://www.encodeproject.org/files/ENCFF639IFG/@@download/ENCFF639IFG.bam http://jaspar.genereg.net/api/v1/matrix/MA0139.1.meme 3080000000 > ctcf_output.txt 2>&1 &
+nohup ./run_peak_calling.sh config_server.sh ENCSR000BUX 1 EGR125Feb 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,X  https://www.encodeproject.org/files/ENCFF000QLS/@@download/ENCFF000QLS.bam http://jaspar.genereg.net/api/v1/matrix/MA0162.2.meme 3080000000 > egr3_output.txt 2 >&1 &
+nohup ./run_peak_calling.sh config_server.sh ENCSR000BGU 1 EBF25Feb 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,X https://www.encodeproject.org/files/ENCFF426RGL/@@download/ENCFF426RGL.bam http://jaspar.genereg.net/api/v1/matrix/MA0154.2.meme 3080000000 > ebf_output.txt 2>&1 &
+nohup ./run_peak_calling.sh config_server.sh ENCSR000BRY 1 TEAD425Feb 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,X  https://www.encodeproject.org/files/ENCFF000OVO/@@download/ENCFF000OVO.bam http://jaspar.genereg.net/api/v1/matrix/MA0809.1.meme 3080000000 > tead4_output.txt 2 >&1 &
+
+nohup ./run_peak_calling.sh config_server.sh ENCSR000DUB 1 CTCF26Feb 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,X https://www.encodeproject.org/files/ENCFF639IFG/@@download/ENCFF639IFG.bam http://jaspar.genereg.net/api/v1/matrix/MA0139.1.meme 3080000000 > ctcf_output.txt 2>&1 &
+
+
+nohup ./run_peak_calling.sh config_server.sh ENCSR000DUB 1 CTCF27Feb 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,X https://www.encodeproject.org/files/ENCFF639IFG/@@download/ENCFF639IFG.bam http://jaspar.genereg.net/api/v1/matrix/MA0139.1.meme 3080000000 > ctcf_output.txt 2>&1 &
+nohup ./run_peak_calling.sh config_server.sh ENCSR000BUX 1 EGR127Feb 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,X  https://www.encodeproject.org/files/ENCFF000QLS/@@download/ENCFF000QLS.bam http://jaspar.genereg.net/api/v1/matrix/MA0162.2.meme 3080000000 > egr1_output.txt 2 >&1 &
+
+nohup ./run_peak_calling.sh config_server.sh ENCSR000DUB 1 CTCF28Feb 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,X https://www.encodeproject.org/files/ENCFF639IFG/@@download/ENCFF639IFG.bam http://jaspar.genereg.net/api/v1/matrix/MA0139.1.meme 3080000000 > ctcf_output.txt 2>&1 &
+nohup ./run_peak_calling.sh config_server.sh ENCSR000BUX 1 EGR128Feb 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,X  https://www.encodeproject.org/files/ENCFF000QLS/@@download/ENCFF000QLS.bam http://jaspar.genereg.net/api/v1/matrix/MA0162.2.meme 3080000000 > egr1_output.txt 2 >&1 &
+
+
+
+Probably bad TF (not related to the motif):
+nohup ./run_peak_calling.sh config_server.sh ENCSR051DXE 1 FUS 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22  https://www.encodeproject.org/files/ENCFF361MTW/@@download/ENCFF361MTW.bam http://jaspar.genereg.net/api/v1/matrix/MA0149.1.meme 2930000000 > fus_output.txt 2 >&1 &
+
+
+Ikke kjørt:
+Mindre tydelig motif: nohup ./run_peak_calling.sh config_server.sh ENCSR000BSZ 1 ZBTB7A 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22  https://www.encodeproject.org/files/ENCFF000NRJ/@@download/ENCFF000NRJ.bam http://jaspar.genereg.net/api/v1/matrix/MA0750.2.meme > ZBTB7A_output.txt 2 >&1 &
 
 
 ./run_peak_calling.sh config_server.sh ENCSR000DUB 1 CTCF 21,22 https://www.encodeproject.org/files/ENCFF639IFG/@@download/ENCFF639IFG.bam http://jaspar.genereg.net/api/v1/matrix/MA0139.1.meme
@@ -105,3 +139,211 @@ nohup ./run_peak_calling.sh config_server.sh ENCSR000BMZ 1 ELF1 1,2,3,4,5,6,7,8,
 ./run_peak_calling.sh config_server.sh ENCSR000DUB 1 CTCFTrimmingBothSides 22 https://www.encodeproject.org/files/ENCFF639IFG/@@download/ENCFF639IFG.bam http://jaspar.genereg.net/api/v1/matrix/MA0139.1.meme 2930000000
 
 graph_peak_caller analyse_peaks ~/dev/graph_peak_caller/tests/whole_genome/22.nobg ~/dev/graph_peak_caller/tests/whole_genome/22.json macs_sequences_chr22.fasta 22_sequences.fasta fimo_macs_22/fimo.txt fimo_graph_22/fimo.txt 22 22 0 0
+
+
+awk '$5 < 20 { print $1  }' alignments.sam > low_qual.txt
+
+
+
+ Nyeste mapping av egr:
+ vg_mappering map -d ~/data/whole_genome/wg1.6 -f raw_trimmed.fq -k 12 -c 10000 > mapped_test.gam &
+
+
+
+Sjekke reads som bwa mapper til flere locations:
+grep X0:i:3 alignments.sam | grep chr22 | grep 50M | awk '{print $1}' > multimaps.txt
+grep -of multimaps.txt filtered_low_qual_reads_removed_22.json > problematic_reads_names.txt
+manuelt fjerne tomme linjer
+vg_mappering map -f test.txt -k 11 -c 10000 -D --acyclic-graph -try-up-to 100 -d ~/data/whole_genome/wg1.6 | vg_mappering view -aj - | grep mapping_quality
+
+
+nohup ./run_peak_calling_custom.sh config_server.sh ENCSR000DUB 1 CTCF28Feb 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,X https://www.encodeproject.org/files/ENCFF639IFG/@@download/ENCFF639IFG.bam http://jaspar.genereg.net/api/v1/matrix/MA0139.1.meme 3080000000 > ctcf_output.txt 2>&1 &
+
+
+nohup ./run_peak_calling.sh config_server.sh ENCSR000BIV 1 SRF28Feb 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,X https://www.encodeproject.org/files/ENCFF575DNN/@@download/ENCFF575DNN.bam http://jaspar.genereg.net/api/v1/matrix/MA0083.2.meme 3080000000 > srf_output.txt 2>&1 &
+nohup ./run_peak_calling.sh config_server.sh ENCSR000BRY 1 TEAD428Feb 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,X  https://www.encodeproject.org/files/ENCFF000OVO/@@download/ENCFF000OVO.bam http://jaspar.genereg.net/api/v1/matrix/MA0809.1.meme 3080000000 > tead4_output.txt 2 >&1 &
+
+
+
+nohup ./run_peak_calling.sh config_server.sh ENCSR000DUB 1 CTCF29Feb 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,X https://www.encodeproject.org/files/ENCFF639IFG/@@download/ENCFF639IFG.bam http://jaspar.genereg.net/api/v1/matrix/MA0139.1.meme 3080000000 > ctcf_output.txt 2>&1 &
+nohup ./run_peak_calling.sh config_server.sh ENCSR000BUX 1 EGR129Feb 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,X  https://www.encodeproject.org/files/ENCFF000QLS/@@download/ENCFF000QLS.bam http://jaspar.genereg.net/api/v1/matrix/MA0162.2.meme 3080000000 > egr1_output.txt 2 >&1 &
+
+nohup ./run_peak_calling.sh config_server.sh ENCSR000BMZ 1 ELF11Mars 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,X https://www.encodeproject.org/files/ENCFF418EVV/@@download/ENCFF418EVV.bam http://jaspar.genereg.net/api/v1/matrix/MA0473.2.meme 3080000000 > elf1_output.txt 2 >&1 &
+
+
+Kjøringer dm:
+
+nohup ./run_peak_calling_generic.sh blank_config.sh ENCSR471GSA 1 DM_JRA chr3R,chr3L,chr2R,chr2L,chrX,chr4 https://www.encodeproject.org/files/ENCFF597CVA/@@download/ENCFF597CVA.bam . 97958719 /media/storage1/dm6/dm3_main_chromosomes.fasta /media/storage1/dm6/wg.xg /media/storage1/dm6/wg.gcsa /media/storage1/dm6/  > dm_jra_output.txt 2 >&1 &
+Virker ikke: nohup ./run_peak_calling_generic.sh blank_config.sh ENCSR672KPS 1 DM_MAX chr3R,chr3L,chr2R,chr2L,chrX,chr4 https://www.encodeproject.org/files/ENCFF880VCN/@@download/ENCFF880VCN.bam . 97958719 /media/storage1/dm6/dm3_main_chromosomes.fasta /media/storage1/dm6/wg.xg /media/storage1/dm6/wg.gcsa /media/storage1/dm6/  > dm_max_output.txt 2 >&1 &
+nohup ./run_peak_calling_generic.sh blank_config.sh ENCSR923VWW 1 DM_SQZ chr3R,chr3L,chr2R,chr2L,chrX,chr4 https://www.encodeproject.org/files/ENCFF255JBC/@@download/ENCFF255JBC.bam . 97958719 /media/storage1/dm6/dm3_main_chromosomes.fasta /media/storage1/dm6/wg.xg /media/storage1/dm6/wg.gcsa /media/storage1/dm6/ > dm_sqz_output.txt 2 >&1 &
+nohup ./run_peak_calling_generic.sh blank_config.sh ENCSR167BID 1 DM_BCD chr3R,chr3L,chr2R,chr2L,chrX,chr4 https://www.encodeproject.org/files/ENCFF272WTF/@@download/ENCFF272WTF.bam . 97958719 /media/storage1/dm6/dm3_main_chromosomes.fasta /media/storage1/dm6/wg.xg /media/storage1/dm6/wg.gcsa /media/storage1/dm6/ > dm_bcd_output.txt 2 >&1 &
+nohup ./run_peak_calling_generic.sh blank_config.sh ENCSR959SWC 1 DM_ACHI chr3R,chr3L,chr2R,chr2L,chrX,chr4 . . 97958719 /media/storage1/dm6/dm3_main_chromosomes.fasta /media/storage1/dm6/wg.xg /media/storage1/dm6/wg.gcsa /media/storage1/dm6/ > dm_achi_output.txt 2 >&1 &
+nohup ./run_peak_calling_generic.sh blank_config.sh ENCSR453UOF 1 DM_SIX4 chr3R,chr3L,chr2R,chr2L,chrX,chr4 . . 97958719 /media/storage1/dm6/dm3_main_chromosomes.fasta /media/storage1/dm6/wg.xg /media/storage1/dm6/wg.gcsa /media/storage1/dm6/ > dm_six4_output.txt 2 >&1 &
+nohup ./run_peak_calling_generic.sh blank_config.sh ENCSR064GFC 1 DM_TIN chr3R,chr3L,chr2R,chr2L,chrX,chr4 . . 97958719 /media/storage1/dm6/dm3_main_chromosomes.fasta /media/storage1/dm6/wg.xg /media/storage1/dm6/wg.gcsa /media/storage1/dm6/ > dm_tin_output.txt 2 >&1 &
+nohup ./run_peak_calling_generic.sh blank_config.sh ENCSR317SVS 1 DM_ACJ6 chr3R,chr3L,chr2R,chr2L,chrX,chr4 . . 97958719 /media/storage1/dm6/dm3_main_chromosomes.fasta /media/storage1/dm6/wg.xg /media/storage1/dm6/wg.gcsa /media/storage1/dm6/ > dm_acj6_output.txt 2 >&1 &
+
+nohup ./run_peak_calling_generic.sh blank_config.sh ENCSR249JVE 1 DM_HTH chr3R,chr3L,chr2R,chr2L,chrX,chr4 . . 97958719 /media/storage1/dm6/dm3_main_chromosomes.fasta /media/storage1/dm6/wg.xg /media/storage1/dm6/wg.gcsa /media/storage1/dm6/ > dm_hth_output.txt 2 >&1 &
+nohup ./run_peak_calling_generic.sh blank_config.sh ENCSR101LNT 1 DM_CG3065 chr3R,chr3L,chr2R,chr2L,chrX,chr4 . . 97958719 /media/storage1/dm6/dm3_main_chromosomes.fasta /media/storage1/dm6/wg.xg /media/storage1/dm6/wg.gcsa /media/storage1/dm6/ > dm_CG3065_output.txt 2 >&1 &
+nohup ./run_peak_calling_generic.sh blank_config.sh ENCSR556QKA 1 DM_DLL chr3R,chr3L,chr2R,chr2L,chrX,chr4 . . 97958719 /media/storage1/dm6/dm3_main_chromosomes.fasta /media/storage1/dm6/wg.xg /media/storage1/dm6/wg.gcsa /media/storage1/dm6/ > dm_dll_output.txt 2 >&1 &
+nohup ./run_peak_calling_generic.sh blank_config.sh ENCSR978WED 1 DM_JIM chr3R,chr3L,chr2R,chr2L,chrX,chr4 . . 97958719 /media/storage1/dm6/dm3_main_chromosomes.fasta /media/storage1/dm6/wg.xg /media/storage1/dm6/wg.gcsa /media/storage1/dm6/ > dm_jim_output.txt 2 >&1 &
+nohup ./run_peak_calling_generic.sh blank_config.sh ENCSR082RBU 1 DM_ANTP chr3R,chr3L,chr2R,chr2L,chrX,chr4 https://www.encodeproject.org/files/ENCFF713VJE/@@download/ENCFF713VJE.bam . 97958719 /media/storage1/dm6/dm3_main_chromosomes.fasta /media/storage1/dm6/wg.xg /media/storage1/dm6/wg.gcsa /media/storage1/dm6/ > dm_antp_output.txt 2 >&1 &
+
+SQZ:
+    - Fin motifassosiasjon
+JRA:
+    - Fin
+BCD:
+    - Lav assosiasjon med motif, unyttig
+ACHI:
+    - Ingen motif-assosiasjon, unyttig
+ANTP:
+    - macs failer
+JIM:
+    - Fin
+SIX4:
+    - Veldig lav motif assosiasjon, lik som max
+DLL:
+    - Ingen motif-assosiasjon
+TIN:
+    - Lav motif-assosiasjon
+ACJ6:
+    - Lav motif-assosiasjon
+CG3065
+    - Vi gjør det bittelitt dårligere. Lav motif-assosiasjon
+HTH:
+    - Måtte kjøre på nytt
+ANTP:
+    - Grei
+
+
+dm6 graph creation
+
+# Create graphs
+( echo chr3R; echo chr3L; echo chr2R; echo chr2L; echo chrX; echo chr4 ) | parallel -j 7 "time vg construct -C -R {} -r dm3.fasta -v snps2_cut.vcf.gz indels2_cut.vcf.gz -t 1 -m 32 >{}.vg
+
+# Convert IDS
+vg ids -j $(for i in $(echo chr3R; echo chr3L; echo chr2R; echo chr2L; echo chrX; echo chr4); do echo $i.vg; done)
+
+# Create XG index
+vg index -x wg.xg $(for i in $(echo chr3R; echo chr3L; echo chr2R; echo chr2L; echo chrX; echo chr4); do echo $i.vg; done)
+
+# GCSA step 1, pruning etc
+for chr in $(echo chr3R; echo chr3L; echo chr2R; echo chr2L; echo chrX; echo chr4);
+do
+    vg mod -t 32 -pl 16 -S -t 16 -e 4 $chr.vg >$chr.prune.vg
+    vg mod -t 32 -N $chr.vg >$chr.ref.vg
+    cat $chr.ref.vg $chr.prune.vg | vg view -v -D - 2>$chr.merge.err >$chr.smooth.vg
+    vg kmers -gBk 16 -H 1000000000 -T 1000000001 $chr.smooth.vg >$chr.graph
+done
+
+# Create gcsa index
+vg index -g wg.gcsa -Z 3000 -X 3 $(for i in $(echo chr3R; echo chr3L; echo chr2R; echo chr2L; echo chrX; echo chr4); do echo -n " -i $i".graph; done) &
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#!/usr/bin/env bash
+./generate_paper_figures_and_tables.sh  ENCSR000DUB 1 CTCF 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,X https://www.encodeproject.org/files/ENCFF639IFG/@@download/ENCFF639IFG.bam http://jaspar.genereg.net/api/v1/matrix/MA0139.1.meme
+./generate_paper_figures_and_tables.sh  ENCSR000DUB 1 CTCFNonTrimming 15,16,17,18,19,20,21,22 https://www.encodeproject.org/files/ENCFF639IFG/@@download/ENCFF639IFG.bam http://jaspar.genereg.net/api/v1/matrix/MA0139.1.meme
+
+./generate_paper_figures_and_tables.sh  ENCSR521IID 1 MAX 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22 https://www.encodeproject.org/files/ENCFF499VEN/@@download/ENCFF499VEN.bam http://jaspar.genereg.net/api/v1/matrix/MA0058.2.meme
+
+./generate_paper_figures_and_tables.sh  ENCSR000BIV 1 SRF 2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,X https://www.encodeproject.org/files/ENCFF575DNN/@@download/ENCFF575DNN.bam http://jaspar.genereg.net/api/v1/matrix/MA0083.2.meme
+
+./generate_paper_figures_and_tables.sh  ENCSR000BGU 1 EBF 14,15,16,17,18,19,20,21,22 https://www.encodeproject.org/files/ENCFF426RGL/@@download/ENCFF426RGL.bam http://jaspar.genereg.net/api/v1/matrix/MA0154.2.meme
+
+./generate_paper_figures_and_tables.sh  ENCSR000BGT 1 BATF 14,15,16,17,18,19,20,21,22 https://www.encodeproject.org/files/ENCFF399QIP/@@download/ENCFF399QIP.bam http://jaspar.genereg.net/api/v1/matrix/MA0462.1.meme
+
+./generate_paper_figures_and_tables.sh  ENCSR996DUT 1 JUN 14,15,16,17,18,19,20,21,22 https://www.encodeproject.org/files/ENCFF755QDV/@@download/ENCFF755QDV.bam http://jaspar.genereg.net/api/v1/matrix/MA0488.1.meme
+
+./generate_paper_figures_and_tables.sh  ENCSR070VXO 1 NR3C1 10,11,12,13,14,15,16,17,18,19,20,21,22 https://www.encodeproject.org/files/ENCFF883JID/@@download/ENCFF883JID.bam http://jaspar.genereg.net/api/v1/matrix/MA0113.3.meme
+
+./generate_paper_figures_and_tables.sh  ENCSR000BMZ 1 ELF1 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22 https://www.encodeproject.org/files/ENCFF418EVV/@@download/ENCFF418EVV.bam http://jaspar.genereg.net/api/v1/matrix/MA0473.2.meme
+
+./generate_paper_figures_and_tables.sh  ENCSR000ECD 1 USF2 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22 https://www.encodeproject.org/files/ENCFF992YZZ/@@download/ENCFF992YZZ.bam http://jaspar.genereg.net/api/v1/matrix/MA0526.1.meme
+
+./generate_paper_figures_and_tables.sh  ENCSR000ECD 1 SP1 17 https://www.encodeproject.org/files/ENCFF992YZZ/@@download/ENCFF992YZZ.bam http://jaspar.genereg.net/api/v1/matrix/MA0526.1.meme
+
+./generate_paper_figures_and_tables.sh  ENCSR000EXZ 1 GATA3 12,13,14,15,16,17,18,19,20,21,22,X https://www.encodeproject.org/files/ENCFF318YMR/@@download/ENCFF318YMR.bam http://jaspar.genereg.net/api/v1/matrix/MA0037.2.memes
+
+
+
+
+# Using raw fastq and performing linear mapping
+# All these have been run and produces new correct linear_alignments.bam for hg19
+
+nohup ./generate_paper_figures_and_tables.sh  ENCSR521IID 1 MAX 12,13,14,15,16,17,18,19,20,21,22 http://jaspar.genereg.net/api/v1/matrix/MA0058.2.meme > max_log_figures.txt 2>&1 &
+nohup ./generate_paper_figures_and_tables.sh  ENCSR000BIV 1 SRF 12,13,14,15,16,17,18,19,20,21,22 http://jaspar.genereg.net/api/v1/matrix/MA0083.2.meme > srf_log_figures.txt 2>&1 &
+nohup ./generate_paper_figures_and_tables.sh  ENCSR000DUB 1 CTCFTrueSparse 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22 http://jaspar.genereg.net/api/v1/matrix/MA0139.1.meme > ctcf_log_figures.txt 2>&1 &
+nohup ./generate_paper_figures_and_tables.sh  ENCSR000BGU 1 EBF 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,X http://jaspar.genereg.net/api/v1/matrix/MA0154.2.meme > ebf_log_figures.txt 2>&1 &
+nohup ./generate_paper_figures_and_tables.sh  ENCSR000BMZ 1 ELF1 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22 http://jaspar.genereg.net/api/v1/matrix/MA0473.2.meme > elf1_log_figures.txt 2>&1 &
+nohup ./generate_paper_figures_and_tables.sh  ENCSR000BGT 1 BATF 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22 http://jaspar.genereg.net/api/v1/matrix/MA0462.1.meme > batf_output.txt 2 >&1 &
+nohup ./generate_paper_figures_and_tables.sh  ENCSR000EXZ 1 GATA3 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22  http://jaspar.genereg.net/api/v1/matrix/MA0037.2.meme > gata3_output.txt 2 >&1 &
+nohup ./generate_paper_figures_and_tables.sh  ENCSR051DXE 1 FUS 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22 http://jaspar.genereg.net/api/v1/matrix/MA0149.1.meme > fus_output.txt 2 >&1 &
+nohup ./generate_paper_figures_and_tables.sh  ENCSR000BRY 1 TEAD4 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22  http://jaspar.genereg.net/api/v1/matrix/MA0809.1.meme > tead4_output.txt 2 >&1 &
+nohup ./generate_paper_figures_and_tables.sh  ENCSR000BUX 1 EGR1 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22  http://jaspar.genereg.net/api/v1/matrix/MA0162.2.meme > egr3_output.txt 2 >&1 &
+nohup ./generate_paper_figures_and_tables.sh  ENCSR070VXO 1 NR3C1 1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,18,19,20,21,22,X http://jaspar.genereg.net/api/v1/matrix/MA0113.3.meme > nr3c1_output.txt 2 >&1 &
+nohup ./generate_paper_figures_and_tables.sh  ENCSR000BQK 1 ATF2 1,2,3,4,5,6,7,8,9,10,11,12,13,14,16,17,18,19,20,21,22,X http://jaspar.genereg.net/api/v1/matrix/MA0834.1.meme > atf2_output.txt 2 >&1 &
+
+
+
+
+nohup graph_peak_caller analyse_peaks_whole_genome 12,13,14,15,16,17,18,19,20,21,22 ./ ~/data/whole_genome/ CTCFCustomMapping > ctcf_analysis_log.txt 2>&1 &
+nohup graph_peak_caller analyse_peaks_whole_genome 12,13,14,15,16,17,18,19,20,21,22 ./ ~/data/whole_genome/ ~/dev/graph_chip_seq_pipeline/figures_tables/SRF > analysis_log.txt 2>&1 &
+nohup graph_peak_caller analyse_peaks_whole_genome 12,13,14,15,16,17,18,19,20,21,22 ./ ~/data/whole_genome/ ~/dev/graph_chip_seq_pipeline/figures_tables/MAX > analysis_log.txt 2>&1 &
+nohup graph_peak_caller analyse_peaks_whole_genome 12,13,14,15,16,17,18,19,20,21,22 ./ ~/data/whole_genome/ ~/dev/graph_chip_seq_pipeline/figures_tables/EBF > analysis_log.txt 2>&1 &
+
+
+./generate_paper_figures_and_tables.sh  ENCSR000DUB 1 CTCF24Feb 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,X http://jaspar.genereg.net/api/v1/matrix/MA0139.1.meme
+nohup ./generate_paper_figures_and_tables.sh  ENCSR000BUX 1 EGR124Feb 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,X  http://jaspar.genereg.net/api/v1/matrix/MA0162.2.meme > egr3_output.txt 2 >&1 &
+nohup ./generate_paper_figures_and_tables.sh  ENCSR000BRY 1 TEAD424Feb 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,X  http://jaspar.genereg.net/api/v1/matrix/MA0809.1.meme > tead4_output.txt 2 >&1 &
+
+nohup ./generate_paper_figures_and_tables.sh  ENCSR000BUX 1 EGR125Feb 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,X  http://jaspar.genereg.net/api/v1/matrix/MA0162.2.meme > egr3_output.txt 2 >&1 &
+nohup ./generate_paper_figures_and_tables.sh  ENCSR000BRY 1 TEAD425Feb 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,X  http://jaspar.genereg.net/api/v1/matrix/MA0809.1.meme > tead4_output.txt 2 >&1 &
+
+nohup ./generate_paper_figures_and_tables.sh  ENCSR000BUX 1 EGR127Feb 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,X  http://jaspar.genereg.net/api/v1/matrix/MA0162.2.meme > egr3_output.txt 2 >&1 &
+./generate_paper_figures_and_tables.sh  ENCSR000DUB 1 CTCF27Feb 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,X http://jaspar.genereg.net/api/v1/matrix/MA0139.1.meme
+
+
+grep X0:i:3 alignments.sam | grep chr22 | grep 36M | awk '{print $1}' > multimaps.txt
+grep -f multimaps.txt filtered_22.json
+
+
+./generate_paper_figures_and_tables.sh  ENCSR000DUB 1 CTCF28Feb 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,X http://jaspar.genereg.net/api/v1/matrix/MA0139.1.meme
+./generate_paper_figures_and_tables.sh  ENCSR000BUX 1 EGR128Feb 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,X  http://jaspar.genereg.net/api/v1/matrix/MA0162.2.meme
+
+
+./generate_paper_figures_and_tables.sh  ENCSR000DUB 1 CTCF29Feb 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,X http://jaspar.genereg.net/api/v1/matrix/MA0139.1.meme
+./generate_paper_figures_and_tables.sh  ENCSR000BUX 1 EGR129Feb 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,X  http://jaspar.genereg.net/api/v1/matrix/MA0162.2.meme
+./generate_paper_figures_and_tables.sh  ENCSR000BRY 1 TEAD429Feb 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,X  http://jaspar.genereg.net/api/v1/matrix/MA0809.1.meme
+./generate_paper_figures_and_tables.sh  ENCSR000BIV 1 SRF28Feb 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,X http://jaspar.genereg.net/api/v1/matrix/MA0083.2.meme
+
+
+DM
+./generate_paper_figures_and_tables2.sh  ENCSR471GSA 1 DM_JRA chr3R,chr3L,chr2R,chr2L,chrX,chr4 . /media/storage1/dm6/ /media/storage1/dm6/dm3_main_chromosomes.fasta 97958719
+./generate_paper_figures_and_tables2.sh  ENCSR923VWW 1 DM_SQZ chr3R,chr3L,chr2R,chr2L,chrX,chr4 . /media/storage1/dm6/ /media/storage1/dm6/dm3_main_chromosomes.fasta 97958719
+./generate_paper_figures_and_tables2.sh  ENCSR082RBU 1 DM_ANTP chr3R,chr3L,chr2R,chr2L,chrX,chr4 . /media/storage1/dm6/ /media/storage1/dm6/dm3_main_chromosomes.fasta 97958719
+./generate_paper_figures_and_tables2.sh  ENCSR959SWC 1 DM_ACHI chr3R,chr3L,chr2R,chr2L,chrX,chr4 . /media/storage1/dm6/ /media/storage1/dm6/dm3_main_chromosomes.fasta 97958719
+./generate_paper_figures_and_tables2.sh  ENCSR167BID 1 DM_BCD chr3R,chr3L,chr2R,chr2L,chrX,chr4 . /media/storage1/dm6/ /media/storage1/dm6/dm3_main_chromosomes.fasta 97958719
+./generate_paper_figures_and_tables2.sh  ENCSR453UOF 1 DM_SIX4 chr3R,chr3L,chr2R,chr2L,chrX,chr4 . /media/storage1/dm6/ /media/storage1/dm6/dm3_main_chromosomes.fasta 97958719
+./generate_paper_figures_and_tables2.sh  ENCSR064GFC 1 DM_TIN chr3R,chr3L,chr2R,chr2L,chrX,chr4 . /media/storage1/dm6/ /media/storage1/dm6/dm3_main_chromosomes.fasta 97958719
+./generate_paper_figures_and_tables2.sh  ENCSR317SVS 1 DM_ACJ6 chr3R,chr3L,chr2R,chr2L,chrX,chr4 . /media/storage1/dm6/ /media/storage1/dm6/dm3_main_chromosomes.fasta 97958719
+./generate_paper_figures_and_tables2.sh  ENCSR249JVE 1 DM_HTH chr3R,chr3L,chr2R,chr2L,chrX,chr4 . /media/storage1/dm6/ /media/storage1/dm6/dm3_main_chromosomes.fasta 97958719
+./generate_paper_figures_and_tables2.sh  ENCSR101LNT 1 DM_CG3065 chr3R,chr3L,chr2R,chr2L,chrX,chr4 . /media/storage1/dm6/ /media/storage1/dm6/dm3_main_chromosomes.fasta 97958719
+./generate_paper_figures_and_tables2.sh  ENCSR556QKA 1 DM_DLL chr3R,chr3L,chr2R,chr2L,chrX,chr4 . /media/storage1/dm6/ /media/storage1/dm6/dm3_main_chromosomes.fasta 97958719
+./generate_paper_figures_and_tables2.sh  ENCSR978WED 1 DM_JIM chr3R,chr3L,chr2R,chr2L,chrX,chr4 . /media/storage1/dm6/ /media/storage1/dm6/dm3_main_chromosomes.fasta 97958719
+./generate_paper_figures_and_tables2.sh  ENCSR082RBU 1 DM_ANTP chr3R,chr3L,chr2R,chr2L,chrX,chr4 . /media/storage1/dm6/ /media/storage1/dm6/dm3_main_chromosomes.fasta 97958719
