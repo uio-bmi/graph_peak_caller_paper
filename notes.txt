@@ -241,15 +241,42 @@ vg index -g wg.gcsa -Z 3000 -X 3 $(for i in $(echo chr3R; echo chr3L; echo chr2R
 
 
 
+arabidopsis graph creation
+( seq 1 5 ) | parallel -j 5 "time vg construct -C -R {} -r reference.fa -v variants.vcf.gz -t 1 -m 32 >{}.vg"
+vg ids -j $(for i in $(seq 1 5); do echo $i.vg; done)
+vg index -x wg.xg $(for i in $(seq 1 5); do echo $i.vg; done)
+
+
+for chr in $(seq 1 5);
+do
+    echo "Chrom $chr"
+    vg mod -t 32 -pl 16 -S -t 16 -e 4 $chr.vg >$chr.prune.vg
+    vg mod -t 32 -N $chr.vg >$chr.ref.vg
+    cat $chr.ref.vg $chr.prune.vg | vg view -v -D - 2>$chr.merge.err >$chr.smooth.vg
+    vg kmers -gBk 16 -H 1000000000 -T 1000000001 $chr.smooth.vg >$chr.graph
+done
+
+vg index -g wg.gcsa -Z 3000 -X 3 $(for i in $(seq 1 5); do echo -n " -i $i".graph; done)
 
 
 
 
 
+yeast
+(seq 1 16) | parallel -j 24 "time vg construct -C -R {} -r reference.fa -v variants.vcf.gz -t 1 -m 32 >{}.vg"
+vg ids -j $(for i in $(seq 1 16); do echo $i.vg; done)
+vg index -x wg.xg $(for i in $(seq 1 16); do echo $i.vg; done)
 
+for chr in $(seq 1 16);
+do
+    echo "Chrom $chr"
+    vg mod -t 32 -pl 16 -S -t 16 -e 4 $chr.vg >$chr.prune.vg
+    vg mod -t 32 -N $chr.vg >$chr.ref.vg
+    cat $chr.ref.vg $chr.prune.vg | vg view -v -D - 2>$chr.merge.err >$chr.smooth.vg
+    vg kmers -gBk 16 -H 1000000000 -T 1000000001 $chr.smooth.vg >$chr.graph
+done
 
-
-
+vg index -g wg.gcsa -Z 3000 -X 3 $(for i in $(seq 1 16); do echo -n " -i $i".graph; done) &
 
 
 
