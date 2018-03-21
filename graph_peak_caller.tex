@@ -77,9 +77,14 @@
 
 % amsmath and amssymb packages, useful for mathematical formulas and symbols
 \usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\newcolumntype{b}{>{\hsize=.49\hsize}X}
+\newcolumntype{c}{>{\hsize=1.4\hsize}X}
 
 % Use adjustwidth environment to exceed column width (see example table in text)
 \usepackage{changepage}
+\usepackage{tabularx}
 
 % Use Unicode characters when possible
 \usepackage[utf8x]{inputenc}
@@ -178,26 +183,24 @@
 % Title must be 250 characters or less.
 \begin{flushleft}
 {\Large
-\textbf\newline{Title of submission to PLOS journals} % Please use "sentence case" for title and headings (capitalize only the first word in a title (or heading), the first word in a subtitle (or subheading), and any proper nouns).
+\textbf\newline{Graph Peak Caller: calling ChIP-Seq Peaks on Graph-based Reference Genomes} % Please use "sentence case" for title and headings (capitalize only the first word in a title (or heading), the first word in a subtitle (or subheading), and any proper nouns).
 }
 \newline
 % Insert author names, affiliations and corresponding author email (do not include titles, positions, or degrees).
 \\
-Name1 Surname\textsuperscript{1,2\Yinyang},
-Name2 Surname\textsuperscript{2\Yinyang},
-Name3 Surname\textsuperscript{2,3\textcurrency},
-Name4 Surname\textsuperscript{2},
-Name5 Surname\textsuperscript{2\ddag},
-Name6 Surname\textsuperscript{2\ddag},
-Name7 Surname\textsuperscript{1,2,3*},
-with the Lorem Ipsum Consortium\textsuperscript{\textpilcrow}
+Ivar Grytten\textsuperscript{1\Yinyang*},
+Knut D. Rand\textsuperscript{2\Yinyang},
+Ingrid K. Glad\textsuperscript{2},
+Geir O. Storvik\textsuperscript{2},
+Alexander J. Nederbragt\textsuperscript{1,3},
+Geir K. Sandve\textsuperscript{1},
 \\
 \bigskip
-\textbf{1} Affiliation Dept/Program/Center, Institution Name, City, State, Country
+\textbf{1} Department of informatics, University of Oslo, Oslo, Norway
 \\
-\textbf{2} Affiliation Dept/Program/Center, Institution Name, City, State, Country
+\textbf{2} Department of Mathematics, University of Oslo, Oslo, Norway
 \\
-\textbf{3} Affiliation Dept/Program/Center, Institution Name, City, State, Country
+\textbf{3} Department of Biosciences, University of Oslo, Oslo, Norway
 \\
 \bigskip
 
@@ -210,79 +213,80 @@ with the Lorem Ipsum Consortium\textsuperscript{\textpilcrow}
 
 % Additional Equal Contribution Note
 % Also use this double-dagger symbol for special authorship notes, such as senior authorship.
-\ddag These authors also contributed equally to this work.
+%\ddag These authors also contributed equally to this work.
 
 % Current address notes
-\textcurrency Current Address: Dept/Program/Center, Institution Name, City, State, Country % change symbol to "\textcurrency a" if more than one current address note
+% \textcurrency Current Address: Department of in/Program/Center, Institution Name, City, State, Country % change symbol to "\textcurrency a" if more than one current address note
 % \textcurrency b Insert second current address 
 % \textcurrency c Insert third current address
 
 % Deceased author note
-\dag Deceased
+%\dag Deceased
 
 % Group/Consortium Author Note
-\textpilcrow Membership list can be found in the Acknowledgments section.
+%\textpilcrow Membership list can be found in the Acknowledgments section.
 
 % Use the asterisk to denote corresponding authorship and provide email address in note below.
-* correspondingauthor@institute.edu
+* ivargry@ifi.uio.no
 
 \end{flushleft}
 % Please keep the abstract below 300 words
 \section*{Abstract}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eget porta erat. Morbi consectetur est vel gravida pretium. Suspendisse ut dui eu ante cursus gravida non sed sem. Nullam sapien tellus, commodo id velit id, eleifend volutpat quam. Phasellus mauris velit, dapibus finibus elementum vel, pulvinar non tellus. Nunc pellentesque pretium diam, quis maximus dolor faucibus id. Nunc convallis sodales ante, ut ullamcorper est egestas vitae. Nam sit amet enim ultrices, ultrices elit pulvinar, volutpat risus.
+Graph-based representations are considered to be the future for reference genomes, as they allow integrated representation of the steadily increasing data on individual variation. Currently available tools allow \emph{de novo} assembly of  graph-based reference genomes, alignment of new read sets to the graph representation as well as certain analyses like variant-calling. We here present a first method for calling peaks on read data aligned to a graph-based reference genome. The method is a graph generalization of the peak caller MACS2 and is implemented in an open source tool, \emph{Graph Peak Caller}. By using the existing tool \emph{vg} to build a pan-genome of \emph{Arabidopsis thaliana}, we validate our approach by showing that Graph Peak Caller with a pan-genome reference graph can detect peaks more accurately than MACS2 with a linear reference genome. 
 
 
 % Please keep the Author Summary between 150 and 200 words
 % Use first person. PLOS ONE authors please skip this step. 
 % Author Summary not valid for PLOS ONE submissions.   
 \section*{Author summary}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eget porta erat. Morbi consectetur est vel gravida pretium. Suspendisse ut dui eu ante cursus gravida non sed sem. Nullam sapien tellus, commodo id velit id, eleifend volutpat quam. Phasellus mauris velit, dapibus finibus elementum vel, pulvinar non tellus. Nunc pellentesque pretium diam, quis maximus dolor faucibus id. Nunc convallis sodales ante, ut ullamcorper est egestas vitae. Nam sit amet enim ultrices, ultrices elit pulvinar, volutpat risus.
+We present Graph Peak Caller, the first peak caller for detecting regions associated to transcription factor binding by using \emph{graph-based reference genomes}. Graph-based reference genomes have become popular as an alternative to the well established “linear” reference genomes, as they are able include known variation within the population, which makes mapping genomic reads to the reference more accurate. Detecting regions associated to transcription factor binding (peaks) is important in order to understand how transcription factors might affect genes. Graph Peak Caller utilizes the benefit of graph-based reference genomes by being able to detect peaks from reads mapped to such references. We show that this leads to more accurate detection of peaks as compared to existing methods that use linear reference genomes.
 
 \linenumbers
 
 % Use "Eq" instead of "Equation" for equation citations.
 \section*{Introduction}
-Lorem ipsum dolor sit~\cite{bib1} amet, consectetur adipiscing elit. Curabitur eget porta erat. Morbi consectetur est vel gravida pretium. Suspendisse ut dui eu ante cursus gravida non sed sem. Nullam Eq~(\ref{eq:schemeP}) sapien tellus, commodo id velit id, eleifend volutpat quam. Phasellus mauris velit, dapibus finibus elementum vel, pulvinar non tellus. Nunc pellentesque pretium diam, quis maximus dolor faucibus id.~\cite{bib2} Nunc convallis sodales ante, ut ullamcorper est egestas vitae. Nam sit amet enim ultrices, ultrices elit pulvinar, volutpat risus.
+Transcription factors are known to play a key role in gene regulation, and detecting regions associated with transcription factor binding is an important step in understanding their function. The most common technique used to detect transcription factor binding sites is through \emph{ChIP-seq}, combining chromatin immunoprecipitation (ChIP) assays with sequencing. Obtaining putative binding regions from ChIP-seq data is done using computational techniques known collectively as performing \emph{peak calling}. Several \emph{peak callers}, programs to perform peak calling, have been developed for this purpose, for example MACS2~\cite{macs} and SPP~\cite{spp}. Common for all current peak callers is that they take reads mapped to a \emph{linear} reference genome, such as GRCh38, as input. 
 
-\begin{eqnarray}
-\label{eq:schemeP}
-	\mathrm{P_Y} = \underbrace{H(Y_n) - H(Y_n|\mathbf{V}^{Y}_{n})}_{S_Y} + \underbrace{H(Y_n|\mathbf{V}^{Y}_{n})- H(Y_n|\mathbf{V}^{X,Y}_{n})}_{T_{X\rightarrow Y}},
-\end{eqnarray}
-
-\section*{Materials and methods}
-\subsection*{Etiam eget sapien nibh}
-
-% For figure citations, please use "Fig" instead of "Figure".
-Nulla mi mi, Fig~\ref{fig1} venenatis sed ipsum varius, volutpat euismod diam. Proin rutrum vel massa non gravida. Quisque tempor sem et dignissim rutrum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi at justo vitae nulla elementum commodo eu id massa. In vitae diam ac augue semper tincidunt eu ut eros. Fusce fringilla erat porttitor lectus cursus, \nameref{S1_Video} vel sagittis arcu lobortis. Aliquam in enim semper, aliquam massa id, cursus neque. Praesent faucibus semper libero.
-
-% Place figure captions after the first paragraph in which they are cited.
-\begin{figure}[!h]
-\caption{{\bf Bold the figure title.}
-Figure caption text here, please use this space for the figure panel descriptions instead of using subfigure commands. A: Lorem ipsum dolor sit amet. B: Consectetur adipiscing elit.}
-\label{fig1}
-\end{figure}
+Graph-based reference genomes have been used in a wide variety of genomic analyses~\cite{de_novo_assembly,velvet}. The software package \emph{vg} supports mapping reads to a graph-based reference genome with potentially increased accuracy~\cite{vg, genome_graphs} as compared to mapping reads to a standard linear reference genome using tools like BWA-mem~\cite{bwa_mem} or Bowtie~\cite{bowtie}. Several types of genomic analyses, such as variant calling and haplotyping, can now be performed using graph-based references~\cite{vg, genome_graphs}. However, no tool currently exists for performing peak calling on graph-based reference genomes. 
 
 % Results and Discussion can be combined.
 \section*{Results}
-Nulla mi mi, venenatis sed ipsum varius, Table~\ref{table1} volutpat euismod diam. Proin rutrum vel massa non gravida. Quisque tempor sem et dignissim rutrum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi at justo vitae nulla elementum commodo eu id massa. In vitae diam ac augue semper tincidunt eu ut eros. Fusce fringilla erat porttitor lectus cursus, vel sagittis arcu lobortis. Aliquam in enim semper, aliquam massa id, cursus neque. Praesent faucibus semper libero.
+We present Graph Peak Caller, a first method for detecting transcription factor binding events from ChIP-seq reads mapped to a graph-based reference genome. Graph Peak Caller is based on the same principles used by MACS2 (see Fig~\ref{fig1} for an overview), and  is able to call peaks with or without a set of control alignments. As input, it supports alignments in the Graph Alignment\/Map format (GAM) from vg, as well as reads represented as genomic intervals using the Offset Based Graph Python package~\cite{rand} Graph Peak Caller can be run from the command line, and is also available through Galaxy at \url{https://hyperbrowser.uio.no/graph-peak-caller}. In the Github repository at \url{http://github.com/uio-bmi/graph_peak_caller}, we provide a simple tutorial on how to use vg and Graph Peak Caller together to go from raw ChIP-seq reads to peaks. 
+
+
+% Place figure captions after the first paragraph in which they are cited.
+\begin{figure}[!h]
+\caption{{\bf Overview of how Graph Peak Caller works.} Example of peak calling on an example graph (nodes in gray, edges in black). After raw reads (a) in the form of input reads (blue) and control reads (red) are mapped to the graph-based reference genome (b), the fragment pileup is created (c) by extending the forward input alignments (shown as resulting blue fragments) and reverse input alignments (yellow fragments) along all possible paths in their corresponding direction. A background track is created by projecting the alignments resulting from the control reads onto a linear path and calculating a local average  read counts (Here shown with a small window size). Then the linear track is projected back to the graph again (not shown). The fragment pileup counts are treated as counts and the background track as rates in a poisson-distribution, and p-values are computed for each position for the observed \emph{count}, given the corresponding rate. Adjusted q-values are computed to control the false discovery rate (d). A set of peak candidates are selected by thresholding the q-values on a user-defined threshold (default 0.05), resulting in a set of candidate peaks with gaps between them (e). Small gaps are filled, resulting in a set of peak subgraphs (f). Graph Peak Caller finds a single “maximum path” (g, maximum path in blue) through each peak subgraph by selecting the path that has the highest number of input reads mapped to it. }
+\label{fig1}
+\end{figure}
+
+The output from Graph Peak Caller consists of graph intervals, but the tool is also able to transform these into approximate positions on a linear reference genome (by projecting them to the nearest position on the linear reference genome), making it possible to analyse detected peaks further using existing “linear” approaches. Graph Peak Caller is also able to output candidates for differentially expressed peaks.
+
+\begin{figure}[!h]
+ \caption{{\bf Dna-binding motif enrichment plots.} The proportion of peaks enriched for a DNA-binding motif (Y-axis) when iteratively including more peaks from the total set of peaks sorted descending on score (X-axis) for MACS2 and Graph Peak Caller. }
+\label{fig2}
+\end{figure}
+
 
 % Place tables after the first paragraph in which they are cited.
 \begin{table}[!ht]
 \begin{adjustwidth}{-2.25in}{0in} % Comment out/remove adjustwidth environment if table fits in text column.
 \centering
-\caption{
-{\bf Table caption Nulla mi mi, venenatis sed ipsum varius, volutpat euismod diam.}}
-\begin{tabular}{|l+l|l|l|l|l|l|l|}
-\hline
-\multicolumn{4}{|l|}{\bf Heading1} & \multicolumn{4}{|l|}{\bf Heading2}\\ \thickhline
-$cell1 row1$ & cell2 row 1 & cell3 row 1 & cell4 row 1 & cell5 row 1 & cell6 row 1 & cell7 row 1 & cell8 row 1\\ \hline
-$cell1 row2$ & cell2 row 2 & cell3 row 2 & cell4 row 2 & cell5 row 2 & cell6 row 2 & cell7 row 2 & cell8 row 2\\ \hline
-$cell1 row3$ & cell2 row 3 & cell3 row 3 & cell4 row 3 & cell5 row 3 & cell6 row 3 & cell7 row 3 & cell8 row 3\\ \hline
-\end{tabular}
-\begin{flushleft} Table notes Phasellus venenatis, tortor nec vestibulum mattis, massa tortor interdum felis, nec pellentesque metus tortor nec nisl. Ut ornare mauris tellus, vel dapibus arcu suscipit sed.
-\end{flushleft}
-\label{table1}
+\caption{My caption}
+\label{my-label}
+\begin{tabularx}{1.4\textwidth}{Xbccbccbb}
+\toprule
+& \multicolumn{3}{|l|}{Graph Peak Caller}  & \multicolumn{3}{l|}{MACS2} & \multicolumn{2}{l}{Bps. on linear ref.}                                                                                    \\ \midrule
+\multicolumn{1}{l|}{Transcription factor} & Total & Shared & \multicolumn{1}{l|}{Unique} & Total & Shared & \multicolumn{1}{l|}{Unique} & Shared & Unique \\ \midrule
+
+
+\multicolumn{1}{r|}{ERF115} & 24847 & 21164 (1846)&3683 (165) &23167 &21162 (1826) &2005 (132) &1.47 &3.62 \\
+\multicolumn{1}{r|}{SEP3} &13902 &11304 (991) &2598 (123) &15517 &11302 (991) &4215 (161) &0.87 &2.59 \\
+\multicolumn{1}{r|}{AP1} &15687 &12694 (1023)	 &2993 (160)	 &17030 &12692 (996)	 &4338 (159)	 &0.78	 &2.37 \\
+\multicolumn{1}{r|}{SOC1} &14817	 &13854 (2258)	 &963 (136)	 &16407 &13849 (2242)	 &2558 (275)	 &1.04	 &2.35 \\
+\multicolumn{1}{r|}{PI} &16548 &13526 (2171) &3022 (350)	 &16084 &13525 (2154)	 &2559 (218)	 &1.18	 &2.82 \\  \bottomrule
+\end{tabularx}
 \end{adjustwidth}
 \end{table}
 
@@ -311,6 +315,14 @@ Nulla mi mi, venenatis sed ipsum varius, volutpat euismod diam. Proin rutrum vel
 
 \section*{Discussion}
 Nulla mi mi, venenatis sed ipsum varius, Table~\ref{table1} volutpat euismod diam. Proin rutrum vel massa non gravida. Quisque tempor sem et dignissim rutrum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi at justo vitae nulla elementum commodo eu id massa. In vitae diam ac augue semper tincidunt eu ut eros. Fusce fringilla erat porttitor lectus cursus, vel sagittis arcu lobortis. Aliquam in enim semper, aliquam massa id, cursus neque. Praesent faucibus semper libero~\cite{bib3}.
+
+\section*{Materials and methods}
+\subsection*{Etiam eget sapien nibh}
+
+% For figure citations, please use "Fig" instead of "Figure".
+Nulla mi mi, Fig~\ref{fig1} venenatis sed ipsum varius, volutpat euismod diam. Proin rutrum vel massa non gravida. Quisque tempor sem et dignissim rutrum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi at justo vitae nulla elementum commodo eu id massa. In vitae diam ac augue semper tincidunt eu ut eros. Fusce fringilla erat porttitor lectus cursus, \nameref{S1_Video} vel sagittis arcu lobortis. Aliquam in enim semper, aliquam massa id, cursus neque. Praesent faucibus semper libero.
+
+
 
 \section*{Conclusion}
 
@@ -415,6 +427,8 @@ Arabidopsis Genome Initiative. Analysis of the genome sequence of the flowering 
 \bibitem{1000genomes}
 1000 Genomes Project Consortium. A global reference for human genetic variation. Nature. 2015 Oct;526(7571):68.
 
+\bibitem{genome_graphs}
+Novak AM, Hickey G, Garrison E, Blum S, Connelly A, Dilthey A, Eizenga J, Elmohamed MS, Guthrie S, Kahles A, Keenan S. Genome graphs. bioRxiv. 2017 Jan 1:101378.
 
 \end{thebibliography}
 
