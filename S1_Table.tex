@@ -1,0 +1,43 @@
+\documentclass[a4paper,8pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+
+\title{}
+\author{}
+\usepackage{booktabs}
+\usepackage{tabularx}
+% Use adjustwidth environment to exceed column width (see example table in text)
+\usepackage{changepage}
+
+\newcolumntype{b}{>{\hsize=.49\hsize}X}
+\newcolumntype{c}{>{\hsize=1.4\hsize}X}
+
+
+\begin{document}
+
+% Place tables after the first paragraph in which they are cited.
+\begin{table}[!ht]
+\begin{adjustwidth}{-1.25in}{0in} % Comment out/remove adjustwidth environment if table fits in text column.
+\centering
+\caption{Overview of peaks reported by Graph Peak Caller and MACS2 on \emph{Drosophila Melanogaster} and human for a set of transcription factors. \emph{Total} is the total number of peaks reported by the peak caller, \emph{Shared} are the number of peaks reported by both peak callers (requiring one or more base pairs to be in common), and \emph{unique} is the number of peaks reported by a peak caller and not the other (meaning no base pairs in common with any peaks found by the other peak caller). The numbers in parentheses are the number of peaks within each group that are enriched for DNA-binding motif. The last two columns show the average number of base pairs in the graph within each peak reported by Graph Peak Caller that are not also on the linear reference genome (meaning these are part of structural variants that are not in the linear reference). Here, all peaks have been trimmed to 120 base pairs around the peak summit (position in peak with lowest q-value), to make the comparison clearer. The criteria for a peak found by one peak caller to also have been marked as found by the other is that the two peaks are overlapping with at least one base pair.}
+\label{table1}
+\begin{tabularx}{1.6\textwidth}{Xbccbccbb}
+\toprule
+& \multicolumn{3}{|l|}{Graph Peak Caller}  & \multicolumn{3}{l|}{MACS2} & \multicolumn{2}{l}{Not on linear ref.}                                                                                    \\ \midrule
+\multicolumn{1}{l|}{Transcription factor} & Total & Shared & \multicolumn{1}{l|}{Unique} & Total & Shared & \multicolumn{1}{l|}{Unique} & Shared & Unique \\ \midrule
+
+\multicolumn{1}{l|}{Human} & \multicolumn{8}{l}{} \\
+\multicolumn{1}{r|}{CTCF} & 48828 &46129 (34220)	&2699 (836)	&47320 &46129 (34120) &1191 (368) &0.60	 &2.25\\
+\multicolumn{1}{r|}{SRF} &19345	 &16515 (4712)	 &22830 (330)	 &17963 &16513 (4709)	 &1450 (153) &0.45	 &1.85 \\
+
+\multicolumn{1}{l|}{\emph{D. melanogaster}} & \multicolumn{8}{l}{} \\
+\multicolumn{1}{r|}{JRA} & 9809 &8215 (376)	 &1594 (55)	 &8679 &8215 (364)	 & 464 (12)	&0.06 &0.19 \\
+\multicolumn{1}{r|}{SQZ} & 12156 &9403 (2103)	 &2753 (557)	 & 10025& 9403 (2075)	&622 (91)	 &0.09	 &0.20 \\
+\multicolumn{1}{r|}{JIM} &6572  &5248 (1359)	 &1324 (210)	 &5607 &5242 (1354)	 &365 (59)	 & 0.06	& 0.20\\
+\multicolumn{1}{r|}{ANTP} & 9769	 &6606 (153)	 & 3163 (59)	&6917	 & 6606 (153)	& 311 (3)	&0.07	 & 0.13\\ \bottomrule
+\end{tabularx}
+\end{adjustwidth}
+\end{table}
+
+\end{document}
