@@ -73,7 +73,7 @@
 % % % % % % % % % % % % % % % % % % % % % % % %
 
 \documentclass[10pt,letterpaper]{article}
-\usepackage[top=0.85in,left=2.75in,footskip=0.75in]{geometry}
+\usepackage[top=0.85in,left=1.55in,footskip=0.75in]{geometry}
 
 % amsmath and amssymb packages, useful for mathematical formulas and symbols
 \usepackage{amsmath,amssymb}
@@ -158,16 +158,16 @@
 \usepackage{lastpage,fancyhdr,graphicx}
 \usepackage{epstopdf}
 %\pagestyle{myheadings}
-\pagestyle{fancy}
-\fancyhf{}
+%\pagestyle{fancy}
+%\fancyhf{}
 %\setlength{\headheight}{27.023pt}
 %\lhead{\includegraphics[width=2.0in]{PLOS-submission.eps}}
-\rfoot{\thepage/\pageref{LastPage}}
-\renewcommand{\headrulewidth}{0pt}
-\renewcommand{\footrule}{\hrule height 2pt \vspace{2mm}}
-\fancyheadoffset[L]{2.25in}
-\fancyfootoffset[L]{2.25in}
-\lfoot{\today}
+%\rfoot{\thepage/\pageref{LastPage}}
+%\renewcommand{\headrulewidth}{0pt}
+%\renewcommand{\footrule}{\hrule height 2pt \vspace{2mm}}
+%\fancyheadoffset[L]{2.25in}
+%\fancyfootoffset[L]{2.25in}
+%\lfoot{\today}
 
 %% Include all macros below
 
@@ -243,7 +243,7 @@ Graph-based representations are considered to be the future for reference genome
 \emph{Graph-based reference genomes} have become popular as an alternative to the well established “linear” reference genomes, as they are able include known variation within the population, which makes mapping genomic reads to the reference more accurate. Detecting regions associated to transcription factor binding (peaks) is important in order to understand how transcription factors might affect genes. We present Graph Peak Caller, the first peak caller for detecting regions associated to transcription factor binding by using graph-based reference genomes. Graph Peak Caller utilizes the benefit of graph-based reference genomes by detecting peaks from reads mapped to such references. We show that this leads to more accurate detection of peaks as compared to existing methods that use linear reference genomes.
 
 
-\linenumbers
+%\linenumbers
 
 % Use "Eq" instead of "Equation" for equation citations.
 \section*{Introduction}
@@ -258,7 +258,7 @@ We present Graph Peak Caller, a first method for detecting transcription factor 
 
 \begin{figure}[!h]
 \caption{{\bf Overview of how Graph Peak Caller works.} Example of peak calling on an example graph (nodes in gray, edges in black). After raw reads (a) in the form of input reads (blue) and control reads (red) are mapped to the graph-based reference genome (b), the fragment pileup is created (c) by extending the forward input alignments (shown as resulting blue fragments) and reverse input alignments (yellow fragments) along all possible paths in their corresponding direction. A background track is created by projecting the alignments resulting from the control reads onto a linear path and calculating a local average  read counts (here shown with a small window size). Then the linear track is projected back to the graph again (not shown). The fragment pileup counts are treated as counts and the background track as rates in a poisson-distribution, and p-values are computed for each position for the observed \emph{count}, given the corresponding rate. Adjusted q-values are computed to control the false discovery rate (d). A set of peak candidates are selected by thresholding the q-values on a user-defined threshold (default 0.05), resulting in a set of candidate peaks with gaps between them (e). Small gaps are filled, resulting in a set of peak subgraphs (f). Graph Peak Caller finds a single “maximum path” (g, maximum path in blue) through each peak subgraph by selecting the path that has the highest number of input reads mapped to it. }
-\label{fig1}
+\label{overview_figure}
 \end{figure}
 
 The output from Graph Peak Caller consists of graph intervals, but the tool is also able to transform these into approximate positions on a linear reference genome (by projecting them to the nearest position on the linear reference genome), making it possible to analyse detected peaks further using existing “linear” approaches. Graph Peak Caller is also able to output candidates for differentially expressed peaks.
@@ -275,7 +275,7 @@ Fig~\ref{fig2} shows the proportion of peaks enriched for DNA-binding motifs whe
 
 % Place tables after the first paragraph in which they are cited.
 \begin{table}[!ht]
-\begin{adjustwidth}{-2.25in}{0in} % Comment out/remove adjustwidth environment if table fits in text column.
+\begin{adjustwidth}{-1.15in}{0in} % Comment out/remove adjustwidth environment if table fits in text column.
 \centering
 \caption{Overview of peaks reported by Graph Peak Caller and MACS2 on \emph{A. thaliana} for 5 transcription factors. \emph{Total} is the total number of peaks reported by the peak caller, \emph{Shared} are the number of peaks reported by both peak callers (requiring one or more base pairs to be in common), and \emph{unique} is the number of peaks reported by a peak caller and not the other (meaning no base pairs in common with any peaks found by the other peak caller). The numbers in parentheses are the number of peaks within each group that are enriched for DNA-binding motif. The last two columns show the average number of base pairs in the graph within each peak reported by Graph Peak Caller that are not also on the linear reference genome (meaning these are part of structural variants that are not in the linear reference). Here, all peaks have been trimmed to 120 base pairs around the peak summit (position in peak with lowest q-value), to make the comparison clearer. The criteria for a peak found by one peak caller to also have been marked as found by the other is that the two peaks are overlapping with at least one base pair.}
 \label{table1}
