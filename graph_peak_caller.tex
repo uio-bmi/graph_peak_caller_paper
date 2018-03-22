@@ -257,17 +257,18 @@ Graph-based reference genomes offers a way to include known variants in the refe
 
 % Results and Discussion can be combined.
 \section*{Results}
-We present Graph Peak Caller, a first method for detecting transcription factor binding events from ChIP-seq reads mapped to a graph-based reference genome. Graph Peak Caller is based on the same principles used by MACS2 (see Fig~\ref{overview_figure} for an overview), and  is able to call peaks with or without a set of control alignments. For the case of a graph that merely reflects a linear reference genome, our peak-caller produces the same results as MACS2. As input, it supports alignments in the Graph Alignment/Map format (GAM) from vg, as well as reads represented as genomic intervals using the Offset Based Graph Python package~\cite{rand}. Graph Peak Caller can be run from the command line, and is also available through Galaxy at \url{https://hyperbrowser.uio.no/graph-peak-caller}. In the Github repository at \url{http://github.com/uio-bmi/graph_peak_caller}, we provide a simple tutorial on how to use vg and Graph Peak Caller together to go from raw ChIP-seq reads to peaks. 
+We present Graph Peak Caller, a first method for detecting transcription factor binding events from ChIP-seq reads mapped to a graph-based reference genome. Graph Peak Caller is based on the same principles used by MACS2 (see Fig~\ref{test} for an overview), and  is able to call peaks with or without a set of control alignments. For the case of a graph that merely reflects a linear reference genome, our peak-caller produces the same results as MACS2. As input, it supports alignments in the Graph Alignment/Map format (GAM) from vg, as well as reads represented as genomic intervals using the Offset Based Graph Python package~\cite{rand}. Graph Peak Caller can be run from the command line, and is also available through Galaxy at \url{https://hyperbrowser.uio.no/graph-peak-caller}. In the Github repository at \url{http://github.com/uio-bmi/graph_peak_caller}, we provide a simple tutorial on how to use vg and Graph Peak Caller together to go from raw ChIP-seq reads to peaks. 
 % Place figure captions after the first paragraph in which they are cited.
 
 \begin{figure}
-  \begin{minipage}[c]{0.6\textwidth}
-   \frame{ \includegraphics[width=\textwidth]{figures/Fig1.png} }
-  \end{minipage}\hfill
-  \begin{minipage}[c]{0.5\textwidth}
+
+   \frame{ \includegraphics[width=0.6\textwidth]{figures/Fig1.png}  }
+ 
     \caption{{\bf Overview of how Graph Peak Caller works.} Example of peak calling on an example graph (nodes in gray, edges in black). After raw reads (a) in the form of input reads (blue) and control reads (red) have been mapped to the graph-based reference genome, and those with too low mapping score have been filtered out (b), the fragment pileup is created (c) by extending the forward input alignments (shown as resulting blue fragments) and reverse input alignments (yellow fragments) along all possible paths in their corresponding direction. A background track is created by projecting the alignments resulting from the control reads onto a linear path and calculating a local average  read counts (here shown with a small window size). Then the linear track is projected back to the graph again (not shown). The fragment pileup counts are treated as counts and the background track as rates in a Poisson-distribution, and p-values are computed for each position for the observed \emph{count}, given the corresponding rate. Adjusted q-values are computed to control the false discovery rate (d) (figure shows q-scores, which are -$log_{10}(q-value)$). A set of peak candidates are selected by thresholding the q-values on a user-defined threshold (default 0.05), resulting in a set of candidate peaks with gaps between them (e). Small gaps are filled, resulting in a set of peak areas (connected subgraphs)(f). Graph Peak Caller finds a single “maximum path” (g, maximum path in blue) through each peak subgraph by selecting the path that has the highest number of input reads mapped to it. }
 %\includegraphics[width=0.5\textwidth]{figures/Fig1.png} \label{fig}
-  \end{minipage}
+   \label{test}
+
+
 \end{figure}
 
 The output from Graph Peak Caller consists of graph intervals, but the tool is also able to transform these into approximate positions on a linear reference genome (by projecting them to the nearest position on the linear reference genome), making it possible to analyse detected peaks further using existing “linear” approaches. Graph Peak Caller is also able to output candidates for differentially expressed peaks.
