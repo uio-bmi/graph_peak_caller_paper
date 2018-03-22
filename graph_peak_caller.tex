@@ -190,9 +190,9 @@
 \\
 Ivar Grytten\textsuperscript{1\Yinyang*},
 Knut D. Rand\textsuperscript{2\Yinyang},
-Ingrid K. Glad\textsuperscript{2},
-Geir O. Storvik\textsuperscript{2},
 Alexander J. Nederbragt\textsuperscript{1,3},
+Geir O. Storvik\textsuperscript{2},
+Ingrid K. Glad\textsuperscript{2},
 Geir K. Sandve\textsuperscript{1},
 \\
 \bigskip
@@ -233,14 +233,15 @@ Geir K. Sandve\textsuperscript{1},
 % Please keep the abstract below 300 words
 \section*{Abstract}
 
-Graph-based representations are considered to be the future for reference genomes, as they allow integrated representation of the steadily increasing data on individual variation. Currently available tools allow \emph{de novo} assembly of  graph-based reference genomes, alignment of new read sets to the graph representation as well as certain analyses like variant-calling. We here present a first method for calling peaks on read data aligned to a graph-based reference genome. The method is a graph generalization of the peak caller MACS2 and is implemented in an open source tool, \emph{Graph Peak Caller}. By using the existing tool \emph{vg} to build a pan-genome of \emph{Arabidopsis thaliana}, we validate our approach by showing that Graph Peak Caller with a pan-genome reference graph can detect peaks more accurately than MACS2 with a linear reference genome. 
+Graph-based representations are considered to be the future for reference genomes, as they allow integrated representation of the steadily increasing data on individual variation. Currently available tools allow \emph{de novo} assembly of  graph-based reference genomes, alignment of new read sets to the graph representation as well as certain analyses like variant-calling. We here present a first method for calling ChIP-Seq peaks on read data aligned to a graph-based reference genome. The method is a graph generalization of the peak caller MACS2 and is implemented in an open source tool, \emph{Graph Peak Caller}. By using the existing tool \emph{vg} to build a pan-genome of \emph{Arabidopsis thaliana}, we validate our approach by showing that Graph Peak Caller with a pan-genome reference graph can trace variants within peaks that are not part of the linear reference genome, and find peaks that in general are more motif-enriched than those found by MACS2. 
 
 
 % Please keep the Author Summary between 150 and 200 words
 % Use first person. PLOS ONE authors please skip this step. 
 % Author Summary not valid for PLOS ONE submissions.   
 \section*{Author summary}
-We present Graph Peak Caller, the first peak caller for detecting regions associated to transcription factor binding by using \emph{graph-based reference genomes}. Graph-based reference genomes have become popular as an alternative to the well established “linear” reference genomes, as they are able include known variation within the population, which makes mapping genomic reads to the reference more accurate. Detecting regions associated to transcription factor binding (peaks) is important in order to understand how transcription factors might affect genes. Graph Peak Caller utilizes the benefit of graph-based reference genomes by being able to detect peaks from reads mapped to such references. We show that this leads to more accurate detection of peaks as compared to existing methods that use linear reference genomes.
+\emph{Graph-based reference genomes} have become popular as an alternative to the well established “linear” reference genomes, as they are able include known variation within the population, which makes mapping genomic reads to the reference more accurate. Detecting regions associated to transcription factor binding (peaks) is important in order to understand how transcription factors might affect genes. We present Graph Peak Caller, the first peak caller for detecting regions associated to transcription factor binding by using graph-based reference genomes. Graph Peak Caller utilizes the benefit of graph-based reference genomes by detecting peaks from reads mapped to such references. We show that this leads to more accurate detection of peaks as compared to existing methods that use linear reference genomes.
+
 
 \linenumbers
 
@@ -248,20 +249,23 @@ We present Graph Peak Caller, the first peak caller for detecting regions associ
 \section*{Introduction}
 Transcription factors are known to play a key role in gene regulation, and detecting regions associated with transcription factor binding is an important step in understanding their function. The most common technique used to detect transcription factor binding sites is through \emph{ChIP-seq}, combining chromatin immunoprecipitation (ChIP) assays with sequencing. Obtaining putative binding regions from ChIP-seq data is done using computational techniques known collectively as performing \emph{peak calling}. Several \emph{peak callers}, programs to perform peak calling, have been developed for this purpose, for example MACS2~\cite{macs} and SPP~\cite{spp}. Common for all current peak callers is that they take reads mapped to a \emph{linear} reference genome, such as GRCh38, as input. 
 
-Graph-based reference genomes have been used in a wide variety of genomic analyses~\cite{de_novo_assembly,velvet}. The software package \emph{vg} supports mapping reads to a graph-based reference genome with potentially increased accuracy~\cite{vg, genome_graphs} as compared to mapping reads to a standard linear reference genome using tools like BWA-mem~\cite{bwa_mem} or Bowtie~\cite{bowtie}. Several types of genomic analyses, such as variant calling and haplotyping, can now be performed using graph-based references~\cite{vg, genome_graphs}. However, no tool currently exists for performing peak calling on graph-based reference genomes. 
+Graph-based reference genomes offers a way to include known variants in the reference structure \cite{graph_evolution}. The software package \emph{vg} supports mapping reads to a graph-based reference genome with potentially increased accuracy~\cite{vg, genome_graphs} as compared to mapping reads to a standard linear reference genome using tools like BWA-mem~\cite{bwa_mem} or Bowtie~\cite{bowtie}. Several types of genomic analyses, such as variant calling and haplotyping, can now be performed using graph-based references~\cite{vg, genome_graphs}. However, no tool currently exists for performing peak calling on graph-based reference genomes. 
 
 % Results and Discussion can be combined.
 \section*{Results}
-We present Graph Peak Caller, a first method for detecting transcription factor binding events from ChIP-seq reads mapped to a graph-based reference genome. Graph Peak Caller is based on the same principles used by MACS2 (see Fig~\ref{fig1} for an overview), and  is able to call peaks with or without a set of control alignments. As input, it supports alignments in the Graph Alignment\/Map format (GAM) from vg, as well as reads represented as genomic intervals using the Offset Based Graph Python package~\cite{rand} Graph Peak Caller can be run from the command line, and is also available through Galaxy at \url{https://hyperbrowser.uio.no/graph-peak-caller}. In the Github repository at \url{http://github.com/uio-bmi/graph_peak_caller}, we provide a simple tutorial on how to use vg and Graph Peak Caller together to go from raw ChIP-seq reads to peaks. 
-
-
+We present Graph Peak Caller, a first method for detecting transcription factor binding events from ChIP-seq reads mapped to a graph-based reference genome. Graph Peak Caller is based on the same principles used by MACS2 (see Fig~\ref{fig1} for an overview), and  is able to call peaks with or without a set of control alignments. For the case of a graph that merely reflects a linear reference genome, our peak-caller produces the same results as MACS2. As input, it supports alignments in the Graph Alignment/Map format (GAM) from vg, as well as reads represented as genomic intervals using the Offset Based Graph Python package~\cite{rand} Graph Peak Caller can be run from the command line, and is also available through Galaxy at \url{https://hyperbrowser.uio.no/graph-peak-caller}. In the Github repository at \url{http://github.com/uio-bmi/graph_peak_caller}, we provide a simple tutorial on how to use vg and Graph Peak Caller together to go from raw ChIP-seq reads to peaks. 
 % Place figure captions after the first paragraph in which they are cited.
+
 \begin{figure}[!h]
-\caption{{\bf Overview of how Graph Peak Caller works.} Example of peak calling on an example graph (nodes in gray, edges in black). After raw reads (a) in the form of input reads (blue) and control reads (red) are mapped to the graph-based reference genome (b), the fragment pileup is created (c) by extending the forward input alignments (shown as resulting blue fragments) and reverse input alignments (yellow fragments) along all possible paths in their corresponding direction. A background track is created by projecting the alignments resulting from the control reads onto a linear path and calculating a local average  read counts (Here shown with a small window size). Then the linear track is projected back to the graph again (not shown). The fragment pileup counts are treated as counts and the background track as rates in a poisson-distribution, and p-values are computed for each position for the observed \emph{count}, given the corresponding rate. Adjusted q-values are computed to control the false discovery rate (d). A set of peak candidates are selected by thresholding the q-values on a user-defined threshold (default 0.05), resulting in a set of candidate peaks with gaps between them (e). Small gaps are filled, resulting in a set of peak subgraphs (f). Graph Peak Caller finds a single “maximum path” (g, maximum path in blue) through each peak subgraph by selecting the path that has the highest number of input reads mapped to it. }
+\caption{{\bf Overview of how Graph Peak Caller works.} Example of peak calling on an example graph (nodes in gray, edges in black). After raw reads (a) in the form of input reads (blue) and control reads (red) are mapped to the graph-based reference genome (b), the fragment pileup is created (c) by extending the forward input alignments (shown as resulting blue fragments) and reverse input alignments (yellow fragments) along all possible paths in their corresponding direction. A background track is created by projecting the alignments resulting from the control reads onto a linear path and calculating a local average  read counts (here shown with a small window size). Then the linear track is projected back to the graph again (not shown). The fragment pileup counts are treated as counts and the background track as rates in a poisson-distribution, and p-values are computed for each position for the observed \emph{count}, given the corresponding rate. Adjusted q-values are computed to control the false discovery rate (d). A set of peak candidates are selected by thresholding the q-values on a user-defined threshold (default 0.05), resulting in a set of candidate peaks with gaps between them (e). Small gaps are filled, resulting in a set of peak subgraphs (f). Graph Peak Caller finds a single “maximum path” (g, maximum path in blue) through each peak subgraph by selecting the path that has the highest number of input reads mapped to it. }
 \label{fig1}
 \end{figure}
 
 The output from Graph Peak Caller consists of graph intervals, but the tool is also able to transform these into approximate positions on a linear reference genome (by projecting them to the nearest position on the linear reference genome), making it possible to analyse detected peaks further using existing “linear” approaches. Graph Peak Caller is also able to output candidates for differentially expressed peaks.
+
+To showcase and test Graph Peak Caller, we chose to perform peak calling on \emph{Arabidopsis thaliana}, as the relative small genome size makes it possible to run the experiment and reproduce the results on a laptop. Also, The 1001 Genomes Project for \emph{A. thaliana} makes it possible to build a high-quality reference graph with a high density of variants (on average one SNP or indel for every 9 base pairs, compared to one SNP or indel for every 27 base pairs in The 1000 Genomes Project). We called peaks on a graph-based reference genome for \emph{A. thaliana} and compared the results to peaks called on a linear reference genome by MACS2 (Methods). Table~\ref{table1} shows an overview of peaks found by Graph Peak Caller and MACS2. In the instances where the peak-callers find peaks that overlap, the peaks found by Graph Peak Caller are slightly more enriched for DNA-binding motifs than the peaks found by MACS2 for most transcription factors, except SEP3, where the numbers are the same. For all transcription factors except ERF115, the peaks uniquely found by Graph Peak Caller (not overlapping peaks found by MACS2) are more enriched for DNA-binding motifs than the peaks uniquely found by MACS2. The peaks found uniquely by Graph Peak Caller have more than twice the number of basepairs not part of the linear reference genome, compared to the peaks found by Graph Peak Caller that also have been found by MACS2 (Table~\ref{table1}, last two columns).
+
+Fig~\ref{fig2} shows the proportion of peaks enriched for DNA-binding motifs when sorting the peak sets descending on score and computing the proportion of peaks enriched for DNA-binding motif when iteratively including more peaks. As seen in the figure, Graph Peak Caller generally has a better correspondence between high scores and motif enrichment. To validate that our peak caller works on other species, we also did the same experiment using two other reference graphs, one for \emph{Drosophila melanogaster } and a human reference graph (see Fig S1 and Table S1).
 
 \begin{figure}[!h]
  \caption{{\bf Dna-binding motif enrichment plots.} The proportion of peaks enriched for a DNA-binding motif (Y-axis) when iteratively including more peaks from the total set of peaks sorted descending on score (X-axis) for MACS2 and Graph Peak Caller. }
@@ -273,11 +277,11 @@ The output from Graph Peak Caller consists of graph intervals, but the tool is a
 \begin{table}[!ht]
 \begin{adjustwidth}{-2.25in}{0in} % Comment out/remove adjustwidth environment if table fits in text column.
 \centering
-\caption{My caption}
-\label{my-label}
+\caption{Overview of peaks reported by Graph Peak Caller and MACS2 on \emph{A. thaliana} for 5 transcription factors. \emph{Total} is the total number of peaks reported by the peak caller, \emph{Shared} are the number of peaks reported by both peak callers (requiring one or more base pairs to be in common), and \emph{unique} is the number of peaks reported by a peak caller and not the other (meaning no base pairs in common with any peaks found by the other peak caller). The numbers in parentheses are the number of peaks within each group that are enriched for DNA-binding motif. The last two columns show the average number of base pairs in the graph within each peak reported by Graph Peak Caller that are not also on the linear reference genome (meaning these are part of structural variants that are not in the linear reference). Here, all peaks have been trimmed to 120 base pairs around the peak summit (position in peak with lowest q-value), to make the comparison clearer. The criteria for a peak found by one peak caller to also have been marked as found by the other is that the two peaks are overlapping with at least one base pair.}
+\label{table1}
 \begin{tabularx}{1.4\textwidth}{Xbccbccbb}
 \toprule
-& \multicolumn{3}{|l|}{Graph Peak Caller}  & \multicolumn{3}{l|}{MACS2} & \multicolumn{2}{l}{Bps. on linear ref.}                                                                                    \\ \midrule
+& \multicolumn{3}{|l|}{Graph Peak Caller}  & \multicolumn{3}{l|}{MACS2} & \multicolumn{2}{l}{Not on linear ref.}                                                                                    \\ \midrule
 \multicolumn{1}{l|}{Transcription factor} & Total & Shared & \multicolumn{1}{l|}{Unique} & Total & Shared & \multicolumn{1}{l|}{Unique} & Shared & Unique \\ \midrule
 
 
@@ -291,74 +295,59 @@ The output from Graph Peak Caller consists of graph intervals, but the tool is a
 \end{table}
 
 
-%PLOS does not support heading levels beyond the 3rd (no 4th level headings).
-\subsection*{\lorem\ and \ipsum\ nunc blandit a tortor}
-\subsubsection*{3rd level heading} 
-Maecenas convallis mauris sit amet sem ultrices gravida. Etiam eget sapien nibh. Sed ac ipsum eget enim egestas ullamcorper nec euismod ligula. Curabitur fringilla pulvinar lectus consectetur pellentesque. Quisque augue sem, tincidunt sit amet feugiat eget, ullamcorper sed velit. Sed non aliquet felis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris commodo justo ac dui pretium imperdiet. Sed suscipit iaculis mi at feugiat. 
-
-\begin{enumerate}
-	\item{react}
-	\item{diffuse free particles}
-	\item{increment time by dt and go to 1}
-\end{enumerate}
 
 
-\subsection*{Sed ac quam id nisi malesuada congue}
-
-Nulla mi mi, venenatis sed ipsum varius, volutpat euismod diam. Proin rutrum vel massa non gravida. Quisque tempor sem et dignissim rutrum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi at justo vitae nulla elementum commodo eu id massa. In vitae diam ac augue semper tincidunt eu ut eros. Fusce fringilla erat porttitor lectus cursus, vel sagittis arcu lobortis. Aliquam in enim semper, aliquam massa id, cursus neque. Praesent faucibus semper libero.
-
-\begin{itemize}
-	\item First bulleted item.
-	\item Second bulleted item.
-	\item Third bulleted item.
-\end{itemize}
 
 \section*{Discussion}
-Nulla mi mi, venenatis sed ipsum varius, Table~\ref{table1} volutpat euismod diam. Proin rutrum vel massa non gravida. Quisque tempor sem et dignissim rutrum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi at justo vitae nulla elementum commodo eu id massa. In vitae diam ac augue semper tincidunt eu ut eros. Fusce fringilla erat porttitor lectus cursus, vel sagittis arcu lobortis. Aliquam in enim semper, aliquam massa id, cursus neque. Praesent faucibus semper libero~\cite{bib3}.
+We have presented a first peak caller for ChIP-seq data mapped to a graph-based reference genome. We have tested our method by calling peaks on a graph-based reference genome for \emph{A. thaliana} and comparing the detected peaks to those found by MACS2 using a linear reference genome of the same species. In the instances where the peak callers find peaks that overlap, Graph Peak Caller is able to find peaks that are more enriched for motifs (Table~\ref{table1}). This is likely because Graph Peak Caller can trace variants within the peaks that are not part of the linear reference genome. Even if such peaks are also found by MACS2, the specific sequence matching the DNA-binding motif may not be part of the linear reference.
 
-\section*{Materials and methods}
-\subsection*{Etiam eget sapien nibh}
+Furthermore, Graph Peak Caller has a higher proportion of motif-enriched peaks among the uniquely found peaks, showing that Graph Peak Caller is finding peaks enriched for motifs that MACS2 is not finding. As seen in Table~\ref{table1} (last two columns), these peaks covers more variations from the linear reference genome compared to the peaks found by both peak callers, and thus seem to be in areas where the advantages of graph-based reference genomes are more pronounced. 
 
-% For figure citations, please use "Fig" instead of "Figure".
-Nulla mi mi, Fig~\ref{fig1} venenatis sed ipsum varius, volutpat euismod diam. Proin rutrum vel massa non gravida. Quisque tempor sem et dignissim rutrum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi at justo vitae nulla elementum commodo eu id massa. In vitae diam ac augue semper tincidunt eu ut eros. Fusce fringilla erat porttitor lectus cursus, \nameref{S1_Video} vel sagittis arcu lobortis. Aliquam in enim semper, aliquam massa id, cursus neque. Praesent faucibus semper libero.
+We developed Graph Peak Caller close to MACS2 so we easily could validate our graph-based approach and accurately measure the benefits of doing peak-calling on a graph-based reference genome rather than on a linear reference-genome. Having this as a working first approach to graph-based peak calling, it will now be natural and interesting  to extend our work by drawing from ideas from other peak callers or develop new peak calling principles to further improve graph-based peak calling. Also, Graph Peak Caller currently assumes no known information about the specific paths of the diploid genome of the individual of which ChIP-seq data has been collected from. It would be interesting to develop a ChIP-seq pipeline where the path(s) through the reference graph are known (or estimated based on the ChIP-seq data), and compare that approach to Graph Peak Caller.
+
+There are a few challenges with a graph-based ChIP-seq approach. Mapping to graphs is still in its infancy, and has not yet reached its full potential. Also, both mapping to graph-based reference genomes as well as many of the operations required for doing peak calling, such as expanding sample reads, are, from our experience, still a lot slower than existing solutions on linear reference genomes. 
+
+We believe that our peak caller represents an important step towards creating a toolset for functional genomics on graph-based reference genomes, extending the possible applications of graph-based reference genomes and bringing the genomics community an important step closer to a widespread adoption of these reference structures.
 
 
+\section*{Methods}
+\subsection*{Peak calling}
+Our approach to graph-based peak calling is implemented in an open source Python 3 package, \emph{Graph Peak Caller}. Graph Peak Caller was developed by extending the methodologies and concepts from MACS2 to directed acyclic graphs (DAGs). The MACS2 algorithm can be divided into five steps: estimating the fragment length, creating a fragment pileup by extending input reads to match the estimated fragment length, calculating a background track based on local and global average number of reads, calculation of p/q scores based on the fragment pileup and background track, and finding peaks based on thresholded scores. We have adopted each of these steps to work on DAGs. Fig~\ref{fig1} illustrates how this is done on a graph-based reference genome, and the following describes the details of each step.
+
+Graph Peak Caller generates \emph{the fragment pileup} by extending each read to the estimated fragment length f, and counting the number of extended reads that cover each base pair in the graph. For a single read with length r, the extension is done by including all possible paths of length f-r in the graph that starts at the read’s end position. 
+The background track is an estimate of the expected number of reads mapping to each position in the reference. This is, for a given position in the reference, estimated by measuring the amount of reads mapping in the “neighbourhood” of that position. The reads can either be the input reads or a set of control reads . On a linear reference genome, the background track is simply estimated by taking the average pileup count in a local window around each base pair. This is less trivial to do on a graph-based reference genome, since the concept of neighborhood is not as well defined. We solve this problem by projecting the graph onto a single linear path where parallel paths are projected to the same position on the linear path. This allows us to perform background track estimation much the same way as MACS2 does, using a linear reference, and then projecting the resulting track back to the graph again. If control reads are used to generate the background track, the background track is scaled with the ratio of control reads to sample reads.
+	
+The fragment pileup and background track is then treated as counts and rates in poisson distributions, and p-values are computed for each position for the observed count, given the corresponding rate. Since one test is performed for each position in the graph, we compute q-values (adjusted p-values) to control the false discovery rate. The q-values are thresholded at a user specified threshold, yielding a binary track of potential binding regions. 
+
+Graph Peak Caller then removes small gaps (similarly to MACS2) between these potential binding regions. On a graph, this is done by joining regions that are connected by a path shorter than the read length. Then, the resulting regions are grouped into connected subgraphs, representing areas of potential binding events. The final peaks are selected by finding the path through each subgraph that has the highest number of input reads mapped to it. Similarly to MACS2, peaks that are shorter than the estimated fragment length are removed. 
+
+For each subgraph, Graph Peak Caller can also report an “alternative” peak in addition to the main peak. This is done by using Fimo~\cite{fimo} to estimate the exact location within the peak subgraph that matches the binding motif, and looking for an alternative path through this area which is covered by at least one input read. Such alternative peaks can be used to infer differential binding.
+
+\subsection*{Validation and testing}
+To test our peak caller, we used vg~\cite{vg} to create a whole genome \emph{Arabidopsis thaliana} reference graph by using variants from The 1001 Genomes Project. We selected all transcription factors listed in the transcription factor database of \emph{Expresso}~\cite{expresso} that also had a motif in the \emph{Jaspar} database of transcription factor binding profiles~\cite{jaspar}, resulting in a set of 5 transcription factors: ERF115, SEP3, AP1, SOC1, and PI. (Two transcription factors, SVP and ATAF1, were omitted due to invalid fastq files. AP2 and AP3 were omitted based on their close relatedness to AP1. Also, PIF3 was omitted since neither the detected binding events by Graph Peak Caller nor MACS2 had any association with the motif we found in the Jaspar database). Raw ChiP-seq reads were downloaded from the NCBI Sequence Read Archive (SRA) (SRA accession numbers in S1 Appendix) and trimmed using \emph{Trim Galore!}~\cite{trim_galore} (default parameters). Reads were mapped both to our graph-based reference genome using vg and to the \emph{Tair10}~\cite{tair} reference genome using \emph{bwa aln} (default parameters). In both cases, the resulting alignments were filtered using a mapping quality threshold of 37. MACS2 was used to call peaks on the linear reference genome, using default parameters. We created DNA-binding motif enrichment plots (Figure 2) for each set of detected peaks (URLs to the motif models that were used are in S1 Appendix). We have created a Docker repository with the \emph{A. thaliana} graph-based reference genome, Graph Peak Caller, vg and all other software and scripts used to generate the results in this article. A simple guide on how to re-run the experiments can be found in the Github repository for Graph Peak Caller.
 
 \section*{Conclusion}
+We have developed Graph Peak Caller, a tool for performing peak calling from ChIP-seq reads mapped to a graph-based reference genome. Graph Peak Caller is based on the same principles as MACS2. We have validated our approach by using both Graph Peak Caller and MACS2 to call peaks using chip-seq datasets on \emph{A. thaliana}, showing that the peaks found by Graph Peak Caller in general are more enriched for DNA-binding motifs than those found by MACS2 on a linear reference genome. Graph Peak Caller is also able to provide candidates for differentially expressed peaks, and together with vg it provides a simple way of doing peak-calling on graph-based reference genomes.
 
-CO\textsubscript{2} Maecenas convallis mauris sit amet sem ultrices gravida. Etiam eget sapien nibh. Sed ac ipsum eget enim egestas ullamcorper nec euismod ligula. Curabitur fringilla pulvinar lectus consectetur pellentesque. Quisque augue sem, tincidunt sit amet feugiat eget, ullamcorper sed velit. 
 
-Sed non aliquet felis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris commodo justo ac dui pretium imperdiet. Sed suscipit iaculis mi at feugiat. Ut neque ipsum, luctus id lacus ut, laoreet scelerisque urna. Phasellus venenatis, tortor nec vestibulum mattis, massa tortor interdum felis, nec pellentesque metus tortor nec nisl. Ut ornare mauris tellus, vel dapibus arcu suscipit sed. Nam condimentum sem eget mollis euismod. Nullam dui urna, gravida venenatis dui et, tincidunt sodales ex. Nunc est dui, sodales sed mauris nec, auctor sagittis leo. Aliquam tincidunt, ex in facilisis elementum, libero lectus luctus est, non vulputate nisl augue at dolor. For more information, see \nameref{S1_Appendix}.
 
 \section*{Supporting information}
 
 % Include only the SI item label in the paragraph heading. Use the \nameref{label} command to cite SI items in the text.
+\paragraph*{S1 Table}
+\label{S1_Table}
+{\bf Overview of peaks detected on human and \emph{D. melanogaster}.} .
+
 \paragraph*{S1 Fig.}
 \label{S1_Fig}
-{\bf Bold the title sentence.} Add descriptive text after the title of the item (optional).
-
-\paragraph*{S2 Fig.}
-\label{S2_Fig}
-{\bf Lorem ipsum.} Maecenas convallis mauris sit amet sem ultrices gravida. Etiam eget sapien nibh. Sed ac ipsum eget enim egestas ullamcorper nec euismod ligula. Curabitur fringilla pulvinar lectus consectetur pellentesque.
-
-\paragraph*{S1 File.}
-\label{S1_File}
-{\bf Lorem ipsum.}  Maecenas convallis mauris sit amet sem ultrices gravida. Etiam eget sapien nibh. Sed ac ipsum eget enim egestas ullamcorper nec euismod ligula. Curabitur fringilla pulvinar lectus consectetur pellentesque.
-
-\paragraph*{S1 Video.}
-\label{S1_Video}
-{\bf Lorem ipsum.}  Maecenas convallis mauris sit amet sem ultrices gravida. Etiam eget sapien nibh. Sed ac ipsum eget enim egestas ullamcorper nec euismod ligula. Curabitur fringilla pulvinar lectus consectetur pellentesque.
+{\bf DNA-binding motif-enrichment plot for peaks detected on human and \emph{D. melanogaster}.}
 
 \paragraph*{S1 Appendix.}
 \label{S1_Appendix}
-{\bf Lorem ipsum.} Maecenas convallis mauris sit amet sem ultrices gravida. Etiam eget sapien nibh. Sed ac ipsum eget enim egestas ullamcorper nec euismod ligula. Curabitur fringilla pulvinar lectus consectetur pellentesque.
+{\bf URLs to motifs and accession numbers to data used in experiments.}
 
-\paragraph*{S1 Table.}
-\label{S1_Table}
-{\bf Lorem ipsum.} Maecenas convallis mauris sit amet sem ultrices gravida. Etiam eget sapien nibh. Sed ac ipsum eget enim egestas ullamcorper nec euismod ligula. Curabitur fringilla pulvinar lectus consectetur pellentesque.
-
-\section*{Acknowledgments}
-Cras egestas velit mauris, eu mollis turpis pellentesque sit amet. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam id pretium nisi. Sed ac quam id nisi malesuada congue. Sed interdum aliquet augue, at pellentesque quam rhoncus vitae.
+\section*{Acknowledgements}
+The sequence data used for creating the Arabidopsis thaliana reference graph were produced by the Weigel laboratory at the Max Planck Institute for Developmental Biology.
 
 \nolinenumbers
 
@@ -380,10 +369,6 @@ Cras egestas velit mauris, eu mollis turpis pellentesque sit amet. Interdum et m
 
 \begin{thebibliography}{10}
 
-\bibitem{rand}
-Rand KD, Grytten I, Nederbragt AJ, Storvik GO, Glad IK, Sandve GK. 
-\newblock {Coordinates and intervals in graph-based reference genomes}. 
-\newblock BMC bioinformatics. 2017 Dec;18(1):263.
 
 \bibitem{macs}
 Zhang Y, Liu T, Meyer CA, Eeckhoute J, Johnson DS, Bernstein BE, Nusbaum C, Myers RM, Brown M, Li W, Liu XS. 
@@ -393,20 +378,27 @@ Zhang Y, Liu T, Meyer CA, Eeckhoute J, Johnson DS, Bernstein BE, Nusbaum C, Myer
 \bibitem{spp}
 Kharchenko PV, Tolstorukov MY, Park PJ. Design and analysis of ChIP-seq experiments for DNA-binding proteins. Nature biotechnology. 2008 Dec;26(12):1351.
 
-\bibitem{de_novo_assembly}
-Iqbal Z, Caccamo M, Turner I, Flicek P, McVean G. De novo assembly and genotyping of variants using colored de Bruijn graphs. Nature genetics. 2012 Feb;44(2):226.
+\bibitem{graph_evolution}
+Paten B, Novak AM, Eizenga JM, Garrison E. Genome graphs and the evolution of genome inference. Genome research. 2017 May 1;27(5):665-76.
 
-\bibitem{velvet}
-Zerbino DR, Birney E. Velvet: algorithms for de novo short read assembly using de Bruijn graphs. Genome research. 2008 May 1;18(5):821-9.
+\bibitem{genome_graphs}
+Novak AM, Hickey G, Garrison E, Blum S, Connelly A, Dilthey A, Eizenga J, Elmohamed MS, Guthrie S, Kahles A, Keenan S. Genome graphs. bioRxiv. 2017 Jan 1:101378.
+
 
 \bibitem{vg}
 Garrison E, Sirén J, Novak AM, Hickey G, Eizenga JM, Dawson ET, Jones W, Lin MF, Paten B, Durbin R. Sequence variation aware genome references and read mapping with the variation graph toolkit. bioRxiv. 2017 Jan 1:234856.
+
 
 \bibitem{bwa_mem}
 Li H. Aligning sequence reads, clone sequences and assembly contigs with BWA-MEM. arXiv preprint arXiv:1303.3997. 2013 Mar 16.
 
 \bibitem{bowtie}
 Langmead B, Salzberg SL. Fast gapped-read alignment with Bowtie 2. Nature methods. 2012 Apr;9(4):357.
+
+\bibitem{rand}
+Rand KD, Grytten I, Nederbragt AJ, Storvik GO, Glad IK, Sandve GK. 
+\newblock {Coordinates and intervals in graph-based reference genomes}. 
+\newblock BMC bioinformatics. 2017 Dec;18(1):263.
 
 \bibitem{fimo}
 Grant CE, Bailey TL, Noble WS. FIMO: scanning for occurrences of a given motif. Bioinformatics. 2011 Feb 16;27(7):1017-8.
@@ -426,9 +418,6 @@ Arabidopsis Genome Initiative. Analysis of the genome sequence of the flowering 
 
 \bibitem{1000genomes}
 1000 Genomes Project Consortium. A global reference for human genetic variation. Nature. 2015 Oct;526(7571):68.
-
-\bibitem{genome_graphs}
-Novak AM, Hickey G, Garrison E, Blum S, Connelly A, Dilthey A, Eizenga J, Elmohamed MS, Guthrie S, Kahles A, Keenan S. Genome graphs. bioRxiv. 2017 Jan 1:101378.
 
 \end{thebibliography}
 
