@@ -21,7 +21,7 @@
 \begin{adjustwidth}{-1.25in}{0in} % Comment out/remove adjustwidth environment if table fits in text column.
 \centering
 \caption{Overview of peaks reported by Graph Peak Caller and MACS2 on \emph{Drosophila Melanogaster} and human for a set of transcription factors. \emph{Total} is the total number of peaks reported by the peak caller, \emph{Shared} are the number of peaks reported by both peak callers (requiring one or more base pairs to be in common), and \emph{unique} is the number of peaks reported by a peak caller and not the other (meaning no base pairs in common with any peaks found by the other peak caller). The numbers in parentheses are the number of peaks within each group that are enriched for DNA-binding motif. The last two columns show the average number of base pairs in the graph within each peak reported by Graph Peak Caller that are not also on the linear reference genome (meaning these are part of structural variants that are not in the linear reference). Here, all peaks have been trimmed to 120 base pairs around the peak summit (position in peak with lowest q-value), to make the comparison clearer. The criteria for a peak found by one peak caller to also have been marked as found by the other is that the two peaks are overlapping with at least one base pair.}
-\label{table1}
+\label{tableS1}
 \begin{tabularx}{1.6\textwidth}{Xbccbccbb}
 \toprule
 & \multicolumn{3}{|l|}{Graph Peak Caller}  & \multicolumn{3}{l|}{MACS2} & \multicolumn{2}{l}{Not on linear ref.}                                                                                    \\ \midrule
@@ -41,3 +41,8 @@
 \end{table}
 
 \end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
