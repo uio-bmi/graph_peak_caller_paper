@@ -307,7 +307,11 @@ To validate that our peak caller works on other species, we also did the same ex
 \begin{table}[!ht]
 \begin{adjustwidth}{-1.15in}{0in} % Comment out/remove adjustwidth environment if table fits in text column.
 \centering
-\caption{Overview of peaks reported by Graph Peak Caller and MACS2 on \emph{A. thaliana} for 5 transcription factors. \emph{Total} is the total number of peaks reported by the peak caller, \emph{Shared} is the number of peaks reported by both peak callers (requiring one or more base pairs to be in common), and \emph{unique} is the number of peaks reported by a peak caller and not the other (meaning no base pairs in common with any peaks found by the other peak caller). In the categories \emph{Shared} and \emph{Unique}, both the number of peaks matching motif (the number before the /) and the number of peaks found are shown (percent of peaks matching motif are shown in parentheses). The last two columns show the average number of base pairs in the graph within each peak reported by Graph Peak Caller that are not also on the linear reference genome (meaning these are part of structural variants that are not in the linear reference). Here, all peaks have been trimmed to 120 base pairs around the peak summit (position in peak with lowest q-value), to make the comparison clearer. The criteria for a peak found by one peak caller to also have been marked as found by the other is that the two peaks are overlapping with at least one base pair.}
+\caption{Overview of peaks reported by Graph Peak Caller and MACS2 on \emph{A. thaliana} for 5 transcription factors (TFs).
+  \emph{Total} is the total number of peaks reported by the peak caller, \emph{Shared} is the number of peaks reported by both peak callers (requiring one or more base pairs to be in common), and \emph{unique} is the number of peaks reported by a peak caller and not the other (meaning no base pairs in common with any peaks found by the other peak caller).
+  In the categories \emph{Shared} and \emph{Unique}, both the number of peaks matching motif (the number before the /) and the number of peaks found are shown (percent of peaks matching motif are shown in parentheses).
+  The last two columns show the average number of base pairs in the graph within each peak reported by Graph Peak Caller that are not also on the linear reference genome (meaning these are part of structural variants that are not in the linear reference).
+  Here, all peaks have been trimmed to 120 base pairs around the peak summit (position in peak with lowest q-value), to make the comparison clearer. The criteria for a peak found by one peak caller to also have been marked as found by the other is that the two peaks are overlapping with at least one base pair.}
 \label{table1}
 \begin{tabularx}{1.4\textwidth}{Xbcdbcdbb}
 \toprule
@@ -315,11 +319,14 @@ To validate that our peak caller works on other species, we also did the same ex
 \multicolumn{1}{l|}{TF} & Total & Shared & \multicolumn{1}{l|}{Unique} & Total & Shared & \multicolumn{1}{l|}{Unique} & Shared & Unique \\ \midrule
 
 
-\multicolumn{1}{r|}{ERF115} & 24847 & 1846/21164 & 165/3683 (4.5\%) &23167 &1826/21162  &132/2005  (6.6\%) &1.47 &3.62 \\
-\multicolumn{1}{r|}{SEP3} &13902 &991/11304 & 123/2598 (4.7\%) &15517 &991/11302 & 161/4215 (3.8\%) &0.87 &2.59 \\
-\multicolumn{1}{r|}{AP1} &15687 &1023/12694 &160/2993 (5.3\%) &17030 &996/12692	 &159/4338 (3.7\%)	 &0.78	 &2.37 \\
-\multicolumn{1}{r|}{SOC1} &14817	 &2258/13854 &136/963 (14.1\%)	 &16407 &2242/13849 &275/2558 (10.8\%)	 &1.04	 &2.35 \\
-\multicolumn{1}{r|}{PI} &16548 &2171/13526 &350/3022  (11.6\%)  &16084 &2154/13525	 &218/2559 (8.5\%)&1.18	 &2.82 \\  \bottomrule
+\multicolumn{1}{r|}{ERF115} &24847 & 1846/21164 & 165/3683  (4.5\%)  &23167 &1826/21162  &132/2005  (6.6\%) &1.47 &3.62 \\
+\multicolumn{1}{r|}{SEP3}   &13902 & 991/11304  & 123/2598  (4.7\%)  &15517 &991/11302   &161/4215 (3.8\%)  &0.87 &2.59 \\
+  \multicolumn{1}{r|}{AP1}  &15687 & 1023/12694 & 160/2993  (5.3\%)  &17030 &996/12692	 &159/4338 (3.7\%)  &0.78 &2.37 \\
+  \multicolumn{1}{r|}{SOC1} &14817 & 2258/13854 & 136/963   (14.1\%) &16407 &2242/13849  &275/2558 (10.8\%) &1.04 &2.35 \\
+  \multicolumn{1}{r|}{PI}   &16548 & 2171/13526 & 350/3022  (11.6\%) &16084 &2154/13525	 &218/2559 (8.5\%)  &1.18 &2.82 \\
+  \hline
+  \multicolumn{1}{r|}{Total}&85801 & 8289/72542 & 934/13259 (7.0\%)  &88205 &8209/72530	 &945/15675 (6.0\%) & & \\  \bottomrule
+
 \end{tabularx}
 \end{adjustwidth}
 \end{table}

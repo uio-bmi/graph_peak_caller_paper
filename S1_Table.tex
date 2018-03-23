@@ -11,7 +11,8 @@
 \usepackage{changepage}
 
 \newcolumntype{b}{>{\hsize=.49\hsize}X}
-\newcolumntype{c}{>{\hsize=1.4\hsize}X}
+\newcolumntype{c}{>{\hsize=1.2\hsize}X}
+\newcolumntype{d}{>{\hsize=1.8\hsize}X}
 
 
 \begin{document}
@@ -20,24 +21,36 @@
 \begin{table}[!ht]
 \begin{adjustwidth}{-1.25in}{0in} % Comment out/remove adjustwidth environment if table fits in text column.
 \centering
-\caption{Overview of peaks reported by Graph Peak Caller and MACS2 on \emph{Drosophila Melanogaster} and human for a set of transcription factors. \emph{Total} is the total number of peaks reported by the peak caller, \emph{Shared} are the number of peaks reported by both peak callers (requiring one or more base pairs to be in common), and \emph{unique} is the number of peaks reported by a peak caller and not the other (meaning no base pairs in common with any peaks found by the other peak caller). The numbers in parentheses are the number of peaks within each group that are enriched for DNA-binding motif. The last two columns show the average number of base pairs in the graph within each peak reported by Graph Peak Caller that are not also on the linear reference genome (meaning these are part of structural variants that are not in the linear reference). Here, all peaks have been trimmed to 120 base pairs around the peak summit (position in peak with lowest q-value), to make the comparison clearer. The criteria for a peak found by one peak caller to also have been marked as found by the other is that the two peaks are overlapping with at least one base pair.}
-\label{table1}
-\begin{tabularx}{1.6\textwidth}{Xbccbccbb}
+\caption{Overview of peaks reported by Graph Peak Caller and MACS2 on \emph{Drosophila Melanogaster} and human for a set of transcription factors (TFs).
+  \emph{Total} is the total number of peaks reported by the peak caller, \emph{Shared} are the number of peaks reported by both peak callers (requiring one or more base pairs to be in common), and \emph{unique} is the number of peaks reported by a peak caller and not the other (meaning no base pairs in common with any peaks found by the other peak caller).
+  In the categories \emph{Shared} and \emph{Unique}, both the number of peaks matching motif (the number before the /) and the number of peaks found are shown (percent of peaks matching motif are shown in parentheses). The last two columns show the average number of base pairs in the graph within each peak reported by Graph Peak Caller that are not also on the linear reference genome (meaning these are part of structural variants that are not in the linear reference). Here, all peaks have been trimmed to 120 base pairs around the peak summit (position in peak with lowest q-value), to make the comparison clearer. The criteria for a peak found by one peak caller to also have been marked as found by the other is that the two peaks are overlapping with at least one base pair.}
+\label{tableS1}
+\begin{tabularx}{1.6\textwidth}{Xbcdbcdbb}
 \toprule
-& \multicolumn{3}{|l|}{Graph Peak Caller}  & \multicolumn{3}{l|}{MACS2} & \multicolumn{2}{l}{Not on linear ref.}                                                                                    \\ \midrule
-\multicolumn{1}{l|}{Transcription factor} & Total & Shared & \multicolumn{1}{l|}{Unique} & Total & Shared & \multicolumn{1}{l|}{Unique} & Shared & Unique \\ \midrule
+  & \multicolumn{3}{|l|}{Graph Peak Caller}  & \multicolumn{3}{l|}{MACS2} & \multicolumn{2}{l}{Not on linear ref.}                                                                                    \\ \midrule
+  \multicolumn{1}{l|}{TF} & Total & Shared & \multicolumn{1}{l|}{Unique} & Total & Shared & \multicolumn{1}{l|}{Unique} & Shared & Unique \\ \midrule
 
-\multicolumn{1}{l|}{Human} & \multicolumn{8}{l}{} \\
-\multicolumn{1}{r|}{CTCF} & 48828 &46129 (34220)	&2699 (836)	&47320 &46129 (34120) &1191 (368) &0.60	 &2.25\\
-\multicolumn{1}{r|}{SRF} &19345	 &16515 (4712)	 &22830 (330)	 &17963 &16513 (4709)	 &1450 (153) &0.45	 &1.85 \\
+  \multicolumn{1}{l|}{Human} & \multicolumn{8}{l}{} \\
+  \multicolumn{1}{r|}{CTCF} & 48828 & 34220/46129 & 836/2699 (31.0 \%)  & 47320 & 34120/46129 & 368/1191 (30.9 \%) & 0.60	 &2.25\\
+  \multicolumn{1}{r|}{SRF}  & 19345 & 4712/16515  & 330/2830 (11.7 \%)  & 17963 & 4709/16513  & 153/1450 (10.5 \%) & 0.45	 &1.85 \\
+\hline
+\multicolumn{1}{r|}{Total}  & 68173 & 38932/62644 & 1166/5529 (21.1 \%) & 65283 & 38829/62642 & 521/2641 (19.7 \%) & &\\
 
-\multicolumn{1}{l|}{\emph{D. melanogaster}} & \multicolumn{8}{l}{} \\
-\multicolumn{1}{r|}{JRA} & 9809 &8215 (376)	 &1594 (55)	 &8679 &8215 (364)	 & 464 (12)	&0.06 &0.19 \\
-\multicolumn{1}{r|}{SQZ} & 12156 &9403 (2103)	 &2753 (557)	 & 10025& 9403 (2075)	&622 (91)	 &0.09	 &0.20 \\
-\multicolumn{1}{r|}{JIM} &6572  &5248 (1359)	 &1324 (210)	 &5607 &5242 (1354)	 &365 (59)	 & 0.06	& 0.20\\
-\multicolumn{1}{r|}{ANTP} & 9769	 &6606 (153)	 & 3163 (59)	&6917	 & 6606 (153)	& 311 (3)	&0.07	 & 0.13\\ \bottomrule
+  \multicolumn{1}{l|}{\emph{D. m.}} & \multicolumn{8}{l}{} \\
+  \multicolumn{1}{r|}{JRA}  & 9809  & 376/8215  & 55/1594  (3.5\%)  & 8679  & 364/8215  & 12/464 (2.6\%)  & 0.06 & 0.19 \\
+  \multicolumn{1}{r|}{SQZ}  & 12156 & 2103/9403 & 557/2753 (20.2\%) & 10025 & 2075/9403 & 91/622 (14.6\%) & 0.09 & 0.20 \\
+  \multicolumn{1}{r|}{JIM}  & 6572  & 1359/5248 & 210/1324 (15.9\%) & 5607  & 1354/5242 & 59/365 (16.2\%) & 0.06 & 0.20  \\
+  \multicolumn{1}{r|}{ANTP} & 9769  & 153/6606  & 59/3163  (1.9\%)  & 6917  & 153/6606  & 3/311  (1.0\%)  & 0.07   & 0.13\\
+  \hline
+ \multicolumn{1}{r|}{Total} & 38306 & 3991/29472 & 881/8834 (10.0\%) & 31228 & 3946/29466 & 165/1762 (9.4\%) &  &\\ 
+\bottomrule
 \end{tabularx}
 \end{adjustwidth}
 \end{table}
 
 \end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
