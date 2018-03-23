@@ -1,15 +1,32 @@
-\documentclass[a4paper,10pt]{letter}
+\documentclass[a4paper,11pt]{letter}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
 \usepackage{url}
 
+\addtolength{\textwidth}{2.5cm}
+\addtolength{\oddsidemargin}{-1.3cm}
+\topmargin-0.8in
+
 \begin{document}
 
-\begin{letter}
+\begin{letter}{}
+
+\opening{Dear Editor,}
+
+We are pleased to submit this presubmission inquiry for a manuscript entitled \emph{“Graph Peak Caller: calling ChIP-Seq Peaks on Graph-based Reference Genomes”}, where we present a first method for detecting transcription factor binding events on graph-based reference genomes. Starting at the next page, we have attached the manuscript that we plan to submit if this inquiry gets accepted.
+
+Graph-based reference genomes have become popular as an alternative to standard “linear” reference genomes, as they are able to represent structural variants in addition to the standard linear reference. The software package vg is able to map reads to such references with improved accuracy as compared to current linear aligners, such as BWA-MEM and Bowtie. However, basic operations, such as peak calling, could until now not be performed on graphs due to a lack of appropriate software
+
+We have validated our method by building a pan-genome reference graph for Arabidopsis thaliana and comparing the peaks detected by Graph Peak Caller to those detected by MACS2 when MACS2 is used on a linear reference genome of the same species. Using the same input data (raw ChIP-seq reads for a set of transcription factors on A. thaliana), we show that we are able to detect peaks that in general are more enriched for DNA-binding motifs than those found by MACS2. Also, we show that we are better able to detect transcription factor binding events in highly variable regions of the genome. 
+
+Graph Peak Caller is already available as a command-line tool through the Python Package Index, and can be used on a variety of graph-based reference genomes through a simple web-interface at \url{http://hyperbrowser.no/graph-peak-caller}. Simple instructions on how to use the command-line tool can be found at the Github repository at \url{http://github.com/uio-bmi/graph_peak_caller}. We have created a docker repository containing our software and the data used to run these experiments, making it straightforward to replicate the results.
+
+We believe Graph Peak Caller will be useful for anyone doing peak calling on ChIP-seq data. Furthermore, for the increasing amount of biologists working on graph-based reference genome, Graph Peak Caller for the first time enables peak calling on such references.
 
 
+
+\closing{Ivar Grytten and Knut Rand}
 
 \end{letter}
-
 \end{document}
