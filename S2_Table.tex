@@ -1,0 +1,60 @@
+\documentclass[a4paper,8pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+
+\title{}
+\author{}
+\usepackage{booktabs}
+\usepackage{tabularx}
+% Use adjustwidth environment to exceed column width (see example table in text)
+\usepackage{changepage}
+
+\newcolumntype{b}{>{\hsize=.49\hsize}X}
+\newcolumntype{c}{>{\hsize=1.2\hsize}X}
+\newcolumntype{d}{>{\hsize=1.8\hsize}X}
+
+\usepackage{caption}
+
+\begin{document}
+
+% Place tables after the first paragraph in which they are cited.
+\begin{table}[!ht]
+\begin{adjustwidth}{-1.25in}{0in} % Comment out/remove adjustwidth environment if table fits in text column.
+\centering
+\caption*{\textbf{Table S2} Average number of base pairs not also part of linear reference genome within peak sets. Here, all peaks have been trimmed to 120 base pairs around the peak summit (position in peak with lowest q-value), to make the comparison clearer.}
+\label{tableS2}
+\begin{tabularx}{1.6\textwidth}{b|X|X}
+  \multicolumn{3}{l}{\textbf{Average number of base pairs not part of linear reference genome}} \\ \hline
+\toprule
+   & Peaks found by Graph Peak Caller that also were found by MACS2 & Peaks found uniquely by Graph Peak Caller\\
+  \emph{\textbf{A. thaliana}} & & \\ \hline
+  ERF115 & 1.47 & 3.62 \\
+  SEP3 & 0.87 & 2.59 \\
+  AP1 & 0.78 & 2.37 \\
+  SOC1 & 1.04 & 2.35 \\
+  PI & 1.18 & 2.82 \\ \hline
+  
+  \emph{\textbf{D. melanogaster}} & & \\ \hline
+  JRA & 0.06 & 0.19 \\
+  SQZ & 0.09 & 0.20 \\
+  JIM & 0.06 & 0.20\\
+  ANTP & 0.07 & 0.13 \\
+  
+  \emph{\textbf{Human}} & & \\ \hline
+  CTCF & 0.60 & 2.25 \\
+  SRF & 0.45 & 1.85 \\
+  
+  
+  
+\bottomrule
+\end{tabularx}
+\end{adjustwidth}
+\end{table}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
