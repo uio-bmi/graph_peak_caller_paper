@@ -82,9 +82,11 @@
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{floatrow}
+\usepackage{listings}
+\lstset{language=bash}
 \newcolumntype{b}{>{\hsize=.49\hsize}X}
 \newcolumntype{c}{>{\hsize=1.2\hsize}X}
-\newcolumntype{d}{>{\hsize=1.7\hsize}X}
+\newcolumntype{d}{>{\hsize=1.5\hsize}X}
 % custom stuff end
 
 % Use adjustwidth environment to exceed column width (see example table in text)
@@ -308,7 +310,7 @@ factor that matches a DNA-binding motif. The peak detected by Graph Peak Caller 
 
 For all transcription factors, except ERF115, the peaks uniquely found by Graph Peak Caller (not overlapping peaks found by MACS2) are more enriched for DNA-binding motifs than the peaks uniquely found by MACS2. In aggregate, the ratios of motif-matches of the uniquely found peaks are $7.0\%$ for Graph Peak Caller and $6.0\%$ for MACS2, yielding a $z$-value for the difference of $3.54$ and a $p$-value of $0.02\%$ using a one-sided $z$-test. MACS2 in aggregate predicts 2443 more unique peaks than Graph Peak Caller, but only finds $11$ ($0.5\%$) more peaks that are motif-enriched, which is less than one would expect by chance, since the false discovery rate of motif-matches is controlled at $5\%$. Fig~\ref{motif_enrichment_reads} shows one of the cases on chromosome 1 where Graph Peak Caller detects a peak that is not detected by MACS2, because the input reads are aligned against an indel that is not part of the linear reference genome. 
 
-The peaks found uniquely by Graph Peak Caller have more than twice the number of basepairs not part of the linear reference genome, compared to the peaks found by Graph Peak Caller that also have been found by MACS2. Fig~\ref{motif_plots} shows the proportion of peaks enriched for DNA-binding motifs for the peaks that are uniquely found by each peak caller (for a similar plot including all peaks, see Fig S1). As seen in the figure, Graph Peak Caller has a better correspondence between high peak scores and motif enrichment for all transcription factors, except ERF115. 
+The peaks found uniquely by Graph Peak Caller have more than twice the number of basepairs not part of the linear reference genome, compared to the peaks found by Graph Peak Caller that also have been found by MACS2 (Table~S2). Fig~\ref{motif_plots} shows the proportion of peaks enriched for DNA-binding motifs for the peaks that are uniquely found by each peak caller (for a similar plot including all peaks, see Fig S1). As seen in the figure, Graph Peak Caller has a better correspondence between high peak scores and motif enrichment for all transcription factors, except ERF115. 
 
 
 To validate that our peak caller works on other species, we repeated the experiment on similar datasets for \emph{Drosophila melanogaster } and human (see Fig S2 and Table S1). In both cases Graph Peak Caller got a higher ratio of motif-matches on uniquely found peaks, but not statistically significant ($p_{\text{human}}=7\%$, $p_{\text{D.melanogaster}}=17\%$).
@@ -334,22 +336,22 @@ To validate that our peak caller works on other species, we repeated the experim
 \centering
 \caption{Overview of peaks reported by Graph Peak Caller and MACS2 on \emph{A. thaliana} for 5 transcription factors (TFs).
   \emph{Total} is the total number of peaks reported by the peak caller, \emph{shared} is the number of peaks reported by both peak callers (requiring overlap between two peaks), and \emph{unique} is the number of peaks reported by one peak caller and not the other.
-  In the categories \emph{shared} and \emph{unique}, both the number of peaks matching motif (the number before the /) and the number of peaks found are shown (percent of peaks matching motif are shown in parentheses).
+  In the categories \emph{shared} and \emph{unique}, both the number of peaks with motif match (the number before the /) and the number of peaks found are shown (percent of peaks with motif match are shown in parentheses).
   Here, all peaks have been trimmed to 120 base pairs around the peak summit (position in peak with lowest q-value), to make the comparison clearer.}
 \label{table1}
-\begin{tabularx}{1.55\textwidth}{Xbcdbcdbb}
+\begin{tabularx}{1.55\textwidth}{Xbddbddbb}
 \toprule
 & \multicolumn{3}{|l|}{Graph Peak Caller}  & \multicolumn{3}{l}{MACS2}  \\ \midrule
 \multicolumn{1}{l|}{TF} & Total & Shared & \multicolumn{1}{l|}{Unique} & Total & Shared & \multicolumn{1}{l}{Unique} \\ \midrule
 
 
-\multicolumn{1}{r|}{ERF115} &24847 & 1846/21164 & 165/3683  (4.5\%)  &23167 &1826/21162  &132/2005  (6.6\%) \\
-\multicolumn{1}{r|}{SEP3}   &13902 & 991/11304  & 123/2598  (4.7\%)  &15517 &991/11302   &161/4215 (3.8\%) \\
-  \multicolumn{1}{r|}{AP1}  &15687 & 1023/12694 & 160/2993  (5.3\%)  &17030 &996/12692	 &159/4338 (3.7\%)  \\
-  \multicolumn{1}{r|}{SOC1} &14817 & 2258/13854 & 136/963   (14.1\%) &16407 &2242/13849  &275/2558 (10.8\%) \\
-  \multicolumn{1}{r|}{PI}   &16548 & 2171/13526 & 350/3022  (11.6\%) &16084 &2154/13525	 &218/2559 (8.5\%) \\
+\multicolumn{1}{r|}{ERF115} &24847 & 1846/21164 (8.72\%) & 165/3683  (4.48\%)  &23167 &1826/21162 (8.63\%)  &132/2005 (6.58\%) \\
+\multicolumn{1}{r|}{SEP3}   &13902 & 991/11304  (8.77\%) & 123/2598  (4.73\%)  &15517 &991/11302  (8.77\%)  &161/4215 (3.82\%) \\
+  \multicolumn{1}{r|}{AP1}  &15687 & 1023/12694 (8.06\%) & 160/2993  (5.35\%)  &17030 &996/12692  (7.85\%)  &159/4338 (3.67\%)  \\
+  \multicolumn{1}{r|}{SOC1} &14817 & 2258/13854 (16.2\%) & 136/963   (14.1\%) &16407 &2242/13849  (16.2\%)  &275/2558 (10.8\%) \\
+  \multicolumn{1}{r|}{PI}   &16548 & 2171/13526 (16.1\%) & 350/3022  (11.6\%) &16084 &2154/13525  (15.9\%)  &218/2559 (8.52\%) \\
   \hline
-  \multicolumn{1}{r|}{Total}&85801 & 8289/72542 & 934/13259 (7.0\%)  &88205 &8209/72530	 &945/15675 (6.0\%)\\  \bottomrule
+  \multicolumn{1}{r|}{Total}&85801 & 8289/72542 (11.4\%) & 934/13259 (7.04\%)  &88205 &8209/72530 (11.3\%)  &945/15675 (6.03\%)\\  \bottomrule
 
 \end{tabularx}
 \end{adjustwidth}
@@ -358,7 +360,9 @@ To validate that our peak caller works on other species, we repeated the experim
 \section*{Discussion}
 We have presented a first peak caller for ChIP-seq data mapped to a graph-based reference genome. We have tested our method by calling peaks on a graph-based reference genome for \emph{A. thaliana} and comparing the detected peaks to those found by MACS2 using a linear reference genome of the same species. In the instances where the peak callers find peaks that overlap, Graph Peak Caller is able to find peaks that are more enriched for motifs. This is likely because Graph Peak Caller can trace variants within the peaks that are not part of the linear reference genome. Even if such peaks are also found by MACS2, the specific sequence comprising the DNA-binding motif may not be part of the linear reference.
 	
-Furthermore, Graph Peak Caller has a significantly higher proportion of motif-enriched peaks among its uniquely found peaks, showing that Graph Peak Caller is finding peaks enriched for motifs that MACS2 is not finding, e.g. the peak seen in Fig~\ref{motif_enrichment_reads}. As seen in Table~\ref{S2table}, these peaks covers more variations from the linear reference genome compared to the peaks found by both peak callers, and thus seem to be in areas where the advantages of graph-based reference genomes are more pronounced. 
+Furthermore, Graph Peak Caller has a significantly higher proportion of motif-enriched peaks among its uniquely found peaks, showing that Graph Peak Caller is finding peaks enriched for motifs that MACS2 is not finding.
+% TODO: is this clear
+These peaks covers more variations from the linear reference genome compared to the peaks found by both peak callers, and thus seem to be in areas where the advantages of graph-based reference genomes are more pronounced. 
 
 We chose to develop Graph Peak Caller by tightly following the principles of MACS2, so we easily could validate our graph-based approach and accurately measure the benefits of doing peak calling on a graph-based reference genome rather than on a linear reference-genome. Having this as a working first approach to graph-based peak calling, it will now be natural and interesting  to extend our work by drawing ideas from other peak callers or develop new peak calling principles to further improve graph-based peak calling. Also, Graph Peak Caller currently assumes no known information about the specific paths of the diploid genome of the individual that ChIP-seq data has been collected from. It would be interesting to develop a ChIP-seq pipeline where the path(s) through the reference graph are known (or estimated based on the ChIP-seq data), and compare that approach to Graph Peak Caller.
 
@@ -369,7 +373,7 @@ We believe that our peak caller represents an important step towards creating a 
 \section*{Methods}
 \subsection*{Peak calling}
 Our approach to graph-based peak calling is implemented in an open source Python 3 package, \emph{Graph Peak Caller}. Graph Peak Caller was developed by extending the methodologies and concepts from MACS2 to directed acyclic graphs (DAGs). The MACS2 algorithm can be divided into five steps: estimating the fragment length, creating a fragment pileup by extending input reads to match the estimated fragment length, calculating a background track based on local and global average number of reads, calculation of p/q scores based on the fragment pileup and background track, and finding peaks based on thresholded scores. We have adopted each of these steps to work on DAGs. Fig~\ref{overview_figure} illustrates the method on a graph-based reference genome, and the following describes the details of each step.
-
+Graph Peak Caller uses the linear estimation algorithm from MACS2 to estimate the fragment length $f$ by using the linear path through the graph with the highest number of aligned reads as reference.
 Graph Peak Caller generates \emph{the fragment pileup} by extending each read to the estimated fragment length $f$, and counting the number of extended reads that cover each base pair in the graph. For a single read with length $r$, the extension is done by including all possible paths of length $f-r$ in the graph that start at the read’s end position. 
 The background track is an estimate of the expected number of reads mapping to each position in the reference. This is, for a given position in the reference, estimated by measuring the amount of reads mapping in the “neighbourhood” of that position. The reads can either be the input reads or a set of control reads . On a linear reference genome, the background track is simply estimated by taking the average pileup count in a local window around each base pair. This is less trivial to do on a graph-based reference genome, since the concept of neighborhood is not as well defined. We solve this problem by projecting the graph onto a single linear path where parallel paths are projected to the same position on the linear path. This allows us to perform background track estimation much the same way as MACS2 does, using a linear reference, and then projecting the resulting track back to the graph again. If control reads are used to generate the background track, the background track is scaled with the ratio of control reads to input reads.
 	
@@ -383,10 +387,10 @@ For each subgraph, Graph Peak Caller can also report an “alternative” peak i
 To test our peak caller, we used \emph{vg}~\cite{vg} to create a whole genome \emph{Arabidopsis thaliana} reference graph by using variants from The 1001 Genomes Project.
 We selected all transcription factors listed in the transcription factor database of \emph{Expresso}~\cite{expresso} that also had a motif in the \emph{Jaspar} database of transcription factor binding profiles~\cite{jaspar}, resulting in a set of 5 transcription factors: ERF115, SEP3, AP1, SOC1, and PI.
 (Two transcription factors, SVP and ATAF1, were omitted due to invalid fastq files. AP2 and AP3 were omitted based on their close relatedness to AP1. Also, PIF3 was omitted since neither the detected binding events by Graph Peak Caller nor MACS2 had any association with the motif we found in the Jaspar database).
-Raw ChiP-seq reads were downloaded from the NCBI Sequence Read Archive (SRA) (SRA accession numbers in S1 Appendix) and trimmed using \emph{Trim Galore!}~\cite{trim_galore} (default parameters).
-Reads were mapped both to our graph-based reference genome using vg and to the \emph{Tair10}~\cite{tair} reference genome using \emph{BWA ALN} (default parameters).
-In the linear case we filtered out low-quality alignments using \emph{SAMtools}~\cite{samtools} with the command $samtools view -F 1804 -q 37$, and for the graph alignments we used $vg filter -q 37$.
-MACS2 was used to call peaks on the linear reference genome, using default parameters. We created DNA-binding motif enrichment plots (Figure~\ref{motif_plots}) for each set of detected peaks (URLs to the motif models that were used are in S1 Appendix). We have created a Docker repository with the \emph{A. thaliana} graph-based reference genome, Graph Peak Caller, vg and all other software and scripts used to generate the results in this article. A simple guide on how to re-run the experiments can be found in the Github repository for Graph Peak Caller.
+Raw ChiP-seq reads were downloaded from the NCBI Sequence Read Archive (SRA) (SRA accession numbers in S1 Appendix) and trimmed using \emph{Trim Galore!} v0.4.4~\cite{trim_galore} (default parameters).
+Reads were mapped both to our graph-based reference genome using vg and to the \emph{Tair10}~\cite{tair} reference genome using \emph{BWA} v0.7.12 (\texttt{bwa aln} followed by \texttt{bwa samsse}, default parameters).
+In the linear case we filtered out low-quality alignments using \emph{SAMtools} v0.1.19~\cite{samtools} with the command \texttt{samtools view -F 1804 -q 37}, and for the graph alignments we used \texttt{vg filter -q 37}.
+\emph{MACS2} v2.1.0 was used to call peaks on the linear reference genome, using default parameters. We created DNA-binding motif enrichment plots (Figure~\ref{motif_plots}) for each set of detected peaks (URLs to the motif models that were used are in S1 Appendix). We have created a Docker repository with the \emph{A. thaliana} graph-based reference genome, Graph Peak Caller, vg and all other software and scripts used to generate the results in this article. A simple guide on how to re-run the experiments can be found in the Github repository for Graph Peak Caller.
 
 \section*{Conclusion}
 We have developed Graph Peak Caller, a tool for performing peak calling from ChIP-seq reads mapped to a graph-based reference genome. Graph Peak Caller is based on the same principles as MACS2. We have validated our approach by using both Graph Peak Caller and MACS2 to call peaks using ChIP-seq datasets on \emph{A. thaliana}, showing that the peaks found by Graph Peak Caller in general are more enriched for DNA-binding motifs than those found by MACS2 on a linear reference genome. Graph Peak Caller is also able to provide candidates for differentially expressed peaks, and together with \emph{vg} it provides a first method for doing peak calling on graph-based reference genomes.
