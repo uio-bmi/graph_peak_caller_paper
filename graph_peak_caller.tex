@@ -255,22 +255,10 @@ For a transcription factor, this is done by extracting DNA-sequences from areas 
 finding where these sequences belong on a \emph{reference genome},
 and then using computational techniques, known as \emph{peak calling},
 to predict where the protein binds.
-Current peak callers do this by using reference genomes that do not contain known genetic variation from the population,
+Current peak callers do this by using reference genomes that do not contain known genetic variants from the population,
 potentially missing cases where proteins bind to such variants. 
-We have developed a peak caller that utilizes graph based 
-Until now, the reference genomes used in these procedures have not contained genomic variation from the population.
-Recently better reference-genomes, graph-based reference genomes, have been created that also contain genetic variation from the population.
-% However no peak-calling tools exists to predict transcription factor binding sites on these new reference structures.
-We present the first tool \emph{Graph-based reference genomes} that utilizes these graph based reference genomes to predict transcription factor binding sites.
-We show that this can lead to better detection of where proteins binds compared to existing methods that use linear reference genomes.
-
-% Detecting where such proteins bind in the genome is 
-% This is usually done by a procedure called ChIP-seq where dna-fragments that bind to the transcription factors are sequencesed.
-In order to use this data to find binding sites, peak calling is needed.
-\emph{Graph-based reference genomes} have become popular as an alternative to the well established “linear” reference genomes, as they are able include known variation within the population, which makes mapping genomic reads to the reference more accurate.
-We present Graph Peak Caller, the first peak caller for detecting regions associated to transcription factor binding by using graph-based reference genomes.
-Graph Peak Caller utilizes the benefit of graph-based reference genomes by detecting peaks from reads mapped to such references.
-We show that this leads to more accurate detection of peaks as compared to existing methods that use linear reference genomes.
+Recently, a new type of reference genomes, \emph{graph-based reference genomes}, have become popular, as they are able to also represent variants. We here present a peak caller, \emph{Graph Peak Caller} that is able to detect where transcription factors bind by using these new graph-based reference genomes.  
+We show that this can lead to better detection of where transcription factors bind compared to existing methods that use linear reference genomes.
 
 
 \linenumbers
@@ -375,6 +363,7 @@ We believe that our peak caller represents an important step towards creating a 
 \section*{Methods}
 \subsection*{Peak calling}
 Our approach to graph-based peak calling is implemented in an open source Python 3 package, \emph{Graph Peak Caller}. Graph Peak Caller was developed by extending the methodologies and concepts from MACS2 to directed acyclic graphs (DAGs). The MACS2 algorithm can be divided into five steps: estimating the fragment length, creating a fragment pileup by extending input reads to match the estimated fragment length, calculating a background track based on local and global average number of reads, calculation of p/q scores based on the fragment pileup and background track, and finding peaks based on thresholded scores. We have adopted each of these steps to work on DAGs. Fig~\ref{overview_figure} illustrates the method on a graph-based reference genome, and the following describes the details of each step.
+
 Graph Peak Caller uses the linear estimation algorithm from MACS2 to estimate the fragment length $f$ by using the linear path through the graph with the highest number of aligned reads as reference.
 Graph Peak Caller generates \emph{the fragment pileup} by extending each read to the estimated fragment length $f$, and counting the number of extended reads that cover each base pair in the graph. For a single read with length $r$, the extension is done by including all possible paths of length $f-r$ in the graph that start at the read’s end position. 
 The background track is an estimate of the expected number of reads mapping to each position in the reference. This is, for a given position in the reference, estimated by measuring the amount of reads mapping in the “neighbourhood” of that position. The reads can either be the input reads or a set of control reads . On a linear reference genome, the background track is simply estimated by taking the average pileup count in a local window around each base pair. This is less trivial to do on a graph-based reference genome, since the concept of neighborhood is not as well defined. We solve this problem by projecting the graph onto a single linear path where parallel paths are projected to the same position on the linear path. This allows us to perform background track estimation much the same way as MACS2 does, using a linear reference, and then projecting the resulting track back to the graph again. If control reads are used to generate the background track, the background track is scaled with the ratio of control reads to input reads.
