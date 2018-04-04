@@ -73,7 +73,7 @@
 % % % % % % % % % % % % % % % % % % % % % % % %
 
 \documentclass[10pt,letterpaper]{article}
-\usepackage[top=0.85in,left=1.55in,footskip=0.75in]{geometry}
+\usepackage[top=0.85in,left=2.75in,footskip=0.75in]{geometry}
 
 % amsmath and amssymb packages, useful for mathematical formulas and symbols
 \usepackage{amsmath,amssymb}
@@ -144,6 +144,7 @@
 \textwidth 5.25in 
 \textheight 8.75in
 
+
 % Bold the 'Figure #' in the caption and separate it from the title/caption with a period
 % Captions will be left justified
 \usepackage[aboveskip=1pt,labelfont=bf,labelsep=period,justification=raggedright,singlelinecheck=off]{caption}
@@ -162,17 +163,17 @@
 % Header and Footer with logo
 \usepackage{lastpage,fancyhdr,graphicx}
 \usepackage{epstopdf}
-%\pagestyle{myheadings}
-%\pagestyle{fancy}
-%\fancyhf{}
-%\setlength{\headheight}{27.023pt}
+\pagestyle{myheadings}
+\pagestyle{fancy}
+\fancyhf{}
+\setlength{\headheight}{27.023pt}
 %\lhead{\includegraphics[width=2.0in]{PLOS-submission.eps}}
-%\rfoot{\thepage/\pageref{LastPage}}
-%\renewcommand{\headrulewidth}{0pt}
-%\renewcommand{\footrule}{\hrule height 2pt \vspace{2mm}}
-%\fancyheadoffset[L]{2.25in}
-%\fancyfootoffset[L]{2.25in}
-%\lfoot{\today}
+\rfoot{\thepage/\pageref{LastPage}}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrule}{\hrule height 2pt \vspace{2mm}}
+\fancyheadoffset[L]{2.25in}
+\fancyfootoffset[L]{2.25in}
+\lfoot{\today}
 
 %% Include all macros below
 
@@ -243,11 +244,11 @@ Graph-based representations are considered to be the future for reference genome
 % Please keep the Author Summary between 150 and 200 words
 % Use first person. PLOS ONE authors please skip this step. 
 % Author Summary not valid for PLOS ONE submissions.   
-%\section*{Author summary}
-%\emph{Graph-based reference genomes} have become popular as an alternative to the well established “linear” reference genomes, as they are able include known variation within the population, which makes mapping genomic reads to the reference more accurate. Detecting regions associated to transcription factor binding (peaks) is important in order to understand how transcription factors might affect genes. We present Graph Peak Caller, the first peak caller for detecting regions associated to transcription factor binding by using graph-based reference genomes. Graph Peak Caller utilizes the benefit of graph-based reference genomes by detecting peaks from reads mapped to such references. We show that this leads to more accurate detection of peaks as compared to existing methods that use linear reference genomes.
+\section*{Author summary}
+\emph{Graph-based reference genomes} have become popular as an alternative to the well established “linear” reference genomes, as they are able include known variation within the population, which makes mapping genomic reads to the reference more accurate. Detecting regions associated to transcription factor binding (peaks) is important in order to understand how transcription factors might affect genes. We present Graph Peak Caller, the first peak caller for detecting regions associated to transcription factor binding by using graph-based reference genomes. Graph Peak Caller utilizes the benefit of graph-based reference genomes by detecting peaks from reads mapped to such references. We show that this leads to more accurate detection of peaks as compared to existing methods that use linear reference genomes.
 
 
-%\linenumbers
+\linenumbers
 
 % Use "Eq" instead of "Equation" for equation citations.
 \section*{Introduction}
@@ -262,7 +263,7 @@ We present Graph Peak Caller, a first method for detecting transcription factor 
 
 \begin{figure}
 
-   \frame{ \includegraphics[width=0.6\textwidth]{figures/Fig1.png}  }
+   \frame{ \includegraphics[width=0.5\textwidth]{figures/Fig1.png}  }
  
     \caption{{\bf Overview of how Graph Peak Caller works.} Example of peak calling on an example graph (nodes in gray, edges in black). After raw reads (a) in the form of input reads (blue) and control reads (red) have been mapped to the graph-based reference genome and filtered based on mapping quality (b), the fragment pileup is created (c) by extending the forward input alignments (shown as resulting blue fragments) and reverse input alignments (yellow fragments) along all possible paths in their corresponding direction. A background track is created by projecting the alignments resulting from the control reads onto a linear path and calculating a local average  read counts (here shown with a small window size). Then the linear track is projected back to the graph again (not shown). The fragment pileup counts are treated as \emph{counts} and the background track as \emph{rates} in a Poisson-distribution, and p-values are computed for each position for the observed count, given the corresponding rate. Adjusted q-values are computed to control the false discovery rate (d) (figure shows q-scores, which are -$log_{10}(qvalue)$). A set of peak candidates are selected by thresholding the q-values on a user-defined threshold (default 0.05), resulting in a set of candidate peaks with gaps between them (e). Small gaps are filled, resulting in a set of peak areas (connected subgraphs)(f). Graph Peak Caller finds a single “maximum path” (g, maximum path in blue) through each peak subgraph by selecting the path that has the highest number of input reads mapped to it. }
 %\includegraphics[width=0.5\textwidth]{figures/Fig1.png} \label{fig}
@@ -300,7 +301,7 @@ To validate that our peak caller works on other species, we also did the same ex
 
 \begin{figure}[!h]
  \includegraphics[width=1.0\textwidth]{figures/Fig4.png}
- \caption{{\bf Dna-binding motif enrichment plots.} The proportion of peaks enriched for a DNA-binding motif (Y-axis) when iteratively including more peaks from the complete set of peaks sorted descending on score (X-axis) for MACS2 and Graph Peak Caller. }
+ \caption{{\bf Dna-binding motif enrichment plots.} The proportion of peaks enriched for a DNA-binding motif (Y-axis) when iteratively including more peaks from the set of uniquely found peaks for each peak caller, sorted descending on score (X-axis). }
 \label{motif_plots}
 \end{figure}
 
