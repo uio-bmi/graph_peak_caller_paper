@@ -253,22 +253,10 @@ For a transcription factor, this is done by extracting DNA-sequences from areas 
 finding where these sequences belong on a \emph{reference genome},
 and then using computational techniques, known as \emph{peak calling},
 to predict where the protein binds.
-Current peak callers do this by using reference genomes that do not contain known genetic variation from the population,
+Current peak callers do this by using reference genomes that do not contain known genetic variants from the population,
 potentially missing cases where proteins bind to such variants. 
-We have developed a peak caller that utilizes graph based 
-Until now, the reference genomes used in these procedures have not contained genomic variation from the population.
-Recently better reference-genomes, graph-based reference genomes, have been created that also contain genetic variation from the population.
-% However no peak-calling tools exists to predict transcription factor binding sites on these new reference structures.
-We present the first tool \emph{Graph-based reference genomes} that utilizes these graph based reference genomes to predict transcription factor binding sites.
-We show that this can lead to better detection of where proteins binds compared to existing methods that use linear reference genomes.
-
-% Detecting where such proteins bind in the genome is 
-% This is usually done by a procedure called ChIP-seq where dna-fragments that bind to the transcription factors are sequencesed.
-In order to use this data to find binding sites, peak calling is needed.
-\emph{Graph-based reference genomes} have become popular as an alternative to the well established “linear” reference genomes, as they are able include known variation within the population, which makes mapping genomic reads to the reference more accurate.
-We present Graph Peak Caller, the first peak caller for detecting regions associated to transcription factor binding by using graph-based reference genomes.
-Graph Peak Caller utilizes the benefit of graph-based reference genomes by detecting peaks from reads mapped to such references.
-We show that this leads to more accurate detection of peaks as compared to existing methods that use linear reference genomes.
+Recently, a new type of reference genomes, \emph{graph-based reference genomes}, have become popular, as they are able to also represent variants. We here present a peak caller, \emph{Graph Peak Caller} that is able to detect where transcription factors bind by using these new graph-based reference genomes.  
+We show that this can lead to better detection of where transcription factors bind compared to existing methods that use linear reference genomes.
 
 
 \linenumbers
