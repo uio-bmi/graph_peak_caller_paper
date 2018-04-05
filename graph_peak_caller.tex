@@ -298,7 +298,7 @@ factor that matches a DNA-binding motif. The peak detected by Graph Peak Caller 
 \end{figure}
 
 
-For all transcription factors, except ERF115, the peaks uniquely found by Graph Peak Caller (not overlapping peaks found by MACS2) are more enriched for DNA-binding motifs than the peaks uniquely found by MACS2. In aggregate, the ratios of motif-matches of the uniquely found peaks are $7.0\%$ for Graph Peak Caller and $6.0\%$ for MACS2, yielding a $z$-value for the difference of $3.49$ and a $p$-value of $0.02\%$ using a one-sided $z$-test following Devore \& Berk chapter 10.4~\cite{devoreberk}. MACS2 in aggregate predicts 2443 more unique peaks than Graph Peak Caller, but only finds $11$ ($0.5\%$) more peaks that are motif-enriched, which is less than one would expect by chance, since the false discovery rate of motif-matches is controlled at $5\%$. Fig~\ref{motif_enrichment_reads} shows one of the cases on chromosome 1 where Graph Peak Caller detects a peak that is not detected by MACS2, due to that the input reads are aligned against an indel that is not part of the linear reference genome. 
+For all transcription factors, except ERF115, the peaks uniquely found by Graph Peak Caller (not overlapping peaks found by MACS2) are more enriched for DNA-binding motifs than the peaks uniquely found by MACS2. In aggregate, the ratios of motif-matches of the uniquely found peaks are $7.0\%$ for Graph Peak Caller and $6.0\%$ for MACS2, yielding a $z$-value for the difference of $3.49$ and a $p$-value of $0.02\%$ using a one-sided $z$-test for difference in population proportions~\cite{devoreberk}. MACS2 in aggregate predicts 2443 more unique peaks than Graph Peak Caller, but only finds $11$ ($0.5\%$) more peaks that are motif-enriched, which is less than one would expect by chance, since the false discovery rate of motif-matches is controlled at $5\%$. Fig~\ref{motif_enrichment_reads} shows one of the cases on chromosome 1 where Graph Peak Caller detects a peak that is not detected by MACS2, due to that the input reads are aligned against an indel that is not part of the linear reference genome. 
 
 The peaks found uniquely by Graph Peak Caller have more than twice the number of basepairs not part of the linear reference genome, compared to the peaks found by Graph Peak Caller that also have been found by MACS2 (Table~S2). Fig~\ref{motif_plots} shows the proportion of peaks enriched for DNA-binding motifs for the peaks that are uniquely found by each peak caller (for a similar plot including all peaks, see Fig S1). As seen in the figure, Graph Peak Caller has a better correspondence between high peak scores and motif enrichment for all transcription factors, except ERF115. 
 
@@ -496,8 +496,8 @@ Arabidopsis Genome Initiative. Analysis of the Genome Sequence of the flowering 
 1000 Genomes Project Consortium. A global Reference for Human genetic Variation. Nature. 2015 Oct;526(7571):68.
 
 \bibitem{devoreberk}
-  Devore J, Berk K. Modern Mathematical Statistics with Applications.
-  Springer-Verlag, New York, 2012.
+  Devore JL, Berk KN. Modern Mathematical Statistics with Applications. 2nd ed.
+  New York: Springer-Verlag; 2012. p. 519-521
 
 
 \end{thebibliography}
