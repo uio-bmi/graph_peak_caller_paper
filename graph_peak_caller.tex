@@ -149,7 +149,16 @@
 \renewcommand{\@biblabel}[1]{\quad#1.}
 \makeatother
 
-
+% Custom stuff
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{floatrow}
+\usepackage{listings}
+\lstset{language=bash}
+\newcolumntype{b}{>{\hsize=.49\hsize}X}
+\newcolumntype{c}{>{\hsize=1.2\hsize}X}
+\newcolumntype{d}{>{\hsize=1.5\hsize}X}
+% custom stuff end
 
 % Header and Footer with logo
 \usepackage{lastpage,fancyhdr,graphicx}
@@ -172,9 +181,8 @@
 \newcommand{\ipsum}{{\bf IPSUM}}
 
 
-%%
-END MACROS SECTION
-
+%% END MACROS SECTION
+ 
 
 \begin{document}
 \vspace*{0.2in}
@@ -244,13 +252,13 @@ A key regulatory mechanism is the modulation of transcription by a class of prot
 Determining the binding locations of transcription factors for specific cell types and settings is thus a key step in understanding the dynamics of normal cells as well as disease states.
 
 Binding sites for a given transcription factor are typically obtained through an experimental technique called CHiP-seq, in which DNA binding locations are obtained by sequencing DNA fragments attached to the transcription factor and aligning these sequences to a reference genome.
-A computational technique known as peak calling is then used to separate signal from noise and predict where the protein binds.
+A computational technique known as \emph{peak calling} is then used to separate signal from noise and predict where the protein binds.
 
 Current peak callers are based on linear reference genomes that do not contain known genetic variants from the population.
 They thus potentially miss cases where proteins bind to such alternative genome sequences.
 Recently, a new type of reference genomes based on graph representations have become popular, as they are able to also incorporate alternative genome sequences.
 We here present \emph{Graph Peak Caller}, the first peak caller that is able to exploit such graph representations for the detection of transcription factor binding locations.
-Using a graph-based reference genome for \emph{Arabidopsis thaliana}, we show that our peak caller can lead to better detection of transcription factor binding locations as compared to a similar existing peak caller that use a linear reference genome representation.
+Using a graph-based reference genome for \emph{Arabidopsis thaliana}, we show that our peak caller can lead to better detection of transcription factor binding locations as compared to a similar existing peak caller that uses a linear reference genome representation.
 
 \linenumbers
 
@@ -293,8 +301,7 @@ Fig~\ref{motif_enrichment} shows an example of a peak detected on chromosome 1, 
 \centering
 \caption{Overview of peaks reported by Graph Peak Caller and MACS2 on \emph{A. thaliana} for 5 transcription factors (TFs).
   \emph{Total} is the total number of peaks reported by the peak caller,
-  \emph{shared} is the number of peaks that overlap with one or more peaks from the other peak caller
-, and \emph{unique} is the number of peaks reported by one peak caller and not the other.
+  \emph{shared} is the number of peaks that overlap with one or more peaks from the other peak caller, and \emph{unique} is the number of peaks reported by one peak caller and not the other.
   In the categories \emph{shared} and \emph{unique}, both the number of peaks with motif match (the number before the /) and the number of peaks found are shown (percent of peaks with motif match are shown in parentheses).
   Here, all peaks have been trimmed to 120 base pairs around the peak summit (position in peak with lowest q-value), to make the comparison clearer.}
 \label{table1}
