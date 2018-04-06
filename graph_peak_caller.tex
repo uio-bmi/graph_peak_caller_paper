@@ -276,7 +276,7 @@ In the Github repository at \url{http://github.com/uio-bmi/graph_peak_caller}, w
 \begin{figure}[H]
    %\frame{ \includegraphics[width=0.6\textwidth]{figures/Fig1.png}  }
    \caption{{\bf Overview of how Graph Peak Caller works.} Example of peak calling on an example graph (nodes in gray, edges in black). After raw reads (a) in the form of input reads (blue) and control reads (red) have been mapped to the graph-based reference genome and filtered based on mapping quality (b), the fragment pileup is created (c) by extending the forward input alignments and reverse input alignments (extensions shown as dotted lines) along all possible paths in their corresponding direction.
-     A background track is created by projecting the alignments resulting from the control reads onto a linear path and calculating a local average read counts.
+     A background track is created by projecting the alignments resulting from the control reads onto a linear path and calculating a local average of read counts.
      Then the linear track is projected back to the graph again (not shown).
      The fragment pileup is treated as \emph{counts} and the background track as \emph{rates} in a Poisson-distribution, and p-values are computed for each position for the observed count, given the corresponding rate.
      Adjusted q-values are computed to control the false discovery rate (d) (figure shows q-scores, which are -$log_{10}(qvalue)$). The q-values are thresholded on a user-defined threshold (default 0.05), resulting in a set of peak candidate areas with gaps between them (e). Small gaps are filled, resulting in a set of peak subgraphs (connected subgraphs)(f). Graph Peak Caller finds a single “maximum path” (g, maximum path in blue) through each peak subgraph by selecting the path that has the highest number of input reads mapped to it. }
@@ -307,8 +307,8 @@ Fig~\ref{motif_enrichment} shows an example of a peak detected on chromosome 1, 
 \centering
 \caption{Overview of peaks reported by Graph Peak Caller and MACS2 on \emph{A. thaliana} for 5 transcription factors (TFs).
   \emph{Total} is the total number of peaks reported by the peak caller,
-  \emph{shared} is the number of peaks that overlap with one or more peaks in the other peak caller,
- and \emph{unique} is the number of peaks reported by one peak caller and not the other.
+  \emph{shared} is the number of peaks that overlap with one or more peaks from the other peak caller,
+  and \emph{unique} is the number of peaks reported by one peak caller and not the other.
   In the categories \emph{shared} and \emph{unique}, both the number of peaks with motif match (the number before the /) and the number of peaks found are shown (percent of peaks with motif match are shown in parentheses).
   Here, all peaks have been trimmed to 120 base pairs around the peak summit (position in peak with lowest q-value), to make the comparison clearer.}
 \label{table1}
@@ -338,7 +338,7 @@ factor that matches a DNA-binding motif. The peak detected by Graph Peak Caller 
 \end{figure}
 
 
-For all transcription factors, except ERF115, the peaks uniquely found by Graph Peak Caller (not overlapping peaks found by MACS2) are more enriched for DNA-binding motifs than the peaks uniquely found by MACS2. In aggregate, the ratios of motif-matches of the uniquely found peaks are $7.0\%$ for Graph Peak Caller and $6.0\%$ for MACS2, yielding a $z$-value for the difference of $3.49$ and a $p$-value of $0.02\%$ using a one-sided $z$-test for difference in population proportions~\cite{devoreberk}. MACS2 in aggregate predicts 2443 more unique peaks than Graph Peak Caller, but only finds $11$ ($0.5\%$) more peaks that are motif-enriched, which is less than one would expect by chance, since the false discovery rate of motif-matches is controlled at $5\%$. Fig~\ref{motif_enrichment_reads} shows one of the cases on chromosome 1 where Graph Peak Caller detects a peak that is not detected by MACS2, due to that the input reads are aligned against an indel that is not part of the linear reference genome. 
+For all transcription factors, except ERF115, the peaks uniquely found by Graph Peak Caller (not overlapping peaks found by MACS2) are more enriched for DNA-binding motifs than the peaks uniquely found by MACS2. In aggregate, the ratios of motif-matches of the uniquely found peaks are $7.04\%$ for Graph Peak Caller and $6.03\%$ for MACS2, yielding a $z$-value for the difference of $3.49$ and a $p$-value of $0.024\%$ using a one-sided $z$-test for difference in population proportions~\cite{devoreberk}. MACS2 in aggregate predicts 2443 more unique peaks than Graph Peak Caller, but only finds $11$ ($0.45\%$) more peaks that are motif-enriched, which is less than one would expect by chance, since the false discovery rate of motif-matches is controlled at $5\%$. Fig~\ref{motif_enrichment_reads} shows one of the cases on chromosome 1 where Graph Peak Caller detects a peak that is not detected by MACS2, due to that the input reads are aligned against an indel that is not part of the linear reference genome. 
 
 
 \begin{figure}[h!]
