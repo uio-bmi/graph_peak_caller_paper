@@ -272,7 +272,7 @@ Several types of genomic analyses, such as variant calling and haplotyping, can 
 % Results and Discussion can be combined.
 \section*{Results}
 We present Graph Peak Caller, a first method for detecting transcription factor binding events from ChIP-seq reads mapped to a graph-based reference genome. Graph Peak Caller is based on the same principles used by MACS2 (see Fig~\ref{overview_figure} for an overview), and  is able to call peaks with or without a set of control alignments. For the case of a graph that merely reflects a linear reference genome, our peak-caller produces the same results as MACS2. As input, it supports alignments in the Graph Alignment/Map format (GAM) from \emph{vg}, as well as reads represented as genomic intervals using the Offset Based Graph Python package~\cite{rand}. Graph Peak Caller can be run from the command line, and is also available through Galaxy at \url{https://hyperbrowser.uio.no/graph-peak-caller}.
-In the Github repository at \url{http://github.com/uio-bmi/graph_peak_caller}, we provide a simple tutorial on how to use vg and Graph Peak Caller to go from raw ChIP-seq reads to peaks. 
+In the Github repository at \url{http://github.com/uio-bmi/graph_peak_caller}, we provide a simple tutorial on how to use \emph{vg} and Graph Peak Caller to go from raw ChIP-seq reads to peaks. 
 % Place figure captions after the first paragraph in which they are cited.
 
 \begin{figure}
@@ -306,7 +306,8 @@ Fig~\ref{motif_enrichment} shows an example of a peak detected on chromosome 1, 
 \centering
 \caption{Overview of peaks reported by Graph Peak Caller and MACS2 on \emph{A. thaliana} for 5 transcription factors (TFs).
   \emph{Total} is the total number of peaks reported by the peak caller,
-  \emph{shared} is the number of peaks that overlap with one or more peaks in the other peak caller, and \emph{unique} is the number of peaks reported by one peak caller and not the other.
+  \emph{shared} is the number of peaks that overlap with one or more peaks in the other peak caller
+, and \emph{unique} is the number of peaks reported by one peak caller and not the other.
   In the categories \emph{shared} and \emph{unique}, both the number of peaks with motif match (the number before the /) and the number of peaks found are shown (percent of peaks with motif match are shown in parentheses).
   Here, all peaks have been trimmed to 120 base pairs around the peak summit (position in peak with lowest q-value), to make the comparison clearer.}
 \label{table1}
@@ -400,9 +401,9 @@ To test our peak caller, we used \emph{vg}~\cite{vg} to create a whole genome \e
 We selected all transcription factors listed in the transcription factor database of \emph{Expresso}~\cite{expresso} that also had a motif in the \emph{Jaspar} database of transcription factor binding profiles~\cite{jaspar}, resulting in a set of 5 transcription factors: ERF115, SEP3, AP1, SOC1, and PI.
 (Two transcription factors, SVP and ATAF1, were omitted due to invalid fastq files. AP2 and AP3 were omitted based on their close relatedness to AP1. Also, PIF3 was omitted since neither the detected binding events by Graph Peak Caller nor MACS2 had any association with the motif we found in the Jaspar database).
 Raw ChiP-seq reads were downloaded from the NCBI Sequence Read Archive (SRA) (SRA accession numbers in Appendix S1) and trimmed using \emph{Trim Galore!} v0.4.4~\cite{trim_galore} (default parameters).
-Reads were mapped both to our graph-based reference genome using vg and to the \emph{Tair10}~\cite{tair} reference genome using \emph{BWA} v0.7.12 (\texttt{bwa aln} followed by \texttt{bwa samsse}, default parameters).
+Reads were mapped both to our graph-based reference genome using \emph{vg} and to the \emph{Tair10}~\cite{tair} reference genome using \emph{BWA} v0.7.12 (\texttt{bwa aln} followed by \texttt{bwa samsse}, default parameters).
 In the linear case we filtered out low-quality alignments using \emph{SAMtools} v0.1.19~\cite{samtools} with the command \texttt{samtools view -F 1804 -q 37}, and for the graph alignments we used \texttt{vg filter -q 37}.
-\emph{MACS2} v2.1.0 was used to call peaks on the linear reference genome, using default parameters. We created DNA-binding motif enrichment plots (Figure~\ref{motif_plots}) for each set of detected peaks (URLs to the motif models that were used are in Appendix S1). We have created a Docker repository with the \emph{A. thaliana} graph-based reference genome, Graph Peak Caller, vg and all other software and scripts used to generate the results in this article. A simple guide on how to re-run the experiments can be found in the Github repository for Graph Peak Caller.
+\emph{MACS2} v2.1.0 was used to call peaks on the linear reference genome, using default parameters. We created DNA-binding motif enrichment plots (Figure~\ref{motif_plots}) for each set of detected peaks (URLs to the motif models that were used are in Appendix S1). We have created a Docker repository with the \emph{A. thaliana} graph-based reference genome, Graph Peak Caller, \emph{vg} and all other software and scripts used to generate the results in this article. A simple guide on how to re-run the experiments can be found in the Github repository for Graph Peak Caller.
 
 \section*{Conclusion}
 We have developed Graph Peak Caller, a tool for performing peak calling from ChIP-seq reads mapped to a graph-based reference genome. Graph Peak Caller is based on the same principles as MACS2. We have validated our approach by using both Graph Peak Caller and MACS2 to call peaks using ChIP-seq datasets on \emph{A. thaliana}, showing that the peaks found by Graph Peak Caller in general are more enriched for DNA-binding motifs than those found by MACS2 on a linear reference genome. Graph Peak Caller is also able to provide candidates for differentially expressed peaks, and together with \emph{vg} it provides a first method for doing peak calling on graph-based reference genomes.
