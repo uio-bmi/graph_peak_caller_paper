@@ -78,23 +78,22 @@
 % amsmath and amssymb packages, useful for mathematical formulas and symbols
 \usepackage{amsmath,amssymb}
 
+% Use adjustwidth environment to exceed column width (see example table in text)
+\usepackage{changepage}
+
+% Use Unicode characters when possible
+\usepackage[utf8x]{inputenc}
+
+
 % Custom stuff
-\usepackage{booktabs}
+\usepackage{booktabs} 
 \usepackage{tabularx}
-\usepackage{floatrow}
 \usepackage{listings}
 \lstset{language=bash}
 \newcolumntype{b}{>{\hsize=.49\hsize}X}
 \newcolumntype{c}{>{\hsize=1.2\hsize}X}
 \newcolumntype{d}{>{\hsize=1.5\hsize}X}
 % custom stuff end
-
-% Use adjustwidth environment to exceed column width (see example table in text)
-\usepackage{changepage}
-\usepackage{tabularx}
-
-% Use Unicode characters when possible
-\usepackage[utf8x]{inputenc}
 
 % textcomp package and marvosym package for additional characters
 \usepackage{textcomp,marvosym}
@@ -146,7 +145,6 @@
 \textwidth 5.25in 
 \textheight 8.75in
 
-
 % Bold the 'Figure #' in the caption and separate it from the title/caption with a period
 % Captions will be left justified
 \usepackage[aboveskip=1pt,labelfont=bf,labelsep=period,justification=raggedright,singlelinecheck=off]{caption}
@@ -165,10 +163,10 @@
 % Header and Footer with logo
 \usepackage{lastpage,fancyhdr,graphicx}
 \usepackage{epstopdf}
-\pagestyle{myheadings}
+%\pagestyle{myheadings}
 \pagestyle{fancy}
 \fancyhf{}
-\setlength{\headheight}{27.023pt}
+%\setlength{\headheight}{27.023pt}
 %\lhead{\includegraphics[width=2.0in]{PLOS-submission.eps}}
 \rfoot{\thepage/\pageref{LastPage}}
 \renewcommand{\headrulewidth}{0pt}
@@ -276,10 +274,9 @@ We present Graph Peak Caller, a first method for detecting transcription factor 
 In the Github repository at \url{http://github.com/uio-bmi/graph_peak_caller}, we provide a simple tutorial on how to use \emph{vg} and Graph Peak Caller to go from raw ChIP-seq reads to peaks. 
 % Place figure captions after the first paragraph in which they are cited.
 
-\begin{figure}
 
+\begin{figure}[!h]
    %\frame{ \includegraphics[width=0.6\textwidth]{figures/Fig1.png}  }
- 
    \caption{{\bf Overview of how Graph Peak Caller works.} Example of peak calling on an example graph (nodes in gray, edges in black). After raw reads (a) in the form of input reads (blue) and control reads (red) have been mapped to the graph-based reference genome and filtered based on mapping quality (b), the fragment pileup is created (c) by extending the forward input alignments and reverse input alignments (extensions shown as dotted lines) along all possible paths in their corresponding direction.
      A background track is created by projecting the alignments resulting from the control reads onto a linear path and calculating a local average read counts.
      Then the linear track is projected back to the graph again (not shown).
@@ -287,8 +284,6 @@ In the Github repository at \url{http://github.com/uio-bmi/graph_peak_caller}, w
      Adjusted q-values are computed to control the false discovery rate (d) (figure shows q-scores, which are -$log_{10}(qvalue)$). The q-values are thresholded on a user-defined threshold (default 0.05), resulting in a set of peak candidate areas with gaps between them (e). Small gaps are filled, resulting in a set of peak subgraphs (connected subgraphs)(f). Graph Peak Caller finds a single “maximum path” (g, maximum path in blue) through each peak subgraph by selecting the path that has the highest number of input reads mapped to it. }
 %\includegraphics[width=0.5\textwidth]{figures/Fig1.png} \label{fig}
    \label{overview_figure}
-
-
 \end{figure}
 
 The output from Graph Peak Caller consists of graph intervals, but the tool is also able to transform these into approximate positions on a linear reference genome (by projecting them to the nearest position on the linear reference genome), making it possible to analyse detected peaks further using existing “linear” approaches.
