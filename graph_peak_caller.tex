@@ -331,8 +331,7 @@ Fig~\ref{motif_enrichment} shows an example of a peak detected on chromosome 1, 
 \end{table}
 
 
-\begin{figure}
- %\frame{ \includegraphics[width=1.0\textwidth]{figures/Fig2.png} }
+\begin{figure} %\frame{ \includegraphics[width=1.0\textwidth]{figures/Fig2.png} }
  \caption{{\bf Example of a motif match for a peak following a variant not part of the linear reference genome.} Showing part of the graph-based reference genome for \emph{A. thaliana} on chromosome 1 (top) with the linear reference genome represented by blue nodes (bases). The figure shows a peak found for the ERF115 transcription
 factor that matches a DNA-binding motif. The peak detected by Graph Peak Caller follows the linear reference genome (blue nodes) except for the first SNP shown (green node), where the peak follows the green G instead of the blue A, making this a significant match against the DNA-binding motif (shown as a sequence logo at the bottom). The peak detected by MACS2 does not have a significant motif match.}
 \label{motif_enrichment}
@@ -404,7 +403,7 @@ We selected all transcription factors listed in the transcription factor databas
 Raw ChiP-seq reads were downloaded from the NCBI Sequence Read Archive (SRA) (SRA accession numbers in Appendix S1) and trimmed using \emph{Trim Galore!} v0.4.4~\cite{trim_galore} (default parameters).
 Reads were mapped both to our graph-based reference genome using \emph{vg} and to the \emph{Tair10}~\cite{tair} reference genome using \emph{BWA} v0.7.12 (\texttt{bwa aln} followed by \texttt{bwa samsse}, default parameters).
 In the linear case we filtered out low-quality alignments using \emph{SAMtools} v0.1.19~\cite{samtools} with the command \texttt{samtools view -F 1804 -q 37}, and for the graph alignments we used \texttt{vg filter -q 37}.
-\emph{MACS2} v2.1.0 was used to call peaks on the linear reference genome, using default parameters. We created DNA-binding motif enrichment plots (Figure~\ref{motif_plots}) for each set of detected peaks (URLs to the motif models that were used are in Appendix S1). We have created a Docker repository with the \emph{A. thaliana} graph-based reference genome, Graph Peak Caller, \emph{vg} and all other software and scripts used to generate the results in this article. A simple guide on how to re-run the experiments can be found in the Github repository for Graph Peak Caller.
+\emph{MACS2} v2.1.0 was used to call peaks on the linear reference genome, using default parameters. We created DNA-binding motif enrichment plots (Fig~\ref{motif_plots}) for each set of detected peaks (URLs to the motif models that were used are in Appendix S1). We have created a Docker repository with the \emph{A. thaliana} graph-based reference genome, Graph Peak Caller, \emph{vg} and all other software and scripts used to generate the results in this article. A simple guide on how to re-run the experiments can be found in the Github repository for Graph Peak Caller.
 
 \section*{Conclusion}
 We have developed Graph Peak Caller, a tool for performing peak calling from ChIP-seq reads mapped to a graph-based reference genome. Graph Peak Caller is based on the same principles as MACS2. We have validated our approach by using both Graph Peak Caller and MACS2 to call peaks using ChIP-seq datasets on \emph{A. thaliana}, showing that the peaks found by Graph Peak Caller in general are more enriched for DNA-binding motifs than those found by MACS2 on a linear reference genome. Graph Peak Caller is also able to provide candidates for differentially expressed peaks, and together with \emph{vg} it provides a first method for doing peak calling on graph-based reference genomes.
