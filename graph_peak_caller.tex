@@ -251,13 +251,13 @@ A key regulatory mechanism is the modulation of transcription by a class of prot
 Determining the binding locations of transcription factors for specific cell types and settings is thus a key step in understanding the dynamics of normal cells as well as disease states.
 
 Binding sites for a given transcription factor are typically obtained through an experimental technique called CHiP-seq, in which DNA binding locations are obtained by sequencing DNA fragments attached to the transcription factor and aligning these sequences to a reference genome.
-A computational technique known as peak calling is then used to separate signal from noise and predict where the protein binds.
+A computational technique known as \emph{peak calling} is then used to separate signal from noise and predict where the protein binds.
 
 Current peak callers are based on linear reference genomes that do not contain known genetic variants from the population.
 They thus potentially miss cases where proteins bind to such alternative genome sequences.
 Recently, a new type of reference genomes based on graph representations have become popular, as they are able to also incorporate alternative genome sequences.
 We here present \emph{Graph Peak Caller}, the first peak caller that is able to exploit such graph representations for the detection of transcription factor binding locations.
-Using a graph-based reference genome for \emph{Arabidopsis thaliana}, we show that our peak caller can lead to better detection of transcription factor binding locations as compared to a similar existing peak caller that use a linear reference genome representation.
+Using a graph-based reference genome for \emph{Arabidopsis thaliana}, we show that our peak caller can lead to better detection of transcription factor binding locations as compared to a similar existing peak caller that uses a linear reference genome representation.
 
 \linenumbers
 
@@ -307,8 +307,8 @@ Fig~\ref{motif_enrichment} shows an example of a peak detected on chromosome 1, 
 \centering
 \caption{Overview of peaks reported by Graph Peak Caller and MACS2 on \emph{A. thaliana} for 5 transcription factors (TFs).
   \emph{Total} is the total number of peaks reported by the peak caller,
-  \emph{shared} is the number of peaks that overlap with one or more peaks in the other peak caller
-, and \emph{unique} is the number of peaks reported by one peak caller and not the other.
+  \emph{shared} is the number of peaks that overlap with one or more peaks in the other peak caller,
+ and \emph{unique} is the number of peaks reported by one peak caller and not the other.
   In the categories \emph{shared} and \emph{unique}, both the number of peaks with motif match (the number before the /) and the number of peaks found are shown (percent of peaks with motif match are shown in parentheses).
   Here, all peaks have been trimmed to 120 base pairs around the peak summit (position in peak with lowest q-value), to make the comparison clearer.}
 \label{table1}
@@ -373,7 +373,7 @@ Furthermore, Graph Peak Caller has a significantly higher proportion of motif-en
 % TODO: is this clear
 These peaks covers more variations from the linear reference genome compared to the peaks found by both peak callers, and thus seem to be in areas where the advantages of graph-based reference genomes are more pronounced. 
 
-We chose to develop Graph Peak Caller by tightly following the principles of MACS2, so we easily could validate our graph-based approach and accurately measure the benefits of doing peak calling on a graph-based reference genome rather than on a linear reference-genome. Having this as a working first approach to graph-based peak calling, it will now be natural and interesting  to extend our work by drawing ideas from other peak callers or develop new peak calling principles to further improve graph-based peak calling. Also, Graph Peak Caller currently assumes no known information about the specific paths of the diploid genome of the individual that ChIP-seq data has been collected from. It would be interesting to develop a ChIP-seq pipeline where the path(s) through the reference graph are known (or estimated based on the ChIP-seq data), and compare that approach to Graph Peak Caller.
+We chose to develop Graph Peak Caller by tightly following the principles of MACS2, so we easily could validate our graph-based approach and accurately measure the benefits of doing peak calling on a graph-based reference genome rather than on a linear reference genome. Having this as a working first approach to graph-based peak calling, it will now be natural and interesting  to extend our work by drawing ideas from other peak callers or develop new peak calling principles to further improve graph-based peak calling. Also, Graph Peak Caller currently assumes no known information about the specific paths of the diploid genome of the individual that ChIP-seq data has been collected from. It would be interesting to develop a ChIP-seq pipeline where the path(s) through the reference graph are known (or estimated based on the ChIP-seq data), and compare that approach to Graph Peak Caller.
 
 There are a few challenges with a graph-based ChIP-seq approach. Mapping to graphs is still in its infancy, and has not yet reached its full potential. Also, both mapping to graph-based reference genomes as well as many of the operations required for doing peak calling, such as expanding input reads, are, in our experience, still a lot slower than existing solutions on linear reference genomes. 
 
