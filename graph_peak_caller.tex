@@ -249,17 +249,19 @@ Graph-based representations are considered to be the future for reference genome
 % Use first person. PLOS ONE authors please skip this step. 
 % Author Summary not valid for PLOS ONE submissions.   
 \section*{Author summary}
-Transcription factors are proteins that bind to DNA and regulate genes by making sure they are turned on and off at the right time in different cells in the body. 
-Thus, understanding where these proteins bind in the genome is important in order to understand many diseases as well as understanding why different cells in the body behave differently.
-For a transcription factor, this is done by extracting DNA-sequences from areas where the transcription factor binds (CHiP-seq),
-finding where these sequences belong on a \emph{reference genome},
-and then using computational techniques, known as \emph{peak calling},
-to predict where the protein binds.
-Current peak callers do this by using reference genomes that do not contain known genetic variants from the population,
-potentially missing cases where proteins bind to such variants. 
-Recently, a new type of reference genomes, \emph{graph-based reference genomes}, have become popular, as they are able to also represent variants. We here present a peak caller, \emph{Graph Peak Caller}, that is able to detect where transcription factors bind by using these new graph-based reference genomes.  
-We show that this can lead to better detection of where transcription factors bind compared to existing methods that use linear reference genomes.
 
+The expression of genes is a tightly regulated process.
+A key regulatory mechanism is the modulation of transcription by a class of proteins called transcription factors that bind to DNA in the spatial proximity of regulated genes.
+Determining the binding locations of transcription factors for specific cell types and settings is thus a key step in understanding the dynamics of normal cells as well as disease states.
+
+Binding sites for a given transcription factor are typically obtained through an experimental technique called CHiP-seq, in which DNA binding locations are obtained by sequencing DNA fragments attached to the transcription factor and aligning these sequences to a reference genome.
+A computational technique known as peak calling is then used to separate signal from noise and predict where the protein binds.
+
+Current peak callers are based on linear reference genomes that do not contain known genetic variants from the population.
+They thus potentially miss cases where proteins bind to such alternative genome sequences.
+Recently, a new type of reference genomes based on graph representations have become popular, as they are able to also incorporate alternative genome sequences.
+We here present \emph{Graph Peak Caller}, the first peak caller that is able to exploit such graph representations for the detection of transcription factor binding locations.
+Using a graph-based reference genome for \emph{Arabidopsis Thaliana}, we show that this can lead to better detection of transcription factor binding locations as compared to a similar existing peak caller that use a linear reference genome representation.
 
 \linenumbers
 
@@ -296,13 +298,18 @@ Graph Peak Caller is also able to output peaks candidates for differentially exp
 
 To showcase and test Graph Peak Caller, we chose to perform peak calling on \emph{Arabidopsis thaliana}, as the 1001 Genomes Project for \emph{A. thaliana} makes it possible to build a high-quality reference graph with a high density of variants (on average one SNP or indel for every 9 base pairs, compared to one SNP or indel for every 27 base pairs in the human 1000 Genomes Project). 
 
-We called peaks on a graph-based reference genome for \emph{A. thaliana} and compared the results to peaks called on the \emph{Tair10}~\cite{tair} linear reference genome by MACS2 (Methods). Table~\ref{table1} shows an overview of peaks found by Graph Peak Caller and MACS2. Most of the peaks found by one peak caller are also found by the other. Among these, the peaks found by Graph Peak Caller are slightly more enriched for DNA-binding motifs than the peaks found by MACS2 for all transcription factors, except SEP3, where the numbers are the same. Fig~\ref{motif_enrichment} shows an example of a peak detected on chromosome 1, illustrating how both peak callers find a peak, but only the peak found by Graph Peak Caller has a match against the motif.
+We called peaks on a graph-based reference genome for \emph{A. thaliana} and compared the results to peaks called on the \emph{Tair10}~\cite{tair} linear reference genome by MACS2 (Methods).
+Table~\ref{table1} shows an overview of peaks found by Graph Peak Caller and MACS2.
+Most of the peaks found by one peak caller are also found by the other.
+Among these, the peaks found by Graph Peak Caller are slightly more enriched for DNA-binding motifs than the peaks found by MACS2 for all transcription factors, except SEP3, where the numbers are the same.
+Fig~\ref{motif_enrichment} shows an example of a peak detected on chromosome 1, illustrating how both peak callers find a peak, but only the peak found by Graph Peak Caller has a match against the motif.
 % Place tables after the first paragraph in which they are cited.
 \begin{table}[!ht]
 \begin{adjustwidth}{-2.45in}{0in} % Comment out/remove adjustwidth environment if table fits in text column.
 \centering
 \caption{Overview of peaks reported by Graph Peak Caller and MACS2 on \emph{A. thaliana} for 5 transcription factors (TFs).
-  \emph{Total} is the total number of peaks reported by the peak caller, \emph{shared} is the number of peaks reported by both peak callers (requiring overlap between two peaks), and \emph{unique} is the number of peaks reported by one peak caller and not the other.
+  \emph{Total} is the total number of peaks reported by the peak caller,
+  \emph{shared} is the number of peaks that overlap with one or more peaks in the other peak caller, and \emph{unique} is the number of peaks reported by one peak caller and not the other.
   In the categories \emph{shared} and \emph{unique}, both the number of peaks with motif match (the number before the /) and the number of peaks found are shown (percent of peaks with motif match are shown in parentheses).
   Here, all peaks have been trimmed to 120 base pairs around the peak summit (position in peak with lowest q-value), to make the comparison clearer.}
 \label{table1}
@@ -312,11 +319,11 @@ We called peaks on a graph-based reference genome for \emph{A. thaliana} and com
 \multicolumn{1}{l|}{TF} & Total & Shared & \multicolumn{1}{l|}{Unique} & Total & Shared & \multicolumn{1}{l}{Unique} \\ \midrule
 
 
-\multicolumn{1}{r|}{ERF115} &24847 & 1846/21164 (8.72\%) & 165/3683  (4.48\%)  &23167 &1826/21162 (8.63\%)  &132/2005 (6.58\%) \\
-\multicolumn{1}{r|}{SEP3}   &13902 & 991/11304  (8.77\%) & 123/2598  (4.73\%)  &15517 &991/11302  (8.77\%)  &161/4215 (3.82\%) \\
-  \multicolumn{1}{r|}{AP1}  &15687 & 1023/12694 (8.06\%) & 160/2993  (5.35\%)  &17030 &996/12692  (7.85\%)  &159/4338 (3.67\%)  \\
   \multicolumn{1}{r|}{SOC1} &14817 & 2258/13854 (16.2\%) & 136/963   (14.1\%) &16407 &2242/13849  (16.2\%)  &275/2558 (10.8\%) \\
+  \multicolumn{1}{r|}{AP1}  &15687 & 1023/12694 (8.06\%) & 160/2993  (5.35\%)  &17030 &996/12692  (7.85\%)  &159/4338 (3.67\%)  \\
+\multicolumn{1}{r|}{ERF115} &24847 & 1846/21164 (8.72\%) & 165/3683  (4.48\%)  &23167 &1826/21162 (8.63\%)  &132/2005 (6.58\%) \\
   \multicolumn{1}{r|}{PI}   &16548 & 2171/13526 (16.1\%) & 350/3022  (11.6\%) &16084 &2154/13525  (15.9\%)  &218/2559 (8.52\%) \\
+\multicolumn{1}{r|}{SEP3}   &13902 & 991/11304  (8.77\%) & 123/2598  (4.73\%)  &15517 &991/11302  (8.77\%)  &161/4215 (3.82\%) \\
   \hline
   \multicolumn{1}{r|}{Total}&85801 & 8289/72542 (11.4\%) & 934/13259 (7.04\%)  &88205 &8209/72530 (11.3\%)  &945/15675 (6.03\%)\\  \bottomrule
 
