@@ -295,6 +295,17 @@ Table~\ref{table1} shows an overview of peaks found by Graph Peak Caller and MAC
 Most of the peaks found by one peak caller are also found by the other.
 Among these, the peaks found by Graph Peak Caller are slightly more enriched for DNA-binding motifs than the peaks found by MACS2 for all transcription factors, except SEP3, where the numbers are the same.
 Fig~\ref{motif_enrichment} shows an example of a peak detected on chromosome 1, illustrating how both peak callers find a peak, but only the peak found by Graph Peak Caller has a match against the motif.
+
+
+
+\begin{figure}[!h]
+ \frame{ \includegraphics[width=1.0\textwidth]{figures/venn_diagrams_aggregated.png} }
+ \caption{{\bf Visual overview of all peaks found by Graph Peak Caller and MACS2 on \emph{A. thaliana}.} Showing the proportions of peaks found by both peak callers and peaks found uniquely by each peak caller. All rectangles are scaled to the proportion between the number of peaks they represent and the number of peaks in the union of the peaks found by both peak callers.}
+% BWA is not able to align these reads with sufficient mapping score to the linear reference genome, 
+\label{asdf}
+\end{figure}
+
+
 % Place tables after the first paragraph in which they are cited.
 \begin{table}[!ht]
 \begin{adjustwidth}{-2.45in}{0in} % Comment out/remove adjustwidth environment if table fits in text column.
@@ -416,8 +427,12 @@ We have developed Graph Peak Caller, a tool for performing peak calling from ChI
 {\bf DNA-binding motif enrichment plots (as Fig~\ref{motif_plots})  for all peaks detected on \emph{A. thaliana} }. Contrary to Fig~\ref{motif_plots}, these plots include all peaks found by both peak callers.
 
 \paragraph*{S2 Fig.}
-\label{S2s_Fig}
+\label{S2_Fig}
 {\bf DNA-binding motif enrichment plots (as Fig~\ref{motif_plots}) for all peaks detected on \emph{D. melanogaster} and human.} Left plots are proportion of peaks matching motif when all peaks are included. Right plots are proportion of peaks matching motif when only unique peaks found by each peak caller are included.
+
+\paragraph*{S3 Fig.}
+\label{S3_Fig}
+{\bf Diagram showing peaks found by Graph Peak Caller and MACS2 for \emph{D. melanogaster}.
 
 
 \paragraph*{S1 Appendix.}
