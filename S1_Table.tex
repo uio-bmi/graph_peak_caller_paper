@@ -20,8 +20,9 @@
 
 % Place tables after the first paragraph in which they are cited.
 
+
 \begin{table}[]
-\begin{adjustwidth}{-1.5in}{0in} % Comment out/remove adjustwidth environment if table fits in text column.
+\begin{adjustwidth}{-1.45in}{0in} % Comment out/remove adjustwidth environment if table fits in text column.
 \centering
 \caption*{\textbf{Table S1} Overview of peaks reported by Graph Peak Caller and MACS2 on \emph{Drosophila melanogaster} and human for 5 transcription factors (TFs).
   In this comparison, the top scoring peaks detected by each peak caller are selected, by for each transcription factor selecting as many peaks as have been detected by the peak caller that is finding the least amount of peaks (\emph{total}). 
@@ -30,29 +31,28 @@
 \label{table1}
 \begin{tabular}{llllllllllll}
 \toprule
- & \multicolumn{3}{|l|}{Peaks found} & \multicolumn{4}{l|}{Motif enrichment Graph Peak Caller}                        & \multicolumn{4}{l}{Motif enrichment MACS2}                       \\ \midrule
- &   \multicolumn{1}{|l}{Total}    &  Shared      &  Unique     & \multicolumn{2}{|l}{Shared} & \multicolumn{2}{l|}{Unique} & \multicolumn{2}{l}{Shared} & \multicolumn{2}{l}{Unique} \\ \midrule
+ & \multicolumn{5}{l|}{Graph Peak Caller}                        & \multicolumn{5}{l}{MACS2}                       \\ \midrule
+ &  \multicolumn{1}{|l}{Total} & \multicolumn{2}{l}{Shared} & \multicolumn{2}{l|}{Unique} & Total & \multicolumn{2}{l}{Shared} & \multicolumn{2}{l}{Unique} \\ \midrule
  
-\multicolumn{1}{l|}{\emph{Human}} & \multicolumn{11}{l}{} \\
+ \multicolumn{1}{l|}{\emph{Human}} & \multicolumn{10}{l}{} \\
+ \multicolumn{1}{r|}{CTCF} & 49049 & 36003/46279 & 77.80\% & 959/2770 & 34.62\% & \multicolumn{1}{|l}{47320} & 35932/46279 & 77.64\% & 391/1041 & 37.56\% & \\ 
+\multicolumn{1}{r|}{SRF} & 19123 & 4711/16640 & 28.31\% & 294/2483 & 11.84\% & \multicolumn{1}{|l}{17963} & 4706/16640 & 28.28\% & 156/1323 & 11.79\% & \\ 
+\midrule\multicolumn{1}{r|}{SUM} & 68172 & 40714/62919 & 64.71\% & 1253/5253 & 23.85\% & \multicolumn{1}{|l}{65283} & 40638/62919 & 64.59\% & 547/2364 & 23.14\% & \\ 
+ 
+\bottomrule
+ \multicolumn{1}{l|}{\emph{D. m.}} & \multicolumn{10}{l}{} \\
+ \multicolumn{1}{r|}{JRA} & 8717 & 362/8105 & 4.47\% & 23/612 & 3.76\% & \multicolumn{1}{|l}{8679} & 359/8105 & 4.43\% & 12/574 & 2.09\% & \\ 
+\multicolumn{1}{r|}{SQZ} & 10374 & 1868/9374 & 19.93\% & 171/1000 & 17.10\% & \multicolumn{1}{|l}{10025} & 1832/9374 & 19.54\% & 89/651 & 13.67\% & \\ 
+\multicolumn{1}{r|}{JIM} & 5385 & 1220/4924 & 24.78\% & 66/461 & 14.32\% & \multicolumn{1}{|l}{5607} & 1215/4924 & 24.68\% & 82/683 & 12.01\% & \\ 
+\multicolumn{1}{r|}{ANTP} & 7093 & 94/6409 & 1.47\% & 11/684 & 1.61\% & \multicolumn{1}{|l}{6917} & 91/6409 & 1.42\% & 4/508 & 0.79\% & \\ 
+\midrule\multicolumn{1}{r|}{SUM} & 31569 & 3544/28812 & 12.30\% & 271/2757 & 9.83\% & \multicolumn{1}{|l}{31228} & 3497/28812 & 12.14\% & 187/2416 & 7.74\% & \\ 
 
- \multicolumn{1}{r|}{CTCF} & 47320 & 45106 & 2214 & \multicolumn{1}{|l}{35733} & 79.22\% & 860 & 38.84\% & \multicolumn{1}{|l}{35675} & 79.09\% & 648 & 29.27\%\\ 
-\multicolumn{1}{r|}{SRF} & 17963 & 15859 & 2104 & \multicolumn{1}{|l}{4670} & 29.45\% & 276 & 13.12\% & \multicolumn{1}{|l}{4669} & 29.44\% & 193 & 9.17\%\\  \midrule
-\multicolumn{1}{r|}{SUM} & 65283 & 60965 & 4318 & \multicolumn{1}{|l}{40403} & 66.27\% & 1136 & 26.31\% & \multicolumn{1}{|l}{40344} & 66.18\% & 841 & 19.48\%\\  
-
-\midrule
-
-\multicolumn{1}{l|}{\emph{D. m.}} & \multicolumn{11}{l}{} \\
-
-\multicolumn{1}{r|}{JRA} & 8679 & 8085 & 594 & \multicolumn{1}{|l}{362} & 4.48\% & 23 & 3.87\% & \multicolumn{1}{|l}{359} & 4.44\% & 12 & 2.02\%\\ 
-\multicolumn{1}{r|}{SQZ} & 10025 & 9165 & 860 & \multicolumn{1}{|l}{1824} & 19.90\% & 161 & 18.72\% & \multicolumn{1}{|l}{1798} & 19.62\% & 123 & 14.30\%\\ 
-\multicolumn{1}{r|}{JIM} & 5385 & 4732 & 653 & \multicolumn{1}{|l}{1155} & 24.41\% & 131 & 20.06\% & \multicolumn{1}{|l}{1146} & 24.22\% & 80 & 12.25\%\\ 
-\multicolumn{1}{r|}{ANTP} & 6917 & 6286 & 631 & \multicolumn{1}{|l}{94} & 1.50\% & 11 & 1.74\% & \multicolumn{1}{|l}{90} & 1.43\% & 5 & 0.79\%\\ 
-\midrule
-\multicolumn{1}{r|}{SUM} & 31006 & 28268 & 2738 & \multicolumn{1}{|l}{3435} & 12.15\% & 326 & 11.91\% & \multicolumn{1}{|l}{3393} & 12.00\% & 220 & 8.04\%\\ 
 \bottomrule
 \end{tabular}
 \end{adjustwidth}
 \end{table}
+
+
 
 
 

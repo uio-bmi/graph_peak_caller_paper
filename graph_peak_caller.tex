@@ -309,37 +309,11 @@ Fig~\ref{motif_enrichment} shows an example of a peak detected on chromosome 1, 
 
 
 \begin{table}[]
-\begin{adjustwidth}{-1.5in}{0in} % Comment out/remove adjustwidth environment if table fits in text column.
-\centering
-\caption{Overview of peaks reported by Graph Peak Caller and MACS2 on \emph{A. thaliana} for 5 transcription factors (TFs).
-  \revision{In this comparison, the top scoring peaks detected by each peak caller are selected, by for each transcription factor selecting as many peaks as have been detected by the peak caller that is finding the least amount of peaks (\emph{total})}. 
-  \revision{\emph{Shared}} are peaks that overlap with a peak from the other peak caller, and \emph{unique} are peaks reported by one peak caller and not the other.
-  \revision{The sections \emph{Motif enrichment Graph Peak Caller} and \emph{Motif enrichment MACS2} show the number of shared and unique peaks that have motif match along with the percentages showing the proportion of shared and unique peaks having motif mtach.} All peaks have been trimmed to 120 base pairs around the peak summit (position in peak with lowest q-value), to make the comparison clearer.}
-\label{table1}
-\begin{tabular}{llllllllllll}
-\toprule
- & \multicolumn{3}{|l|}{Peaks found} & \multicolumn{4}{l|}{Motif enrichment Graph Peak Caller}                        & \multicolumn{4}{l}{Motif enrichment MACS2}                       \\ \midrule
- &   \multicolumn{1}{|l}{Total}    &  Shared      &  Unique     & \multicolumn{2}{|l}{Shared} & \multicolumn{2}{l|}{Unique} & \multicolumn{2}{l}{Shared} & \multicolumn{2}{l}{Unique} \\ \midrule
-\multicolumn{1}{r|}{ERF115} & 23167 & 20421 & 2746 & \multicolumn{1}{|l}{3040} & 14.89\% & 227 & 8.27\% & \multicolumn{1}{|l}{3029} & 14.83\% & 293 & 10.67\%\\ 
-\multicolumn{1}{r|}{SEP3} & 14976 & 11522 & 3454 & \multicolumn{1}{|l}{937} & 8.13\% & 177 & 5.12\% & \multicolumn{1}{|l}{930} & 8.07\% & 141 & 4.08\%\\ 
-\multicolumn{1}{r|}{AP1} & 16797 & 13210 & 3587 & \multicolumn{1}{|l}{750} & 5.68\% & 116 & 3.23\% & \multicolumn{1}{|l}{738} & 5.59\% & 91 & 2.54\%\\ 
-\multicolumn{1}{r|}{SOC1} & 15502 & 13482 & 2020 & \multicolumn{1}{|l}{1570} & 11.65\% & 222 & 10.99\% & \multicolumn{1}{|l}{1580} & 11.72\% & 134 & 6.63\%\\ 
-\multicolumn{1}{r|}{PI} & 16084 & 13274 & 2810 & \multicolumn{1}{|l}{1737} & 13.09\% & 265 & 9.43\% & \multicolumn{1}{|l}{1734} & 13.06\% & 211 & 7.51\%\\ \midrule
-\multicolumn{1}{r|}{SUM} & 86526 & 71909 & 14617 & \multicolumn{1}{|l}{8034} & 11.17\% & 1007 & 6.89\% & \multicolumn{1}{|l}{8011} & 11.14\% & 870 & 5.95\%\\ 
-\bottomrule
-\end{tabular}
-\end{adjustwidth}
-\end{table}
-
-
-
-\begin{table}[]
 \begin{adjustwidth}{-1.95in}{0in} % Comment out/remove adjustwidth environment if table fits in text column.
 \centering
 \caption{Overview of peaks reported by Graph Peak Caller and MACS2 on \emph{A. thaliana} for 5 transcription factors (TFs).
-  \revision{In this comparison, the top scoring peaks detected by each peak caller are selected, by for each transcription factor selecting as many peaks as have been detected by the peak caller that is finding the least amount of peaks (\emph{total})}. 
-  \revision{\emph{Shared}} are peaks that overlap with a peak from the other peak caller, and \emph{unique} are peaks reported by one peak caller and not the other.
-  \revision{The sections \emph{Motif enrichment Graph Peak Caller} and \emph{Motif enrichment MACS2} show the number of shared and unique peaks that have motif match along with the percentages showing the proportion of shared and unique peaks having motif mtach.} All peaks have been trimmed to 120 base pairs around the peak summit (position in peak with lowest q-value), to make the comparison clearer.}
+\emph{Total} is the total number of peaks reported by the peak caller, \emph{shared} is the number of peaks that overlap with a peak from the other peak caller, and \emph{unique} are peaks reported by one peak caller and not the other.
+  In the categories \emph{shared} and \emph{unique}, both the number of peaks with motif match (the number before the /) and the number of peaks found are shown (percent of peaks with motif match are shown in parentheses). All peaks have been trimmed to 120 base pairs around the peak summit (position in peak with lowest q-value), to make the comparison clearer.}
 \label{table1}
 \begin{tabular}{llllllllllll}
 \toprule
@@ -365,7 +339,7 @@ factor that matches a DNA-binding motif. The peak detected by Graph Peak Caller 
 \end{figure}
 
 
-For all transcription factors, except ERF115, the peaks uniquely found by Graph Peak Caller (not overlapping peaks found by MACS2) are more enriched for DNA-binding motifs than the peaks uniquely found by MACS2. In aggregate, the ratios of motif-matches of the uniquely found peaks are \revision{$6.89\%$ for Graph Peak Caller and $5.95\%$ for MACS2, yielding a $z$-value for the difference of \revision{$3.29$ and a $p$-value of $0.05\%$} using a one-sided $z$-test for difference in population proportions~\cite{devoreberk}}. \revision{For the peaks found by both peak callers, Graph Peak Caller finds has a few more peaks with with motif match, but the difference is not statistically significant ($p=0.42$).} Fig~\ref{motif_enrichment_reads} shows one of the cases on chromosome 1 where Graph Peak Caller detects a peak that is not detected by MACS2, due to that the input reads are aligned against an indel that is not part of the linear reference genome. 
+For all transcription factors, except ERF115, the peaks uniquely found by Graph Peak Caller (not overlapping peaks found by MACS2) are more enriched for DNA-binding motifs than the peaks uniquely found by MACS2. In aggregate, the ratios of motif-matches of the uniquely found peaks are \revision{$6.89\%$ for Graph Peak Caller and $5.95\%$ for MACS2, yielding a $z$-value for the difference of \revision{$2.08$ and a $p$-value of $1.9\%$} using a one-sided $z$-test for difference in population proportions~\cite{devoreberk}}. \revision{For the peaks found by both peak callers, Graph Peak Caller has a few more peaks with with motif match, but the difference is not statistically significant ($p=0.42$).} Fig~\ref{motif_enrichment_reads} shows one of the cases on chromosome 1 where Graph Peak Caller detects a peak that is not detected by MACS2, due to that the input reads are aligned against an indel that is not part of the linear reference genome. 
 
 The peaks found uniquely by Graph Peak Caller have more than twice the number of basepairs not part of the linear reference genome, compared to the peaks found by Graph Peak Caller that also have been found by MACS2 (Table~S2). Fig~\ref{motif_plots} shows the proportion of peaks enriched for DNA-binding motifs for the peaks that are uniquely found by each peak caller (for a similar plot including all peaks, see Fig S1). As seen in the figure, Graph Peak Caller has a better correspondence between high peak scores and motif enrichment for all transcription factors, except ERF115. 
 
@@ -374,7 +348,7 @@ The peaks found uniquely by Graph Peak Caller have more than twice the number of
 \revision{Also, if peaks were a result of mismapped alignments containing motif, one would expect to find binding events constituting multiple haplotypes. Thus, for each motif match site, we checked whether it was present in any of the haplotypes used to build the graph. We found that the overwhelming majority, (98.6 \%) of predicted binding sites were indeed compatible with a real haplotype. We also checked whether all the alignments overlapping each of the sites were compatible with either a single or two (allowing for diploidy) haplotypes. This was true in 85.6 \% of the predicted motif matching sites.} 
 
 
-To validate that our peak caller works on other species, we repeated the experiment on similar datasets for \emph{Drosophila melanogaster } and human (see Fig S2 and Table S1). In both cases Graph Peak Caller got \revision{a statistically significant higher ratio of motif-matches on uniquely found peaks ($p_{\text{human}}=2e-14\%$, $p_{\text{D.melanogaster}}=8e-7\%$)}.
+To validate that our peak caller works on other species, we repeated the experiment on similar datasets for \emph{Drosophila melanogaster } and human (see Fig S2 and Table S1). In both cases Graph Peak Caller got a higher ratio of motif-matches on uniquely found peaks, \emph{but only statistically significant for \emph{D. melanogaster} ($p_{\text{human}}=24.9\%$, $p_{\text{D.melanogaster}}=0.42\%$)}.
 
 
 \revision{We also checked how MACS2 performs when using reads aligned by vg that have been projected to the nearest position on the linear reference genome, in order to see how MACS2 performs when taking advantages of the improved mapping to a graph-based reference genome. Using these alignments, MACS2 performs better than when using using alignments from BWA, but is still slightly outperformed by Graph Peak Caller on motif matches (S3 Table).}
