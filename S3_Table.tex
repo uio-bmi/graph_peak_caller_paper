@@ -1,0 +1,50 @@
+\documentclass[a4paper,8pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+
+\title{}
+\author{}
+\usepackage{booktabs}
+\usepackage{tabularx}
+% Use adjustwidth environment to exceed column width (see example table in text)
+\usepackage{changepage}
+
+\newcolumntype{b}{>{\hsize=.35\hsize}X}
+\newcolumntype{c}{>{\hsize=1.6\hsize}X}
+\newcolumntype{d}{>{\hsize=1.8\hsize}X}
+
+\usepackage{caption}
+
+
+
+\begin{document}
+
+% Place tables after the first paragraph in which they are cited.
+\begin{table}[]
+\begin{adjustwidth}{-1.05in}{0in} % Comment out/remove adjustwidth environment if table fits in text column.
+\centering
+\caption*{\textbf{Table S3.} Similar to Table 1 in the manuscript, but instead of MACS2 using reads aligned by BWA, it uses vg alignments projected to the linear reference genome.}
+
+\label{table1}
+\begin{tabular}{llllllllllll}
+\toprule
+ & \multicolumn{5}{l|}{Graph Peak Caller}                        & \multicolumn{5}{l}{MACS2}                       \\ \midrule
+ &  \multicolumn{1}{|l}{Total} & \multicolumn{2}{l}{Shared} & \multicolumn{2}{l|}{Unique} & Total & \multicolumn{2}{l}{Shared} & \multicolumn{2}{l}{Unique} \\ \midrule
+\multicolumn{1}{r|}{ERF115} & 24976 & 3286/23462 & 14.01\% & 119/1514 & 7.86\% & \multicolumn{1}{|l}{24008} & 3294/23462 & 14.04\% & 63/546 & 11.54\% & \\ 
+\multicolumn{1}{r|}{SEP3} & 14976 & 1070/13865 & 7.72\% & 44/1111 & 3.96\% & \multicolumn{1}{|l}{14527} & 1058/13865 & 7.63\% & 27/662 & 4.08\% & \\ 
+\multicolumn{1}{r|}{AP1} & 16797 & 819/15378 & 5.33\% & 47/1419 & 3.31\% & \multicolumn{1}{|l}{15960} & 810/15378 & 5.27\% & 19/582 & 3.26\% & \\ 
+\multicolumn{1}{r|}{SOC1} & 15502 & 1732/14868 & 11.65\% & 60/634 & 9.46\% & \multicolumn{1}{|l}{15512} & 1734/14868 & 11.66\% & 44/644 & 6.83\% & \\ 
+\multicolumn{1}{r|}{PI} & 17518 & 1900/15296 & 12.42\% & 190/2222 & 8.55\% & \multicolumn{1}{|l}{15724} & 1881/15296 & 12.30\% & 36/428 & 8.41\% & \\ 
+\midrule\multicolumn{1}{r|}{SUM} & 89769 & 8807/82869 & 10.63\% & 460/6900 & 6.67\% & \multicolumn{1}{|l}{85731} & 8777/82869 & 10.59\% & 189/2862 & 6.60\% & \\ 
+\bottomrule
+\end{tabular}
+\end{adjustwidth}
+\end{table}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
