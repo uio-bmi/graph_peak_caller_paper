@@ -19,37 +19,42 @@
 \begin{document}
 
 % Place tables after the first paragraph in which they are cited.
-\begin{table}[!ht]
-\small
-\begin{adjustwidth}{-1.25in}{0in} % Comment out/remove adjustwidth environment if table fits in text column.
+
+\begin{table}[]
+\begin{adjustwidth}{-1.5in}{0in} % Comment out/remove adjustwidth environment if table fits in text column.
 \centering
 \caption*{\textbf{Table S1} Overview of peaks reported by Graph Peak Caller and MACS2 on \emph{Drosophila melanogaster} and human for 5 transcription factors (TFs).
-  \emph{Total} is the total number of peaks reported by the peak caller, \emph{shared} is the number of peaks reported by both peak callers (requiring overlap between two peaks), and \emph{unique} is the number of peaks reported by one peak caller and not the other.
-  In the categories \emph{shared} and \emph{unique}, both the number of peaks matching motif (the number before the /) and the number of peaks found are shown (percent of peaks matching motif are shown in parentheses).
-  Here, all peaks have been trimmed to 120 base pairs around the peak summit (position in peak with lowest q-value), to make the comparison clearer.}
-\label{tableS1}
-\begin{tabularx}{1.6\textwidth}{Xbcdbcdbb}
+  In this comparison, the top scoring peaks detected by each peak caller are selected, by for each transcription factor selecting as many peaks as have been detected by the peak caller that is finding the least amount of peaks (\emph{total}). 
+  \emph{Shared} are peaks that overlap with a peak from the other peak caller, and \emph{unique} are peaks reported by one peak caller and not the other.
+  The sections \emph{Motif enrichment Graph Peak Caller} and \emph{Motif enrichment MACS2} show the number of shared and unique peaks that have motif match along with the percentages showing the proportion of shared and unique peaks having motif mtach. All peaks have been trimmed to 120 base pairs around the peak summit (position in peak with lowest q-value), to make the comparison clearer.}
+\label{table1}
+\begin{tabular}{llllllllllll}
 \toprule
-  & \multicolumn{3}{|l|}{Graph Peak Caller}  & \multicolumn{3}{l}{MACS2}   \\ \midrule
-  \multicolumn{1}{l|}{TF} & Total & Shared & \multicolumn{1}{l|}{Unique} & Total & Shared & \multicolumn{1}{l}{Unique} \\ \midrule
+ & \multicolumn{3}{|l|}{Peaks found} & \multicolumn{4}{l|}{Motif enrichment Graph Peak Caller}                        & \multicolumn{4}{l}{Motif enrichment MACS2}                       \\ \midrule
+ &   \multicolumn{1}{|l}{Total}    &  Shared      &  Unique     & \multicolumn{2}{|l}{Shared} & \multicolumn{2}{l|}{Unique} & \multicolumn{2}{l}{Shared} & \multicolumn{2}{l}{Unique} \\ \midrule
+ 
+\multicolumn{1}{l|}{\emph{Human}} & \multicolumn{11}{l}{} \\
 
-  \multicolumn{1}{l|}{Human} & \multicolumn{6}{l}{} \\
-  \multicolumn{1}{r|}{CTCF} & 49049 & 36003/46279  (77.8\%) & 959/2770  (34.6\%)  & 47320 & 35932/46129 (77.9\%) & 391/1041 (37.6\%) \\
-  \multicolumn{1}{r|}{SRF}  & 19123 & 4711/16640  (28.3\%)  & 294/2483  (11.8\%)  & 17963 & 4706/16640  (28.2\%) & 156/1323  (11.7\%)  \\
-\hline
-\multicolumn{1}{r|}{Total}  & 68172 & 40714/62919 (64.7\%)& 1253/5253 (23.9\%) & 65283 & 40638/62769 (64.7\%) & 547/2354 (23.2\%) \\
+ \multicolumn{1}{r|}{CTCF} & 47320 & 45106 & 2214 & \multicolumn{1}{|l}{35733} & 79.22\% & 860 & 38.84\% & \multicolumn{1}{|l}{35675} & 79.09\% & 648 & 29.27\%\\ 
+\multicolumn{1}{r|}{SRF} & 17963 & 15859 & 2104 & \multicolumn{1}{|l}{4670} & 29.45\% & 276 & 13.12\% & \multicolumn{1}{|l}{4669} & 29.44\% & 193 & 9.17\%\\  \midrule
+\multicolumn{1}{r|}{SUM} & 65283 & 60965 & 4318 & \multicolumn{1}{|l}{40403} & 66.27\% & 1136 & 26.31\% & \multicolumn{1}{|l}{40344} & 66.18\% & 841 & 19.48\%\\  
 
-  \multicolumn{1}{l|}{\emph{D. m.}} & \multicolumn{6}{l}{} \\
-  \multicolumn{1}{r|}{JRA}  & 8717  & 362/8105  (4.47\%) & 23/612   (3.76\%)  & 8679  & 359/8105  (4.43\%)  & 12/574  (2.10\%)   \\
-  \multicolumn{1}{r|}{SQZ}  & 10374 & 1868/9374  (19.9\%) & 171/1000  (17.1\%) & 10025 & 1832/9374  (19.5\%) & 89/651  (13.7\%)  \\
-  \multicolumn{1}{r|}{JIM}  & 5385  & 1220/4924  (24.8\%) & 66/461  (14.3\%) & 5607  & 1215/4924  (24.7\%) & 82/683  (12.0\%)   \\
-  \multicolumn{1}{r|}{ANTP} & 7093  & 94/6409  (1.47\%) & 11/684   (1.61\%)  & 6917  & 91/6409  (1.42\%) & 4/508   (0.79\%)  \\
-  \hline
- \multicolumn{1}{r|}{Total} & 31569 & 3544/28812 (12.3\%) & 271/2757 (9.83\%) & 31228 & 3497/28722 (12.1\%) & 187/2416 (7.74\%) \\ 
+\midrule
+
+\multicolumn{1}{l|}{\emph{D. m.}} & \multicolumn{11}{l}{} \\
+
+\multicolumn{1}{r|}{JRA} & 8679 & 8085 & 594 & \multicolumn{1}{|l}{362} & 4.48\% & 23 & 3.87\% & \multicolumn{1}{|l}{359} & 4.44\% & 12 & 2.02\%\\ 
+\multicolumn{1}{r|}{SQZ} & 10025 & 9165 & 860 & \multicolumn{1}{|l}{1824} & 19.90\% & 161 & 18.72\% & \multicolumn{1}{|l}{1798} & 19.62\% & 123 & 14.30\%\\ 
+\multicolumn{1}{r|}{JIM} & 5385 & 4732 & 653 & \multicolumn{1}{|l}{1155} & 24.41\% & 131 & 20.06\% & \multicolumn{1}{|l}{1146} & 24.22\% & 80 & 12.25\%\\ 
+\multicolumn{1}{r|}{ANTP} & 6917 & 6286 & 631 & \multicolumn{1}{|l}{94} & 1.50\% & 11 & 1.74\% & \multicolumn{1}{|l}{90} & 1.43\% & 5 & 0.79\%\\ 
+\midrule
+\multicolumn{1}{r|}{SUM} & 31006 & 28268 & 2738 & \multicolumn{1}{|l}{3435} & 12.15\% & 326 & 11.91\% & \multicolumn{1}{|l}{3393} & 12.00\% & 220 & 8.04\%\\ 
 \bottomrule
-\end{tabularx}
+\end{tabular}
 \end{adjustwidth}
 \end{table}
+
+
 
 \end{document}
 
