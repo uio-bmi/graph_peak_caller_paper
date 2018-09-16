@@ -313,7 +313,7 @@ Fig~\ref{motif_enrichment} shows an example of a peak detected on chromosome 1, 
 \centering
 \caption{Overview of peaks reported by Graph Peak Caller and MACS2 on \emph{A. thaliana} for 5 transcription factors (TFs).
   \emph{Total} is the total number of peaks reported by the peak caller,
-  \emph{shared} is the number of peaks that overlap with one or more peaks from the other peak caller, and \emph{unique} is the number of peaks reported by one peak caller and not the other.
+  \emph{shared} are peaks that overlap with a peak from the other peak caller, and \emph{unique} are peaks reported by one peak caller and not the other. \revision{asdf}
   In the categories \emph{shared} and \emph{unique}, both the number of peaks with motif match (the number before the /) and the number of peaks found are shown (percent of peaks with motif match are shown in parentheses).
   Here, all peaks have been trimmed to 120 base pairs around the peak summit (position in peak with lowest q-value), to make the comparison clearer.}
 \label{table1}
@@ -330,6 +330,30 @@ Fig~\ref{motif_enrichment} shows an example of a peak detected on chromosome 1, 
 \end{tabularx}
 \end{adjustwidth}
 \end{table}
+
+\begin{table}[]
+\begin{adjustwidth}{-2.45in}{0in} % Comment out/remove adjustwidth environment if table fits in text column.
+\centering
+\caption{Overview of peaks reported by Graph Peak Caller and MACS2 on \emph{A. thaliana} for 5 transcription factors (TFs).
+  \emph{Total} is the total number of peaks reported by the peak caller,
+  \emph{shared} are peaks that overlap with a peak from the other peak caller, and \emph{unique} are peaks reported by one peak caller and not the other. \revision{asdf}
+  In the categories \emph{shared} and \emph{unique}, both the number of peaks with motif match (the number before the /) and the number of peaks found are shown (percent of peaks with motif match are shown in parentheses).
+  Here, all peaks have been trimmed to 120 base pairs around the peak summit (position in peak with lowest q-value), to make the comparison clearer.}
+\label{table2}
+\begin{tabular}{llllllllllll}
+\toprule
+ & \multicolumn{3}{|l|}{Peaks found} & \multicolumn{4}{l|}{Motif enrichment Graph Peak Caller}                        & \multicolumn{4}{l}{Motif enrichment MACS2}                       \\ \midrule
+ &   \multicolumn{1}{|l}{Total}    &  Unique      &  Shared     & \multicolumn{2}{|l}{Shared} & \multicolumn{2}{l|}{Unique} & \multicolumn{2}{l}{Shared} & \multicolumn{2}{l}{Unique} \\ \midrule
+\multicolumn{1}{r|}{ERF115} & 23167 & 20421 & 2746 & \multicolumn{1}{|l}{3040} & 14.89\% & 227 & 8.27\% & \multicolumn{1}{|l}{3029} & 14.83\% & 293 & 10.67\%\\ 
+\multicolumn{1}{r|}{SEP3} & 14976 & 11522 & 3454 & \multicolumn{1}{|l}{937} & 8.13\% & 177 & 5.12\% & \multicolumn{1}{|l}{930} & 8.07\% & 141 & 4.08\%\\ 
+\multicolumn{1}{r|}{AP1} & 16797 & 13210 & 3587 & \multicolumn{1}{|l}{750} & 5.68\% & 116 & 3.23\% & \multicolumn{1}{|l}{738} & 5.59\% & 91 & 2.54\%\\ 
+\multicolumn{1}{r|}{SOC1} & 15502 & 13482 & 2020 & \multicolumn{1}{|l}{1570} & 11.65\% & 222 & 10.99\% & \multicolumn{1}{|l}{1580} & 11.72\% & 134 & 6.63\%\\ 
+\multicolumn{1}{r|}{PI} & 16084 & 13274 & 2810 & \multicolumn{1}{|l}{1737} & 13.09\% & 265 & 9.43\% & \multicolumn{1}{|l}{1734} & 13.06\% & 211 & 7.51\%\\ 
+\multicolumn{1}{r|}{SUM} & 86526 & 71909 & 14617 & \multicolumn{1}{|l}{8034} & 11.17\% & 1007 & 6.89\% & \multicolumn{1}{|l}{8011} & 11.14\% & 870 & 5.95\%\\ 
+\end{tabular}
+\end{adjustwidth}
+\end{table}
+
 
 \begin{figure} %\frame{ \includegraphics[width=1.0\textwidth]{figures/Fig2.png} }
  \caption{{\bf Example of a motif match for a peak following a variant not part of the linear reference genome.} Showing part of the graph-based reference genome for \emph{A. thaliana} on chromosome 1 (top) with the linear reference genome represented by blue nodes (bases). The figure shows a peak found for the ERF115 transcription
