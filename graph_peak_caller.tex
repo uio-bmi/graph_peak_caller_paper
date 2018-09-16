@@ -175,7 +175,7 @@
 \fancyfootoffset[L]{2.25in}
 \lfoot{\today}
 
-\newcommand{\revision}[1]{\textcolor{orange}{#1}}
+\newcommand{\revision}[1]{\textcolor{black}{#1}}
 
 %% Include all macros below
 
@@ -277,7 +277,7 @@ We present \emph{Graph Peak Caller}, a first method for detecting transcription 
 In the Github repository at \url{http://github.com/uio-bmi/graph_peak_caller}, we provide a simple tutorial on how to use \emph{vg} and Graph Peak Caller to go from raw ChIP-seq reads to peaks. 
 % Place figure captions after the first paragraph in which they are cited.
 \begin{figure}
-   %\frame{ \includegraphics[width=0.6\textwidth]{figures/Fig1.png}  }
+   \frame{ \includegraphics[width=0.6\textwidth]{figures/Fig1.png}  }
    \caption{{\bf Overview of how Graph Peak Caller works.} Example of peak calling on an example graph (nodes in gray, edges in black). After raw reads (a) in the form of input reads (blue) and control reads (red) have been mapped to the graph-based reference genome and filtered based on mapping quality (b), the fragment pileup is created (c) by extending the forward input alignments and reverse input alignments (extensions shown as dotted lines) along all possible paths in their corresponding direction.
      A background track is created by projecting the alignments resulting from the control reads onto a linear path and calculating a local average of read counts.
      Then the linear track is projected back to the graph again (not shown).
@@ -297,16 +297,23 @@ We called peaks on this graph-based reference genome for \emph{A. thaliana} and 
 Table~\ref{table1} \revision{and Fig~\ref{venn_diagrams}} shows an overview of peaks found by Graph Peak Caller and MACS2.
 Most of the peaks found by one peak caller are also found by the other.
 Among these, the peaks found by Graph Peak Caller are slightly more enriched for DNA-binding motifs than the peaks found by MACS2 for all transcription factors, except SEP3, where the numbers are the same.
-Fig~\ref{motif_enrichment_reads} shows an example of a peak detected on chromosome 1, illustrating how both peak callers find a peak, but only the peak found by Graph Peak Caller has a match against the motif.
+Fig~\ref{motif_enrichment} shows an example of a peak detected on chromosome 1, illustrating how both peak callers find a peak, but only the peak found by Graph Peak Caller has a match against the motif.
 
 
 \begin{figure}[!h]
- %\frame{ \includegraphics[width=1.0\textwidth]{figures/venn_diagrams_aggregated.png} }
+ \frame{ \includegraphics[width=1.0\textwidth]{figures/Fig2.png} }
  \caption{\revision{{\bf Visual overview of all peaks found by Graph Peak Caller and MACS2 on \emph{A. thaliana}.} Showing the proportions of peaks found by both peak callers and peaks found uniquely by each peak caller. All rectangles are scaled to the proportion between the number of peaks they represent and the number of peaks in the union of the peaks found by both peak callers.}}
 % BWA is not able to align these reads with sufficient mapping score to the linear reference genome, 
 \label{venn_diagrams}
 \end{figure}
 
+
+\begin{figure} 
+\frame{ \includegraphics[width=1.0\textwidth]{figures/Fig3.png} }
+ \caption{{\bf Example of a motif match for a peak following a variant not part of the linear reference genome.} Showing part of the graph-based reference genome for \emph{A. thaliana} on chromosome 1 (top) with the linear reference genome represented by blue nodes (bases). The figure shows a peak found for the ERF115 transcription
+factor that matches a DNA-binding motif. The peak detected by Graph Peak Caller follows the linear reference genome (blue nodes) except for the first SNP shown (green node), where the peak follows the green G instead of the blue A, making this a significant match against the DNA-binding motif (shown as a sequence logo at the bottom). The peak detected by MACS2 does not have a significant motif match. \revision{All alignments intersecting with this binding site are present in a common haplotype among the haplotypes used to build the reference graph (S2 Appendix).}}
+\label{motif_enrichment}
+\end{figure}
 
 \begin{table}[]
 \begin{adjustwidth}{-1.95in}{0in} % Comment out/remove adjustwidth environment if table fits in text column.
@@ -333,11 +340,13 @@ Fig~\ref{motif_enrichment_reads} shows an example of a peak detected on chromoso
 
 For all transcription factors, except ERF115, the peaks uniquely found by Graph Peak Caller (not overlapping peaks found by MACS2) are more enriched for DNA-binding motifs than the peaks uniquely found by MACS2. In aggregate, the ratios of motif-matches of the uniquely found peaks are \revision{$6.33\%$ for Graph Peak Caller and $5.74\%$ for MACS2, yielding a $z$-value for the difference of \revision{$2.08$ and a $p$-value of $1.9\%$} using a one-sided $z$-test for difference in population proportions~\cite{devoreberk}}. \revision{For the peaks found by both peak callers, Graph Peak Caller has a few more peaks with with motif match, but the difference is not statistically significant ($p=0.42$).} Fig~\ref{motif_enrichment_reads} shows one of the cases on chromosome 1 where Graph Peak Caller detects a peak that is not detected by MACS2, due to that the input reads are aligned against an indel that is not part of the linear reference genome. 
 
+\begin{figure}[!h]
+ \frame{ \includegraphics[width=1.0\textwidth]{figures/Fig4.png} }
+ \caption{{\bf Example of part of a peak detected by Graph Peak Caller and not by MACS2}. Showing part of the graph-based reference genome for \emph{A. thaliana} on chromosome 1, containing two SNPs (black/blue) and an indel (red) that are not part of the linear reference genome (blue).
+   From the raw ChIP-seq data for the ERF115 transcription factor (NCBI SRA SRR931836) two reads (shown at the top) align perfectly to the graph-based reference genome and Graph Peak Caller is able to detect a peak in this area.
+   Mapping to the linear reference genome does not give sufficiently high mapping score, and so the peak is missed by MACS2. }
+% BWA is not able to align these reads with sufficient mapping score to the linear reference genome, 
 
-\begin{figure} 
-%\frame{ \includegraphics[width=1.0\textwidth]{figures/Fig3.png} }
- \caption{{\bf Example of a motif match for a peak following a variant not part of the linear reference genome.} Showing part of the graph-based reference genome for \emph{A. thaliana} on chromosome 1 (top) with the linear reference genome represented by blue nodes (bases). The figure shows a peak found for the ERF115 transcription
-factor that matches a DNA-binding motif. The peak detected by Graph Peak Caller follows the linear reference genome (blue nodes) except for the first SNP shown (green node), where the peak follows the green G instead of the blue A, making this a significant match against the DNA-binding motif (shown as a sequence logo at the bottom). The peak detected by MACS2 does not have a significant motif match. \revision{All alignments intersecting with this binding site are present in a common haplotype among the haplotypes used to build the reference graph (S2 Appendix).}}
 \label{motif_enrichment_reads}
 \end{figure}
 
@@ -356,7 +365,7 @@ To validate that our peak caller works on other species, we repeated the experim
 
 
 \begin{figure}[!h]
- %\includegraphics[width=1.0\textwidth]{figures/Fig4.png}
+ \includegraphics[width=1.0\textwidth]{figures/Fig5.png}
  \caption{{\bf Dna-binding motif enrichment plots.} The proportion of peaks enriched for a DNA-binding motif (Y-axis) when iteratively including more peaks from the set of uniquely found peaks for each peak caller, sorted descending on score (X-axis). }
 \label{motif_plots}
 \end{figure}
