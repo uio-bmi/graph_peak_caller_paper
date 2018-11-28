@@ -176,7 +176,7 @@
 \lfoot{\today}
 
 \newcommand{\revision}[1]{\textcolor{black}{#1}}
-\newcommand{\minorrevision}[1]{\textcolor{black}{#1}}
+\newcommand{\minorrevision}[1]{\textcolor{orange}{#1}}
 
 %% Include all macros below
 
@@ -356,7 +356,7 @@ The peaks found uniquely by Graph Peak Caller have more than twice the number of
 
 To validate that our peak caller works on other species, we repeated the experiment on similar datasets for \emph{Drosophila melanogaster } and human (see Fig S2 and Table S1). In both cases Graph Peak Caller got a higher ratio of motif-matches on uniquely found peaks, \revision{but only statistically significant for \emph{D. melanogaster} ($p_{\text{human}}=24.9\%$, $p_{\text{D.melanogaster}}=0.42\%$)}.
 
-\revision{We also checked how MACS2 performs when using reads aligned by vg that have been projected to the nearest position on the linear reference genome, in order to see how MACS2 performs when taking advantage of the improved mapping to a graph-based reference genome. Using these alignments, MACS2 performs better than when using using alignments from BWA, but is still slightly outperformed by Graph Peak Caller on motif matches (S3 Table).}
+\revision{We also checked how MACS2 performs when using reads aligned by vg that have been projected to the linear reference genome \minorrevision{using \emph{vg surject}}, in order to see how MACS2 performs when taking advantage of the improved mapping to a graph-based reference genome. Using these alignments, MACS2 performs better than when using using alignments from BWA, but is still slightly outperformed by Graph Peak Caller on motif matches (S3 Table).}
 
 \subsection*{Alignment bias evaluation}
 \revision{A problem with using motif enrichment to compare the peaks detected by MACS2 and Graph Peak Caller is that the two peak callers use different sets of alignments. Thus, we checked whether vg tends to align reads to the graph reference genome that more often end up in alignments with motif match than what BWA does. We found no such tendency. In aggregate for the peaks detected on \emph{A. thaliana}, we found on average 0.0208 motif matches per graph alignment, and and on average 0.0214 motif matches per linear reference genome alignment.}
