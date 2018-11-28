@@ -176,6 +176,7 @@
 \lfoot{\today}
 
 \newcommand{\revision}[1]{\textcolor{black}{#1}}
+\newcommand{\minorrevision}[1]{\textcolor{orange}{#1}}
 
 %% Include all macros below
 
@@ -302,7 +303,8 @@ Fig~\ref{motif_enrichment} shows an example of a peak detected on chromosome 1, 
 
 \begin{figure}[!h]
  %\frame{ \includegraphics[width=1.0\textwidth]{figures/Fig2.png} }
- \caption{\revision{{\bf Visual overview of all peaks found by Graph Peak Caller and MACS2 on \emph{A. thaliana}.} Showing the proportions of peaks found by both peak callers and peaks found uniquely by each peak caller. All rectangles are scaled to the proportion between the number of peaks they represent and the number of peaks in the union of the peaks found by both peak callers.}}
+  \caption{\revision{{\bf Visual overview of all peaks found by Graph Peak Caller and MACS2 on \emph{A. thaliana}.} Showing the proportions of peaks found by both peak callers and peaks found uniquely by each peak caller.
+      All rectangles are scaled to the proportion between the number of peaks they represent and the number of peaks in the union of the peaks found by both peak callers. The colors denote which peak caller found the peaks, while The hatching denotes which peaks had a motif match. Note that a peak found by both peak callers can have motif in one but not the other}}
 % BWA is not able to align these reads with sufficient mapping score to the linear reference genome, 
 \label{venn_diagrams}
 \end{figure}
@@ -355,7 +357,7 @@ The peaks found uniquely by Graph Peak Caller have more than twice the number of
 
 To validate that our peak caller works on other species, we repeated the experiment on similar datasets for \emph{Drosophila melanogaster } and human (see Fig S2 and Table S1). In both cases Graph Peak Caller got a higher ratio of motif-matches on uniquely found peaks, \revision{but only statistically significant for \emph{D. melanogaster} ($p_{\text{human}}=24.9\%$, $p_{\text{D.melanogaster}}=0.42\%$)}.
 
-\revision{We also checked how MACS2 performs when using reads aligned by vg that have been projected to the nearest position on the linear reference genome, in order to see how MACS2 performs when taking advantage of the improved mapping to a graph-based reference genome. Using these alignments, MACS2 performs better than when using using alignments from BWA, but is still slightly outperformed by Graph Peak Caller on motif matches (S3 Table).}
+\revision{We also checked how MACS2 performs when using reads aligned by vg that have been projected to the linear reference genome \minorrevision{using \emph{vg surject}}, in order to see how MACS2 performs when taking advantage of the improved mapping to a graph-based reference genome. Using these alignments, MACS2 performs better than when using using alignments from BWA, but is still slightly outperformed by Graph Peak Caller on motif matches (S3 Table).}
 
 \subsection*{Alignment bias evaluation}
 \revision{A problem with using motif enrichment to compare the peaks detected by MACS2 and Graph Peak Caller is that the two peak callers use different sets of alignments. Thus, we checked whether vg tends to align reads to the graph reference genome that more often end up in alignments with motif match than what BWA does. We found no such tendency. In aggregate for the peaks detected on \emph{A. thaliana}, we found on average 0.0208 motif matches per graph alignment, and and on average 0.0214 motif matches per linear reference genome alignment.}
@@ -366,7 +368,7 @@ To validate that our peak caller works on other species, we repeated the experim
 
 \begin{figure}[!h]
  %\includegraphics[width=1.0\textwidth]{figures/Fig5.png}
- \caption{{\bf Dna-binding motif enrichment plots.} The proportion of peaks enriched for a DNA-binding motif (Y-axis) when iteratively including more peaks from the set of uniquely found peaks for each peak caller, sorted descending on score (X-axis). }
+ \caption{{\bf \minorrevision{DNA}-binding motif enrichment plots.} The proportion of peaks enriched for a DNA-binding motif (Y-axis) when iteratively including more peaks from the set of uniquely found peaks for each peak caller, sorted descending on score (X-axis). }
 \label{motif_plots}
 \end{figure}
 
@@ -417,7 +419,7 @@ We selected all transcription factors listed in the transcription factor databas
 Raw ChiP-seq reads were downloaded from the NCBI Sequence Read Archive (SRA) (SRA accession numbers in Appendix S1) and trimmed using \emph{Trim Galore!} v0.4.4~\cite{trim_galore} (default parameters).
 Reads were mapped both to our graph-based reference genome using \emph{vg} and to the \emph{Tair10}~\cite{tair} reference genome using \emph{BWA} v0.7.12 (\texttt{bwa aln} followed by \texttt{bwa samsse}, default parameters).
 In the linear case we filtered out low-quality alignments using \emph{SAMtools} v0.1.19~\cite{samtools} with the command \texttt{samtools view -F 1804 -q 37}, and for the graph alignments we used \texttt{vg filter -q 37}.
-\emph{MACS2} v2.1.0 was used to call peaks on the linear reference genome, using default parameters. We created DNA-binding motif enrichment plots (Fig~\ref{motif_plots}) for each set of detected peaks (URLs to the motif models that were used are in Appendix S1). We have created a Docker repository with the \emph{A. thaliana} graph-based reference genome, Graph Peak Caller, \emph{vg} and all other software and scripts used to generate the results in this article. A simple guide on how to re-run the experiments can be found in \revision{wiki} in the Github repository for Graph Peak Caller.
+\emph{MACS2} v2.1.0 was used to call peaks on the linear reference genome, using default parameters. We created DNA-binding motif enrichment plots (Fig~\ref{motif_plots}) for each set of detected peaks (URLs to the motif models that were used are in Appendix S1). We have created a Docker repository with the \emph{A. thaliana} graph-based reference genome, Graph Peak Caller, \emph{vg} and all other software and scripts used to generate the results in this article. A simple guide on how to re-run the experiments can be found in \minorrevision{the} \revision{wiki} in the Github repository for Graph Peak Caller.
 
 
 \revision{To investigate how MACS2 performed when using vg alignments projected to the linear reference genome, we projected each vg alignment by finding a corresponding start and end position for the alignment on the linear reference genome. Given a start or end position on the graph, the new corresponding position on the linear reference genome was found by finding the shortest distance in the graph going from the original position backwards through the graph to a node shared with the linear reference genome, and then going this distance forward through the graph by following only nodes shared by the linear reference genome. }
