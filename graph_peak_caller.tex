@@ -91,6 +91,8 @@
 % cite package, to clean up citations in the main text. Do not remove.
 \usepackage{cite}
 
+%\usepackage[nofigures,nolists,nomarkers]{endfloat}
+
 % Use nameref to cite supporting information files (see Supporting Information section for more info)
 \usepackage{nameref,hyperref}
 
@@ -161,7 +163,8 @@
 % custom stuff end
 
 % Header and Footer with logo
-\usepackage{lastpage,fancyhdr,graphicx}
+\usepackage{lastpage,fancyhdr}
+\usepackage{graphicx}
 \usepackage{epstopdf}
 \pagestyle{myheadings}
 \pagestyle{fancy}
@@ -175,8 +178,11 @@
 \fancyfootoffset[L]{2.25in}
 \lfoot{\today}
 
+%\renewcommand{\includegraphics}[2][]{}
+
+
 \newcommand{\revision}[1]{\textcolor{black}{#1}}
-\newcommand{\minorrevision}[1]{\textcolor{orange}{#1}}
+\newcommand{\minorrevision}[1]{\textcolor{black}{#1}}
 
 %% Include all macros below
 
@@ -311,7 +317,7 @@ Fig~\ref{motif_enrichment} shows an example of a peak detected on chromosome 1, 
 
 
 \begin{figure} 
-%\frame{ \includegraphics[width=1.0\textwidth]{figures/Fig3.png} }
+  %\frame{ \includegraphics[width=1.0\textwidth]{figures/Fig3.png} }
  \caption{{\bf Example of a motif match for a peak following a variant not part of the linear reference genome.} Showing part of the graph-based reference genome for \emph{A. thaliana} on chromosome 1 (top) with the linear reference genome represented by blue nodes (bases). The figure shows a peak found for the ERF115 transcription
 factor that matches a DNA-binding motif. The peak detected by Graph Peak Caller follows the linear reference genome (blue nodes) except for the first SNP shown (green node), where the peak follows the green G instead of the blue A, making this a significant match against the DNA-binding motif (shown as a sequence logo at the bottom). The peak detected by MACS2 does not have a significant motif match. \revision{All alignments intersecting with this binding site are present in a common haplotype among the haplotypes used to build the reference graph (S2 Appendix).}}
 \label{motif_enrichment}
@@ -343,7 +349,7 @@ factor that matches a DNA-binding motif. The peak detected by Graph Peak Caller 
 For all transcription factors, except ERF115, the peaks uniquely found by Graph Peak Caller (not overlapping peaks found by MACS2) are more enriched for DNA-binding motifs than the peaks uniquely found by MACS2. In aggregate, the ratios of motif-matches of the uniquely found peaks are \revision{$6.33\%$ for Graph Peak Caller and $5.74\%$ for MACS2, yielding a $z$-value for the difference of \revision{$2.08$ and a $p$-value of $1.9\%$} using a one-sided $z$-test for difference in population proportions~\cite{devoreberk}}. \revision{For the peaks found by both peak callers, Graph Peak Caller has a few more peaks with with motif match, but the difference is not statistically significant ($p=0.42$).} Fig~\ref{motif_enrichment_reads} shows one of the cases on chromosome 1 where Graph Peak Caller detects a peak that is not detected by MACS2, due to that the input reads are aligned against an indel that is not part of the linear reference genome. 
 
 \begin{figure}[!h]
- %\frame{ \includegraphics[width=1.0\textwidth]{figures/Fig4.png} }
+  %\frame{ \includegraphics[width=1.0\textwidth]{figures/Fig4.png} }
  \caption{{\bf Example of part of a peak detected by Graph Peak Caller and not by MACS2}. Showing part of the graph-based reference genome for \emph{A. thaliana} on chromosome 1, containing two SNPs (black/blue) and an indel (red) that are not part of the linear reference genome (blue).
    From the raw ChIP-seq data for the ERF115 transcription factor (NCBI SRA SRR931836) two reads (shown at the top) align perfectly to the graph-based reference genome and Graph Peak Caller is able to detect a peak in this area.
    Mapping to the linear reference genome does not give sufficiently high mapping score, and so the peak is missed by MACS2. }
@@ -367,7 +373,7 @@ To validate that our peak caller works on other species, we repeated the experim
 
 
 \begin{figure}[!h]
- %\includegraphics[width=1.0\textwidth]{figures/Fig5.png}
+  %\includegraphics[width=1.0\textwidth]{figures/Fig5.png}
  \caption{{\bf \minorrevision{DNA}-binding motif enrichment plots.} The proportion of peaks enriched for a DNA-binding motif (Y-axis) when iteratively including more peaks from the set of uniquely found peaks for each peak caller, sorted descending on score (X-axis). }
 \label{motif_plots}
 \end{figure}
