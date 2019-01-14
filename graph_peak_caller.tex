@@ -183,6 +183,7 @@
 
 \newcommand{\revision}[1]{\textcolor{black}{#1}}
 \newcommand{\minorrevision}[1]{\textcolor{black}{#1}}
+\newcommand{\finalrevision}[1]{\textcolor{black}{#1}}
 
 %% Include all macros below
 
@@ -255,19 +256,12 @@ Graph-based representations are considered to be the future for reference genome
 % Use first person. PLOS ONE authors please skip this step. 
 % Author Summary not valid for PLOS ONE submissions.   
 \section*{Author summary}
-
+\finalrevision{
 The expression of genes is a tightly regulated process.
 A key regulatory mechanism is the modulation of transcription by a class of proteins called transcription factors that bind to DNA in the spatial proximity of regulated genes.
-Determining the binding locations of transcription factors for specific cell types and settings is thus a key step in understanding the dynamics of normal cells as well as disease states.
-
-Binding sites for a given transcription factor are typically obtained through an experimental technique called CHiP-seq, in which DNA binding locations are obtained by sequencing DNA fragments attached to the transcription factor and aligning these sequences to a reference genome.
-A computational technique known as \emph{peak calling} is then used to separate signal from noise and predict where the protein binds.
-
-Current peak callers are based on linear reference genomes that do not contain known genetic variants from the population.
-They thus potentially miss cases where proteins bind to such alternative genome sequences.
-Recently, a new type of reference genomes based on graph representations have become popular, as they are able to also incorporate alternative genome sequences.
-We here present \emph{Graph Peak Caller}, the first peak caller that is able to exploit such graph representations for the detection of transcription factor binding locations.
-Using a graph-based reference genome for \emph{Arabidopsis thaliana}, we show that our peak caller can lead to better detection of transcription factor binding locations as compared to a similar existing peak caller that uses a linear reference genome representation.
+Determining the binding locations of transcription factors for specific cell types and settings is thus a key step in understanding the dynamics of normal cells as well as disease states. Binding sites for a given transcription factor are typically obtained through an experimental technique called CHiP-seq, in which DNA binding locations are obtained by sequencing DNA fragments attached to the transcription factor and aligning these sequences to a reference genome.
+A computational technique known as \emph{peak calling} is then used to separate signal from noise and predict where the protein binds. Current peak callers are based on linear reference genomes that do not contain known genetic variants from the population. They thus potentially miss cases where proteins bind to such alternative genome sequences. Recently, a new type of reference genomes based on graph representations have become popular, as they are able to also incorporate alternative genome sequences. We here present \emph{Graph Peak Caller}, the first peak caller that is able to exploit such graph representations for the detection of transcription factor binding locations.
+Using a graph-based reference genome for \emph{Arabidopsis thaliana}, we show that our peak caller can lead to better detection of transcription factor binding locations as compared to a similar existing peak caller that uses a linear reference genome representation.}
 
 \linenumbers
 
@@ -287,11 +281,10 @@ In the Github repository at \url{http://github.com/uio-bmi/graph_peak_caller}, w
    %\frame{ \includegraphics[width=0.6\textwidth]{figures/Fig1.png}  }
    \caption{{\bf Overview of how Graph Peak Caller works.} Example of peak calling on an example graph (nodes in gray, edges in black). After raw reads (a) in the form of input reads (blue) and control reads (red) have been mapped to the graph-based reference genome and filtered based on mapping quality (b), the fragment pileup is created (c) by extending the forward input alignments and reverse input alignments (extensions shown as dotted lines) along all possible paths in their corresponding direction.
      A background track is created by projecting the alignments resulting from the control reads onto a linear path and calculating a local average of read counts.
-     Then the linear track is projected back to the graph again (not shown).
+     Then the linear track is projected back to the \finalrevision{graph again.}
      The fragment pileup is treated as \emph{counts} and the background track as \emph{rates} in a Poisson-distribution, and p-values are computed for each position for the observed count, given the corresponding rate.
      Adjusted q-values are computed to control the false discovery rate (d) (figure shows q-scores, which are -$log_{10}(qvalue)$). The q-values are thresholded on a user-defined threshold (default 0.05), resulting in a set of peak candidate areas with gaps between them (e). Small gaps are filled, resulting in a set of peak subgraphs (connected subgraphs)(f). Graph Peak Caller finds a single “maximum path” (g, maximum path in blue) through each peak subgraph by selecting the path that has the highest number of input reads mapped to it. }
    \label{overview_figure}
-%\includegraphics[width=0.5\textwidth]{figures/Fig1.png} \label{fig}
 \end{figure}
 
 The output from Graph Peak Caller consists of graph intervals, but the tool is also able to transform these into approximate positions on a linear reference genome (by projecting them to the nearest position on the linear reference genome), making it possible to analyse detected peaks further using existing “linear” approaches.
@@ -306,7 +299,7 @@ Most of the peaks found by one peak caller are also found by the other.
 Among these, the peaks found by Graph Peak Caller are slightly more enriched for DNA-binding motifs than the peaks found by MACS2 for all transcription factors, except SEP3, where the numbers are the same.
 Fig~\ref{motif_enrichment} shows an example of a peak detected on chromosome 1, illustrating how both peak callers find a peak, but only the peak found by Graph Peak Caller has a match against the motif.
 
-
+ 
 \begin{figure}[!h]
  %\frame{ \includegraphics[width=1.0\textwidth]{figures/Fig2.png} }
   \caption{\revision{{\bf Visual overview of all peaks found by Graph Peak Caller and MACS2 on \emph{A. thaliana}.} Showing the proportions of peaks found by both peak callers and peaks found uniquely by each peak caller.
@@ -398,6 +391,10 @@ There are a few challenges with a graph-based ChIP-seq approach. Mapping to grap
 
 We believe that our peak caller represents an important step towards creating a more comprehensive toolset for functional genomics on graph-based reference genomes, extending the possible applications of graph-based reference genomes and bringing the genomics community an important step closer to widespread adoption of these reference structures.
 
+\subsection*{\finalrevision{Conclusion}}
+We have developed Graph Peak Caller, a tool for performing peak calling from ChIP-seq reads mapped to a graph-based reference genome. Graph Peak Caller is based on the same principles as MACS2. We have validated our approach by using both Graph Peak Caller and MACS2 to call peaks using ChIP-seq datasets on \emph{A. thaliana}, showing that the peaks found by Graph Peak Caller in general are more enriched for DNA-binding motifs than those found by MACS2 on a linear reference genome. Graph Peak Caller is also able to provide candidates for differentially expressed peaks, and together with \emph{vg} it provides a first method for doing peak calling on graph-based reference genomes.
+
+
 \section*{Methods}
 \subsection*{Peak calling}
 Our approach to graph-based peak calling is implemented in an open source Python 3 package, \emph{Graph Peak Caller}. Graph Peak Caller was developed by extending the methodologies and concepts from MACS2 to directed acyclic graphs (DAGs). The MACS2 algorithm can be divided into five steps: estimating the fragment length, creating a fragment pileup by extending input reads to match the estimated fragment length, calculating a background track based on local and global average number of reads, calculation of p/q scores based on the fragment pileup and background track, and finding peaks based on thresholded scores. We have adopted each of these steps to work on DAGs. Fig~\ref{overview_figure} illustrates the method on a graph-based reference genome, and the following describes the details of each step.
@@ -419,7 +416,7 @@ Such alternative peaks can be used to infer differential binding.
 
 
 \subsection*{Validation and testing}
-To test our peak caller, we used \emph{vg}~\cite{vg} to create a whole genome \emph{Arabidopsis thaliana} reference graph by using variants from the 1001 Genomes Project.
+To test our peak caller, we used \emph{vg}~\cite{vg} to create a whole genome \emph{Arabidopsis thaliana} reference graph by using variants from the 1001 Genomes Project~\cite{1000genomes}.
 We selected all transcription factors listed in the transcription factor database of \emph{Expresso}~\cite{expresso} that also had a motif in the \emph{Jaspar} database of transcription factor binding profiles~\cite{jaspar}, resulting in a set of 5 transcription factors: ERF115, SEP3, AP1, SOC1, and PI.
 (Two transcription factors, SVP and ATAF1, were omitted due to invalid fastq files. AP2 and AP3 were omitted based on their close relatedness to AP1. Also, PIF3 was omitted since neither the detected binding events by Graph Peak Caller nor MACS2 had any association with the motif we found in the Jaspar database).
 Raw ChiP-seq reads were downloaded from the NCBI Sequence Read Archive (SRA) (SRA accession numbers in Appendix S1) and trimmed using \emph{Trim Galore!} v0.4.4~\cite{trim_galore} (default parameters).
@@ -441,10 +438,6 @@ In the linear case we filtered out low-quality alignments using \emph{SAMtools} 
 
  
 \revision{The haplotype analysis was performed by finding all alignments overlapping a peak, and finding which variants each alignment contained, then finding the haplotypes from the VCF file that contained each variant. An alignment was decided to be compatible with a haplotype if all the variants included in the alignment were present in the haplotype. A set of alignments was decided to be compatible with two haplotypes if we could find two haplotypes in the vcf such that all the alignments in the set were compatible with at least one of them.}
-
-
-\section*{Conclusion}
-We have developed Graph Peak Caller, a tool for performing peak calling from ChIP-seq reads mapped to a graph-based reference genome. Graph Peak Caller is based on the same principles as MACS2. We have validated our approach by using both Graph Peak Caller and MACS2 to call peaks using ChIP-seq datasets on \emph{A. thaliana}, showing that the peaks found by Graph Peak Caller in general are more enriched for DNA-binding motifs than those found by MACS2 on a linear reference genome. Graph Peak Caller is also able to provide candidates for differentially expressed peaks, and together with \emph{vg} it provides a first method for doing peak calling on graph-based reference genomes.
 
 \section*{Supporting information}
 
@@ -543,8 +536,18 @@ Rand KD, Grytten I, Nederbragt AJ, Storvik GO, Glad IK, Sandve GK.
 \newblock {Coordinates and Intervals in Graph-based Reference Genomes}. 
 \newblock BMC Bioinformatics. 2017 Dec;18(1):263.
 
+\bibitem{tair}
+Arabidopsis Genome Initiative. Analysis of the Genome Sequence of the flowering Plant Arabidopsis thaliana. Nature. 2000 Dec;408(6814):796.
+
+\bibitem{devoreberk}
+  Devore JL, Berk KN. Modern Mathematical Statistics with Applications. 2nd ed.
+  New York: Springer-Verlag; 2012. p. 519-521
+  
 \bibitem{fimo}
 Grant CE, Bailey TL, Noble WS. FIMO: Scanning for Occurrences of a given Motif. Bioinformatics. 2011 Feb 16;27(7):1017-8.
+
+\bibitem{1000genomes}
+1000 Genomes Project Consortium. A global Reference for Human genetic Variation. Nature. 2015 Oct;526(7571):68.
 
 \bibitem{expresso}
 Aghamirzaie D, Velmurugan KR, Wu S, Altarawy D, Heath LS, Grene R. Expresso: A Database and Web Server for exploring the Interaction of Transcription Factors and their Target Genes in Arabidopsis thaliana using ChIP-Seq peak Data. F1000Research. 2017;6.
@@ -560,15 +563,7 @@ Krueger F. Trim galore. A Wrapper Tool around Cutadapt and FastQC to consistentl
 Li H, Handsaker B, Wysoker A, Fennell T, Ruan J, Homer N, Marth G, Abecasis G, Durbin R. 
 The Sequence Alignment/Map Format and SAMtools. Bioinformatics. 2009 Aug 15;25(16):2078-9.
 
-\bibitem{tair}
-Arabidopsis Genome Initiative. Analysis of the Genome Sequence of the flowering Plant Arabidopsis thaliana. Nature. 2000 Dec;408(6814):796.
 
-\bibitem{1000genomes}
-1000 Genomes Project Consortium. A global Reference for Human genetic Variation. Nature. 2015 Oct;526(7571):68.
-
-\bibitem{devoreberk}
-  Devore JL, Berk KN. Modern Mathematical Statistics with Applications. 2nd ed.
-  New York: Springer-Verlag; 2012. p. 519-521
 
 
 \end{thebibliography}
